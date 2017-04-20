@@ -58,9 +58,9 @@ This endpoint retrieves a credential by ID.
 
 ### Query Parameters
 
-Parameter | Default | Description
---------- | ------- | -----------
-none |  | 
+Parameter | Default | Required | Type | Description
+--------- | --------- | --------- | --------- | -----------
+none | | | | 
 
 ## Get by Name
 
@@ -112,10 +112,10 @@ This endpoint returns a credential by name.
 
 ### Query Parameters
 
-Parameter | Default | Description
---------- | ------- | -----------
-name | none | Name of credential to retrieve 
-current | false | Return only latest credential version 
+Parameter | Default | Required | Type | Description
+--------- | --------- | --------- | --------- | -----------
+name | none | yes | string | Name of credential to retrieve 
+current | false | no | string | Return only latest credential version 
 
 ## Type: Value
 
@@ -160,10 +160,10 @@ This endpoint returns a credential by name.
 
 ### Query Parameters
 
-Parameter | Default | Description
---------- | ------- | -----------
-name | none | Name of credential to retrieve 
-current | false | Return only latest credential version 
+Parameter | Default | Required | Type | Description
+--------- | --------- | --------- | --------- | -----------
+name | none | yes | string | Name of credential to retrieve 
+current | false | no | string | Return only latest credential version 
 
 ## Type: JSON
 
@@ -220,10 +220,10 @@ This endpoint returns a credential by name.
 
 ### Query Parameters
 
-Parameter | Default | Description
---------- | ------- | -----------
-name | none | Name of credential to retrieve 
-current | false | Return only latest credential version 
+Parameter | Default | Required | Type | Description
+--------- | --------- | --------- | --------- | -----------
+name | none | yes | string | Name of credential to retrieve 
+current | false | no | string | Return only latest credential version 
 
 ## Type: Password
 
@@ -268,10 +268,10 @@ This endpoint returns a credential by name.
 
 ### Query Parameters
 
-Parameter | Default | Description
---------- | ------- | -----------
-name | none | Name of credential to retrieve 
-current | false | Return only latest credential version 
+Parameter | Default | Required | Type | Description
+--------- | --------- | --------- | --------- | -----------
+name | none | yes | string | Name of credential to retrieve 
+current | false | no | string | Return only latest credential version 
 
 ## Type: User
 
@@ -322,11 +322,10 @@ This endpoint returns a credential by name.
 
 ### Query Parameters
 
-Parameter | Default | Description
---------- | ------- | -----------
-name | none | Name of credential to retrieve 
-current | false | Return only latest credential version 
-
+Parameter | Default | Required | Type | Description
+--------- | --------- | --------- | --------- | -----------
+name | none | yes | string | Name of credential to retrieve 
+current | false | no | string | Return only latest credential version 
 
 ## Type: Certificate
 
@@ -387,10 +386,10 @@ This endpoint returns a credential by name.
 
 ### Query Parameters
 
-Parameter | Default | Description
---------- | ------- | -----------
-name | none | Name of credential to retrieve 
-current | false | Return only latest credential version 
+Parameter | Default | Required | Type | Description
+--------- | --------- | --------- | --------- | -----------
+name | none | yes | string | Name of credential to retrieve 
+current | false | no | string | Return only latest credential version 
 
 ## Type: RSA
 
@@ -446,10 +445,10 @@ This endpoint returns a credential by name.
 
 ### Query Parameters
 
-Parameter | Default | Description
---------- | ------- | -----------
-name | none | Name of credential to retrieve 
-current | false | Return only latest credential version 
+Parameter | Default | Required | Type | Description
+--------- | --------- | --------- | --------- | -----------
+name | none | yes | string | Name of credential to retrieve 
+current | false | no | string | Return only latest credential version 
 
 ## Type: SSH
 
@@ -503,10 +502,10 @@ This endpoint returns a credential by name.
 
 ### Query Parameters
 
-Parameter | Default | Description
---------- | ------- | -----------
-name | none | Name of credential to retrieve 
-current | false | Return only latest credential version 
+Parameter | Default | Required | Type | Description
+--------- | --------- | --------- | --------- | -----------
+name | none | yes | string | Name of credential to retrieve 
+current | false | no | string | Return only latest credential version 
 
 # Set Credentials
 
