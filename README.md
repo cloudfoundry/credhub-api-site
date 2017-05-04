@@ -11,5 +11,6 @@ bundle exec middleman build --clean
 
 ### Publish
 ```shell
+cd build/
 cf push credhub-api
 ```
