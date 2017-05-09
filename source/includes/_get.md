@@ -27,7 +27,7 @@ curl "https://example.com/api/v1/data/67fc3def-bbfb-4953-83f8-4ab0682ad674" \
 }
 ```
 
-This endpoint retrieves a credential by ID.
+This request retrieves a credential by ID. Exactly one value will be returned.
 
 ### HTTP Request
 
@@ -81,7 +81,7 @@ curl "https://example.com/api/v1/data?name=/example-password" \
 }
 ```
 
-This endpoint returns a credential by name.
+This request returns a credential's value(s) by name. All historical values will be returned unless `"current": true` is specified.
 
 ### HTTP Request
 
@@ -129,7 +129,7 @@ curl "https://example.com/api/v1/data?name=/example-value" \
 }
 ```
 
-This endpoint returns a credential by name.
+This request returns a credential by name. The example provided shows the request parameters and response structure of a value type credential.
 
 ### HTTP Request
 
@@ -189,7 +189,7 @@ curl "https://example.com/api/v1/data?name=/example-json" \
 }
 ```
 
-This endpoint returns a credential by name.
+This request returns a credential by name. The example provided shows the request parameters and response structure of a JSON type credential.
 
 ### HTTP Request
 
@@ -237,7 +237,7 @@ curl "https://example.com/api/v1/data?name=/example-password" \
 }
 ```
 
-This endpoint returns a credential by name.
+This request returns a credential by name. The example provided shows the request parameters and response structure of a password type credential.
 
 ### HTTP Request
 
@@ -291,7 +291,7 @@ curl "https://example.com/api/v1/data?name=/example-user" \
 }
 ```
 
-This endpoint returns a credential by name.
+This request returns a credential by name. The example provided shows the request parameters and response structure of a user type credential.
 
 ### HTTP Request
 
@@ -355,7 +355,7 @@ curl "https://example.com/api/v1/data?name=/example-certificate" \
 }
 ```
 
-This endpoint returns a credential by name.
+This request returns a credential by name. The example provided shows the request parameters and response structure of a certificate type credential.
 
 ### HTTP Request
 
@@ -414,7 +414,7 @@ curl "https://example.com/api/v1/data?name=/example-rsa" \
 }
 ```
 
-This endpoint returns a credential by name.
+This request returns a credential by name. The example provided shows the request parameters and response structure of an RSA type credential.
 
 ### HTTP Request
 
@@ -471,7 +471,7 @@ curl "https://example.com/api/v1/data?name=/example-ssh" \
 }
 ```
 
-This endpoint returns a credential by name.
+This request returns a credential by name. The example provided shows the request parameters and response structure of an SSH type credential.
 
 ### HTTP Request
 

@@ -38,7 +38,7 @@ curl "https://example.com/api/v1/data" \
 }
 ```
 
-This endpoint generates a password credential based on the provided parameters. 
+This request generates a password credential based on the provided parameters. 
 
 ### HTTP Request
 
@@ -101,7 +101,7 @@ curl "https://example.com/api/v1/data" \
 }
 ```
 
-This endpoint generates a user credential based on the provided parameters. 
+This request generates a user credential based on the provided parameters. 
 
 ### HTTP Request
 
@@ -182,7 +182,7 @@ curl "https://example.com/api/v1/data" \
 }
 ```
 
-This endpoint generates a user credential based on the provided parameters.
+This request generates a user credential based on the provided parameters.
 
 ### HTTP Request
 
@@ -264,7 +264,7 @@ curl "https://example.com/api/v1/data" \
 }
 ```
 
-This endpoint generates an RSA credential based on the provided parameters.
+This request generates an RSA credential based on the provided parameters.
 
 ### HTTP Request
 
@@ -328,7 +328,7 @@ curl "https://example.com/api/v1/data" \
 }
 ```
 
-This endpoint generates an SSH credential based on the provided parameters.
+This request generates an SSH credential based on the provided parameters.
 
 ### HTTP Request
 

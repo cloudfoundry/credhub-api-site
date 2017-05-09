@@ -20,7 +20,7 @@ curl "https://example.com/api/v1/data?name=/example-password" \
 [Status 204 Empty]
 ```
 
-This endpoint deletes a credential by name. 
+This request deletes a credential by name. 
 
 ### HTTP Request
 

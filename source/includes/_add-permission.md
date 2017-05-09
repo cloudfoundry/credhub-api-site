@@ -44,7 +44,7 @@ curl "https://example.com/api/v1/permissions" \
 }
 ```
 
-This endpoint adds permissions to a credential. 
+This request adds permissions to a credential. 
 
 ### HTTP Request
 

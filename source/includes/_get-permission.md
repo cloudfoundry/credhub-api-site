@@ -33,7 +33,7 @@ curl "https://example.com/api/v1/permissions?credential_name=/example-password" 
 }
 ```
 
-This endpoint returns the permissions of a credential. 
+This request returns the permissions of a credential. 
 
 ### HTTP Request
 

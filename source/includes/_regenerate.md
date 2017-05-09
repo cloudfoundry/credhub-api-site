@@ -33,7 +33,7 @@ curl "https://example.com/api/v1/data" \
 }
 ```
 
-This endpoint regenerates a credential using the same parameters as the stored value.
+This request regenerates a credential using the same parameters as the stored value. NOTE: Only previously-generated credentials can be regenerated. 
 
 ### HTTP Request
 

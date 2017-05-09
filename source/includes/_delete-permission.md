@@ -19,7 +19,7 @@ curl "https://example.com/api/v1/permissions?credential_name=/example-password&a
 [Status 204 Empty]
 ```
 
-This endpoint deletes a permission for an actor on a credential. 
+This request deletes a permission for an actor on a credential. 
 
 ### HTTP Request
 

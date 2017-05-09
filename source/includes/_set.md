@@ -36,7 +36,7 @@ curl "https://example.com/api/v1/data" \
 }
 ```
 
-This endpoint sets a value credential with a user-provided value. 
+This request sets a value credential with a user-provided value. 
 
 ### HTTP Request
 
@@ -106,7 +106,7 @@ curl "https://example.com/api/v1/data" \
 }
 ```
 
-This endpoint sets a json credential with a user-provided value.
+This request sets a json credential with a user-provided value.
 
 ### HTTP Request
 
@@ -157,7 +157,7 @@ curl "https://example.com/api/v1/data" \
 }
 ```
 
-This endpoint sets a password credential with a user-provided value.
+This request sets a password credential with a user-provided value.
 
 ### HTTP Request
 
@@ -217,7 +217,7 @@ curl "https://example.com/api/v1/data" \
 }
 ```
 
-This endpoint sets a user credential with a user-provided value.
+This request sets a user credential with a user-provided value.
 
 ### HTTP Request
 
@@ -290,7 +290,7 @@ curl "https://example.com/api/v1/data" \
 }
 ```
 
-This endpoint sets a certificate credential with a user-provided value.
+This request sets a certificate credential with a user-provided value.
 
 ### HTTP Request
 
@@ -360,7 +360,7 @@ curl "https://example.com/api/v1/data" \
 }
 ```
 
-This endpoint sets a RSA credential with a user-provided value.
+This request sets a RSA credential with a user-provided value.
 
 ### HTTP Request
 
@@ -426,7 +426,7 @@ curl "https://example.com/api/v1/data" \
 }
 ```
 
-This endpoint sets a SSH credential with a user-provided value.
+This request sets a SSH credential with a user-provided value.
 
 ### HTTP Request
 
