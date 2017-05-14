@@ -6,10 +6,11 @@
 
 ```shell
 user$ credhub generate --type password --name '/example-password'
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
 type: password
 name: /example-password
 value: 3t6Y2OFP0jQIcLnki1h7p3NtSfDx4l9bamr1ja6R
-updated: 2017-01-01T04:07:18Z
+version_created_at: 2017-01-01T04:07:18Z
 ```
 
 > cURL
@@ -64,12 +65,13 @@ parameters.include_special | false | no | boolean | Include special characters f
 
 ```shell
 user$ credhub generate --type user --name '/example-user'
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
 type: user
 name: /example-user
 value: 
   username: FQnwWoxgSrDuqDLmeLpU
   password: 6mRPZB3bAfb8lRpacnXsHfDhlPqFcjH2h9YDvLpL
-updated: 2017-01-01T04:07:18Z
+version_created_at: 2017-01-01T04:07:18Z
 ```
 
 > cURL
@@ -129,6 +131,7 @@ parameters.include_special | false | no | boolean | Include special characters f
 
 ```shell
 user$ credhub generate --type certificate --name '/example-certificate' --common-name 'example.com' --ca '/example-ca'
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
 type: certificate
 name: /example-certificate
 value: 
@@ -144,7 +147,7 @@ value:
     -----BEGIN RSA PRIVATE KEY-----
     ...
     -----END RSA PRIVATE KEY-----
-updated: 2017-01-01T04:07:18Z
+version_created_at: 2017-01-01T04:07:18Z
 ```
 
 > cURL
@@ -221,6 +224,7 @@ parameters.self_sign | false | no<sup>3</sup> | boolean | Whether to self-sign g
 
 ```shell
 user$ credhub generate --type rsa --name '/example-rsa'
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
 type: rsa
 name: /example-rsa
 value: 
@@ -232,7 +236,7 @@ value:
     -----BEGIN RSA PRIVATE KEY-----
     ...
     -----END RSA PRIVATE KEY-----
-updated: 2017-01-01T04:07:18Z
+version_created_at: 2017-01-01T04:07:18Z
 ```
 
 > cURL
@@ -288,6 +292,7 @@ parameters.key_length | 2048 | no | enum<sup>1</sup> | Key length of generated c
 
 ```shell
 user$ credhub generate --type ssh --name '/example-ssh'
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
 type: ssh
 name: /example-ssh
 value: 
@@ -296,7 +301,7 @@ value:
     -----BEGIN RSA PRIVATE KEY-----
     ...
     -----END RSA PRIVATE KEY-----
-updated: 2017-01-01T04:07:18Z
+version_created_at: 2017-01-01T04:07:18Z
 ```
 
 > cURL

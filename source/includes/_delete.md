@@ -4,7 +4,7 @@
 
 ```shell
 user$ credhub delete --name '/example-password'
-Secret successfully deleted
+Credential successfully deleted
 ```
 
 > cURL

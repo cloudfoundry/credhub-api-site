@@ -45,10 +45,11 @@ none | | | |
 
 ```shell
 user$ credhub get --name '/example-password'
+id: 2993f622-cb1e-4e00-a267-4b23c273bf3d
 type: password
 name: /example-password
 value: 3t6Y2OFP0jQIcLnki1h7p3NtSfDx4l9bamr1ja6R
-updated: 2017-01-01T04:07:18Z
+version_created_at: 2017-01-01T04:07:18Z
 ```
 
 > cURL
@@ -100,10 +101,11 @@ current | false | no | string | Return only latest credential version
 
 ```shell
 user$ credhub get --name '/example-value'
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
 type: value
 name: /example-value
 value: sample
-updated: 2017-01-01T04:07:18Z
+version_created_at: 2017-01-01T04:07:18Z
 ```
 
 > cURL
@@ -148,6 +150,7 @@ current | false | no | string | Return only latest credential version
 
 ```shell
 user$ credhub get --name '/example-json'
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
 type: json
 name: /example-json
 value:
@@ -156,7 +159,7 @@ value:
   - val1
   - val2
   is_true: true
-updated: 2017-01-01T04:07:18Z
+version_created_at: 2017-01-01T04:07:18Z
 ```
 
 > cURL
@@ -208,10 +211,11 @@ current | false | no | string | Return only latest credential version
 
 ```shell
 user$ credhub get --name '/example-password'
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
 type: password
 name: /example-password
 value: 3t6Y2OFP0jQIcLnki1h7p3NtSfDx4l9bamr1ja6R
-updated: 2017-01-01T04:07:18Z
+version_created_at: 2017-01-01T04:07:18Z
 ```
 
 > cURL
@@ -256,12 +260,13 @@ current | false | no | string | Return only latest credential version
 
 ```shell
 user$ credhub get --name '/example-user'
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
 type: user
 name: /example-user
 value:
   username: FQnwWoxgSrDuqDLmeLpU
   password: 6mRPZB3bAfb8lRpacnXsHfDhlPqFcjH2h9YDvLpL
-updated: 2017-01-01T04:07:18Z
+version_created_at: 2017-01-01T04:07:18Z
 ```
 
 > cURL
@@ -310,6 +315,7 @@ current | false | no | string | Return only latest credential version
 
 ```shell
 user$ credhub get --name '/example-certificate'
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
 type: certificate
 name: /example-certificate
 value:
@@ -325,7 +331,7 @@ value:
     -----BEGIN RSA PRIVATE KEY-----
     ...
     -----END RSA PRIVATE KEY-----
-updated: 2017-01-01T04:07:18Z
+version_created_at: 2017-01-01T04:07:18Z
 ```
 
 > cURL
@@ -374,6 +380,7 @@ current | false | no | string | Return only latest credential version
 
 ```shell
 user$ credhub get --name '/example-rsa'
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
 type: rsa
 name: /example-rsa
 value:
@@ -385,7 +392,7 @@ value:
     -----BEGIN RSA PRIVATE KEY-----
     ...
     -----END RSA PRIVATE KEY-----
-updated: 2017-01-01T04:07:18Z
+version_created_at: 2017-01-01T04:07:18Z
 ```
 
 > cURL
@@ -433,6 +440,7 @@ current | false | no | string | Return only latest credential version
 
 ```shell
 user$ credhub get --name '/example-ssh'
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
 type: ssh
 name: /example-ssh
 value:
@@ -441,7 +449,7 @@ value:
     -----BEGIN RSA PRIVATE KEY-----
     ...
     -----END RSA PRIVATE KEY-----
-updated: 2017-01-01T04:07:18Z
+version_created_at: 2017-01-01T04:07:18Z
 ```
 
 > cURL

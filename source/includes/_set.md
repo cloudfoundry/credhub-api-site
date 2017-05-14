@@ -6,10 +6,11 @@
 
 ```shell
 user$ credhub set --type value --name '/example-value' --value 'sample'
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
 type: value
 name: /example-value
 value: sample
-updated: 2017-01-01T04:07:18Z
+version_created_at: 2017-01-01T04:07:18Z
 ```
 
 > cURL
@@ -57,6 +58,7 @@ value | none | yes | string | Value of credential to set
 
 ```shell
 user$ credhub set --type json --name '/example-json' --value '{ "key": 123, "key_list": ["val1","val2"],is_true: true }'
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
 type: json
 name: /example-json
 value: 
@@ -65,7 +67,7 @@ value:
   - val1
   - val2
   is_true: true
-updated: 2017-01-01T04:07:18Z
+version_created_at: 2017-01-01T04:07:18Z
 ```
 
 > cURL
@@ -127,10 +129,11 @@ value | none | yes | object | Value of credential to set
 
 ```shell
 user$ credhub set --type password --name '/example-password' --value '3t6Y2OFP0jQIcLnki1h7p3NtSfDx4l9bamr1ja6R'
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
 type: password
 name: /example-password
 value: 3t6Y2OFP0jQIcLnki1h7p3NtSfDx4l9bamr1ja6R
-updated: 2017-01-01T04:07:18Z
+version_created_at: 2017-01-01T04:07:18Z
 ```
 
 > cURL
@@ -178,12 +181,13 @@ value | none | yes | string | Value of credential to set
 
 ```shell
 user$ credhub set --type user --name '/example-user' --username 'FQnwWoxgSrDuqDLmeLpU' --password '6mRPZB3bAfb8lRpacnXsHfDhlPqFcjH2h9YDvLpL'
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
 type: user
 name: /example-user
 value: 
   username: FQnwWoxgSrDuqDLmeLpU
   password: 6mRPZB3bAfb8lRpacnXsHfDhlPqFcjH2h9YDvLpL
-updated: 2017-01-01T04:07:18Z
+version_created_at: 2017-01-01T04:07:18Z
 ```
 
 > cURL
@@ -240,6 +244,7 @@ value.password | none | yes | string | Password value of credential to set
 
 ```shell
 user$ credhub set --type certificate --name '/example-certificate' --root ./root.pem --certificate ./cert.pem --private ./private.pem
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
 type: certificate
 name: /example-certificate
 value: 
@@ -255,7 +260,7 @@ value:
     -----BEGIN RSA PRIVATE KEY-----
     ...
     -----END RSA PRIVATE KEY-----
-updated: 2017-01-01T04:07:18Z
+version_created_at: 2017-01-01T04:07:18Z
 ```
 
 > cURL
@@ -316,6 +321,7 @@ value.private_key | null | no<sup>1</sup> | string | Private key value of creden
 
 ```shell
 user$ credhub set --type rsa --name '/example-rsa' --public ./public.pem --private ./private.pem
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
 type: rsa
 name: /example-rsa
 value: 
@@ -327,7 +333,7 @@ value:
     -----BEGIN RSA PRIVATE KEY-----
     ...
     -----END RSA PRIVATE KEY-----
-updated: 2017-01-01T04:07:18Z
+version_created_at: 2017-01-01T04:07:18Z
 ```
 
 > cURL
@@ -385,6 +391,7 @@ value.private_key | null | no<sup>1</sup> | string | Private key value of creden
 
 ```shell
 user$ credhub set --type ssh --name '/example-ssh' --public ./public.pem --private ./private.pem
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
 type: ssh
 name: /example-ssh
 value: 
@@ -393,7 +400,7 @@ value:
     -----BEGIN RSA PRIVATE KEY-----
     ...
     -----END RSA PRIVATE KEY-----
-updated: 2017-01-01T04:07:18Z
+version_created_at: 2017-01-01T04:07:18Z
 ```
 
 > cURL

@@ -4,10 +4,11 @@
 
 ```shell
 user$ credhub regenerate --name '/example-password'
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
 type: password
 name: /example-password
 value: 3t6Y2OFP0jQIcLnki1h7p3NtSfDx4l9bamr1ja6R
-updated: 2017-01-01T04:07:18Z
+version_created_at: 2017-01-01T04:07:18Z
 ```
 
 > cURL

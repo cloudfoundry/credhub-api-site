@@ -6,6 +6,11 @@
 
 ```shell
 user$ credhub find --name-like 'password'
+credentials: 
+- name: /password1
+  version_created_at: 2017-05-09T21:09:26Z
+- name: /test/example/password
+  version_created_at: 2017-05-09T21:09:07Z
 ```
 
 > cURL
@@ -50,6 +55,13 @@ name-like | none | true | string | Search term to match against stored credentia
 
 ```shell
 user$ credhub find --path '/director-name/deployment-name'
+credentials:
+- name: /director-name/deployment-name/db-password
+  version_created_at: 2017-05-09T21:09:26Z
+- name: /director-name/deployment-name/user-password
+  version_created_at: 2017-05-09T21:09:07Z
+- name: /director-name/deployment-name/api-tls
+  version_created_at: 2017-05-10T11:13:07Z
 ```
 
 > cURL
@@ -98,6 +110,12 @@ path | none | true | string | Path of credentials to return
 
 ```shell
 user$ credhub find --all-paths
+paths: 
+- path: /
+- path: /director-name/
+- path: /director-name/deploy1/
+- path: /director-name/deploy2/
+- path: /director2/
 ```
 
 > cURL
