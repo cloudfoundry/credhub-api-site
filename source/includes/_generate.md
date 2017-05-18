@@ -71,6 +71,7 @@ name: /example-user
 value: 
   username: FQnwWoxgSrDuqDLmeLpU
   password: 6mRPZB3bAfb8lRpacnXsHfDhlPqFcjH2h9YDvLpL
+  password_hash: $6$h3b3JsG5$MnrPIrF6T3zAWk9uaun64vWY.vaBQ5nTRFZjjVqKuDWccxWXn8n6vstQykXEReamb4GYh2q1HC7vFy11wflXd0
 version_created_at: 2017-01-01T04:07:18Z
 ```
 
