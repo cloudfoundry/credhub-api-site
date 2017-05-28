@@ -57,7 +57,7 @@ value | none | yes | string | Value of credential to set
 > CredHub CLI
 
 ```shell
-user$ credhub set --type json --name '/example-json' --value '{ "key": 123, "key_list": ["val1","val2"],is_true: true }'
+user$ credhub set --type json --name '/example-json' --value '{ "key": 123, "key_list": ["val1","val2"], "is_true": true }'
 id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
 type: json
 name: /example-json
