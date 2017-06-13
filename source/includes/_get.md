@@ -5,13 +5,18 @@
 > CredHub CLI
 
 ```shell
-[not supported]
+user$ credhub get --id 2993f622-cb1e-4e00-a267-4b23c273bf3d
+id: 2993f622-cb1e-4e00-a267-4b23c273bf3d
+type: password
+name: /example-password
+value: 6mRPZB3bAfb8lRpacnXsHfDhlPqFcjH2h9YDvLpL
+version_created_at: 2017-01-05T01:01:01Z
 ```
 
 > cURL
 
 ```shell
-curl "https://example.com/api/v1/data/67fc3def-bbfb-4953-83f8-4ab0682ad674" \
+curl "https://example.com/api/v1/data/2993f622-cb1e-4e00-a267-4b23c273bf3d" \
   -X GET \
   -H "authorization: bearer [token]" \
   -H 'content-type: application/json'
@@ -19,11 +24,11 @@ curl "https://example.com/api/v1/data/67fc3def-bbfb-4953-83f8-4ab0682ad674" \
 
 ```json
 {
-  "id": "67fc3def-bbfb-4953-83f8-4ab0682ad674",
+  "id": "2993f622-cb1e-4e00-a267-4b23c273bf3d",
   "name": "/example-password",
   "type": "password",
-  "value": "3t6Y2OFP0jQIcLnki1h7p3NtSfDx4l9bamr1ja6R",
-  "version_created_at": "2017-01-01T04:07:18Z"
+  "value": "6mRPZB3bAfb8lRpacnXsHfDhlPqFcjH2h9YDvLpL",
+  "version_created_at": "2017-01-05T01:01:01Z"
 }
 ```
 
@@ -48,8 +53,8 @@ user$ credhub get --name '/example-password'
 id: 2993f622-cb1e-4e00-a267-4b23c273bf3d
 type: password
 name: /example-password
-value: 3t6Y2OFP0jQIcLnki1h7p3NtSfDx4l9bamr1ja6R
-version_created_at: 2017-01-01T04:07:18Z
+value: 6mRPZB3bAfb8lRpacnXsHfDhlPqFcjH2h9YDvLpL
+version_created_at: 2017-01-05T01:01:01Z
 ```
 
 > cURL
