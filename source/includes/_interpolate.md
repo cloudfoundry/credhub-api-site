@@ -1,4 +1,4 @@
-# VCAP Endpoint [beta]
+# Interpolate Endpoint [beta]
 
 > CredHub CLI
 
@@ -9,7 +9,7 @@
 > cURL
 
 ```shell
-curl "https://example.com/api/v1/vcap" \
+curl "https://example.com/api/v1/interpolate" \
   -X POST \
   -d '{ 
     "VCAP_SERVICES": {
@@ -63,7 +63,7 @@ This endpoint receives a `VCAP_SERVICES` object containing CredHub references an
 
 ### HTTP Request
 
-`POST: https://example.com/api/v1/vcap`
+`POST: https://example.com/api/v1/interpolate`
 
 ### Query Parameters
 

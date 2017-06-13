@@ -20,7 +20,7 @@ includes:
   - get-permission
   - add-permission
   - delete-permission
-  - vcap
+  - interpolate
   - errors
 
 
