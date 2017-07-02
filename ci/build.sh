@@ -7,5 +7,6 @@ pushd credhub-api-site
   apt-get install -y nodejs
   bundle install
   bundle exec middleman build --clean
-  cp -R ./ built-site/
 popd
+
+cp -R credhub-api-site/ built-site/
