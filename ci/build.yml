@@ -8,5 +8,8 @@ image_resource:
 inputs:
 - name: credhub-api-site
 
+outputs: 
+- name: built-site
+
 run:
   path: ./credhub-api-site/ci/build.sh
