@@ -1,0 +1,8 @@
+---
+applications: 
+- name: credhub-api
+  memory: 1024M
+  instances: 2
+  host: credhub-api
+  buildpack: staticfile_buildpack
+  path: credhub-api-site/build
