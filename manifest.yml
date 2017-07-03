@@ -5,4 +5,3 @@ applications:
   instances: 2
   host: credhub-api
   buildpack: staticfile_buildpack
-  path: build/
