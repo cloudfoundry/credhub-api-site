@@ -8,12 +8,14 @@ bundle install
 bundle exec middleman server
 ```
 
-### Build site to publish 
+Changes to master will automatically be published to https://credhub-api.cfapps.io via CI. 
+
+### Manually build site to publish 
 ```shell 
 bundle exec middleman build --clean
 ```
 
-### Publish
+### Manually Publish
 ```shell
 cd build/
 cf push credhub-api
