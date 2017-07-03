@@ -1,7 +1,7 @@
 ---
 applications: 
 - name: credhub-api
-  memory: 1024M
+  memory: 512M
   instances: 2
   host: credhub-api
   buildpack: staticfile_buildpack
