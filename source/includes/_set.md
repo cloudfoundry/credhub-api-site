@@ -452,3 +452,70 @@ value.public_key | null | no<sup>1</sup> | string | Public key value of credenti
 value.private_key | null | no<sup>1</sup> | string | Private key value of credential to set 
 
 <sup>1</sup> At least one value must be set 
+
+## Bulk Import
+
+> CredHub CLI
+
+```shell
+user$ credhub import --file import.yml 
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
+type: ssh
+name: /example-ssh
+value: 
+  public_key: ssh-rsa AAAAB3NzaC1y...W9RWFM1
+  private_key: |
+    -----BEGIN RSA PRIVATE KEY-----
+    ...
+    -----END RSA PRIVATE KEY-----
+version_created_at: 2017-01-01T04:07:18Z
+
+id: 2ba73fbd-439e-40ef-b005-0e1db8815063
+type: password
+name: /example-password
+value: SqFcE2c0AuRvet2YhrxdFbPtkBmjiq 
+version_created_at: 2017-01-01T04:07:28Z
+
+id: 22a1e87b-ba0b-4bc9-bb26-4e5fc5fb1b2f
+type: value
+name: /example-value
+value: sample
+version_created_at: 2017-01-01T04:07:38Z
+```
+
+> cURL
+
+```shell
+[Not Supported]
+```
+
+This CLI command sets multiple credentials from an import file. The import file must be in yaml format, with the key `credentials` whose value is a list of credentials. Each credential must contain a name, type and value. An example is shown below. 
+
+```yaml
+credentials: 
+- name: /example-ssh
+  type: ssh
+  value: 
+    public_key: ssh-rsa AAAAB3NzaC1y...W9RWFM1
+    private_key: |
+      -----BEGIN RSA PRIVATE KEY-----
+      ...
+      -----END RSA PRIVATE KEY-----
+- name: /example-password
+  type: password 
+  value: SqFcE2c0AuRvet2YhrxdFbPtkBmjiq
+- name: /example-value
+  type: value
+  value: sample
+```
+
+### HTTP Request
+
+n/a
+
+### Request Parameters
+
+Parameter | Default | Required | Type | Description
+--------- | --------- | --------- | --------- | ------------
+n/a 
+
