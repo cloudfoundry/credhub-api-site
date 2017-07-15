@@ -483,15 +483,9 @@ value: sample
 version_created_at: 2017-01-01T04:07:38Z
 ```
 
-> cURL
+> Sample Import File
 
-```shell
-[Not Supported]
-```
-
-This CLI command sets multiple credentials from an import file. The import file must be in yaml format, with the key `credentials` whose value is a list of credentials. Each credential must contain a name, type and value. An example is shown below. 
-
-```yaml
+```yml
 credentials: 
 - name: /example-ssh
   type: ssh
@@ -509,6 +503,10 @@ credentials:
   value: sample
 ```
 
+This CLI command sets multiple credentials from an import file. The import file must be in yaml format, with the key `credentials` whose value is a list of credential objects. Each credential must contain a name, type and value. An example is shown to the right.
+
+
+
 ### HTTP Request
 
 n/a
@@ -517,5 +515,5 @@ n/a
 
 Parameter | Default | Required | Type | Description
 --------- | --------- | --------- | --------- | ------------
-n/a 
+n/a |  |  |  |
 
