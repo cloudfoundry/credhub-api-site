@@ -21,6 +21,7 @@ includes:
   - add-permission
   - delete-permission
   - interpolate
+  - encryption-rotation
   - errors
 
 
