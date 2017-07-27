@@ -1,4 +1,4 @@
-# Get Permissions [beta]
+# Get Permissions
 
 > CredHub CLI
 

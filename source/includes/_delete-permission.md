@@ -1,4 +1,4 @@
-# Delete Permissions [beta]
+# Delete Permissions
 
 > CredHub CLI
 

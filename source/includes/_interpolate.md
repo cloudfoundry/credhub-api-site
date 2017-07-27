@@ -1,4 +1,4 @@
-# Interpolate Endpoint [beta]
+# Interpolate Endpoint
 
 > CredHub CLI
 
