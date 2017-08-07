@@ -208,16 +208,22 @@ parameters.organization_unit | none | no<sup>1</sup> | string | Organization Uni
 parameters.locality | none | no<sup>1</sup> | string | Locality/city of generated credential value
 parameters.state | none | no<sup>1</sup> | string | State/province of generated credential value
 parameters.country | none | no<sup>1</sup> | string | Country of generated credential value
-parameters.key_length | 2048 | no | enum<sup>2</sup> | Key length of generated credential value
+parameters.key_usage | none | no | array | 
+parameters.key_usage[] | none | no | enum<sup>2</sup> | Key usage extensions of generated credential value
+parameters.extended_key_usage | none | no | array | 
+parameters.extended_key_usage[] | none | no | enum<sup>3</sup> | Extended key usage extensions of generated credential value
+parameters.key_length | 2048 | no | enum<sup>4</sup> | Key length of generated credential value
 parameters.duration | 365 | no | integer | Duration in days of generated credential value
-parameters.ca | none | no<sup>3</sup> | credential<sup>4</sup> | Name of certificate authority to sign of generated credential value
-parameters.is_ca | false | no<sup>3</sup> | boolean | Whether to generate credential value as a certificate authority
-parameters.self_sign | false | no<sup>3</sup> | boolean | Whether to self-sign generated credential value
+parameters.ca | none | no<sup>5</sup> | credential<sup>6</sup> | Name of certificate authority to sign of generated credential value
+parameters.is_ca | false | no<sup>5</sup> | boolean | Whether to generate credential value as a certificate authority
+parameters.self_sign | false | no<sup>5</sup> | boolean | Whether to self-sign generated credential value
 
 <sup>1</sup> One subject field must be specified in the request <br>
-<sup>2</sup> Acceptable key lengths are 2048, 3072, 4096 <br>
-<sup>3</sup> At least one signing parameter must be provided <br>
-<sup>4</sup> Credential must contain appropriate certificate authority extensions
+<sup>2</sup> Acceptable key usages are digital_signature, non_repudiation, key_encipherment, data_encipherment, key_agreement, key_cert_sign, crl_sign, encipher_only and decipher_only.<br>
+<sup>3</sup> Acceptable extended key usages are client_auth, server_auth, code_signing, email_protection and timestamping.<br>
+<sup>4</sup> Acceptable key lengths are 2048, 3072, 4096 <br>
+<sup>5</sup> At least one signing parameter must be provided <br>
+<sup>6</sup> Credential must contain appropriate certificate authority extensions
 
 ## Type: RSA
 
