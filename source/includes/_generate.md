@@ -170,19 +170,15 @@ curl "https://example.com/api/v1/data" \
 
 ```json
 {
-  "data": [
-    {
-      "id": "67fc3def-bbfb-4953-83f8-4ab0682ad676",
-      "name": "/example-certificate",
-      "type": "certificate",
-      "value": {
-        "ca": "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----",
-        "certificate": "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----",
-        "private_key": "-----BEGIN RSA PRIVATE KEY-----\n...\n-----END RSA PRIVATE KEY-----"
-      }, 
-      "version_created_at": "2017-01-01T04:07:18Z"
-    }
-  ]
+  "id": "67fc3def-bbfb-4953-83f8-4ab0682ad676",
+  "name": "/example-certificate",
+  "type": "certificate",
+  "value": {
+    "ca": "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----",
+    "certificate": "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----",
+    "private_key": "-----BEGIN RSA PRIVATE KEY-----\n...\n-----END RSA PRIVATE KEY-----"
+  }, 
+  "version_created_at": "2017-01-01T04:07:18Z"
 }
 ```
 
