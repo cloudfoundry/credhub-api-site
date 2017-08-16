@@ -58,6 +58,14 @@ parameters.exclude_upper | false | no | boolean | Exclude upper alpha characters
 parameters.exclude_lower | false | no | boolean | Exclude lower alpha characters from generated credential value 
 parameters.exclude_number | false | no | boolean | Exclude number characters from generated credential value  
 parameters.include_special | false | no | boolean | Include special characters from generated credential value 
+additional_permissions | none | no | array | List of additional permissions to set on credential
+additional_permissions[].actor | none | no | identity<sup>1</sup> | Actor to provided specified operations on credential
+additional_permissions[].operations | none | no | array | List of operations provided on credential to specified actor
+additional_permissions[].operations[] | none | no | enum<sup>2</sup> | Operation provided on credential to specified actor
+
+<sup>1</sup>Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/initiatives/authenticati
+on-identities.md) <br>
+<sup>2</sup> Acceptable operations are 'read', 'write', 'delete', 'read_acl' and 'write_acl'
 
 ## Type: User
 
@@ -125,6 +133,14 @@ parameters.exclude_upper | false | no | boolean | Exclude upper alpha characters
 parameters.exclude_lower | false | no | boolean | Exclude lower alpha characters from generated credential value 
 parameters.exclude_number | false | no | boolean | Exclude number characters from generated credential value  
 parameters.include_special | false | no | boolean | Include special characters from generated credential value 
+additional_permissions | none | no | array | List of additional permissions to set on credential
+additional_permissions[].actor | none | no | identity<sup>1</sup> | Actor to provided specified operations on credential
+additional_permissions[].operations | none | no | array | List of operations provided on credential to specified actor
+additional_permissions[].operations[] | none | no | enum<sup>2</sup> | Operation provided on credential to specified actor
+
+<sup>1</sup>Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/initiatives/authenticati
+on-identities.md) <br>
+<sup>2</sup> Acceptable operations are 'read', 'write', 'delete', 'read_acl' and 'write_acl'
 
 ## Type: Certificate
 
@@ -213,6 +229,11 @@ parameters.duration | 365 | no | integer | Duration in days of generated credent
 parameters.ca | none | no<sup>5</sup> | credential<sup>6</sup> | Name of certificate authority to sign of generated credential value
 parameters.is_ca | false | no<sup>5</sup> | boolean | Whether to generate credential value as a certificate authority
 parameters.self_sign | false | no<sup>5</sup> | boolean | Whether to self-sign generated credential value
+additional_permissions | none | no | array | List of additional permissions to set on credential
+additional_permissions[].actor | none | no | identity<sup>7</sup> | Actor to provided specified operations on credential
+additional_permissions[].operations | none | no | array | List of operations provided on credential to specified actor
+additional_permissions[].operations[] | none | no | enum<sup>8</sup> | Operation provided on credential to specified actor
+
 
 <sup>1</sup> One subject field must be specified in the request <br>
 <sup>2</sup> Acceptable key usages are digital_signature, non_repudiation, key_encipherment, data_encipherment, key_agreement, key_cert_sign, crl_sign, encipher_only and decipher_only.<br>
@@ -220,6 +241,9 @@ parameters.self_sign | false | no<sup>5</sup> | boolean | Whether to self-sign g
 <sup>4</sup> Acceptable key lengths are 2048, 3072, 4096 <br>
 <sup>5</sup> At least one signing parameter must be provided <br>
 <sup>6</sup> Credential must contain appropriate certificate authority extensions
+<sup>7</sup>Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/initiatives/authenticati
+on-identities.md) <br>
+<sup>8</sup> Acceptable operations are 'read', 'write', 'delete', 'read_acl' and 'write_acl'
 
 ## Type: RSA
 
@@ -286,8 +310,15 @@ type | none | yes | string | Type of credential to set
 overwrite | false | no | boolean | Overwrite if value exists
 parameters | none | no | object | Generation parameters
 parameters.key_length | 2048 | no | enum<sup>1</sup> | Key length of generated credential value
+additional_permissions | none | no | array | List of additional permissions to set on credential
+additional_permissions[].actor | none | no | identity<sup>2</sup> | Actor to provided specified operations on credential
+additional_permissions[].operations | none | no | array | List of operations provided on credential to specified actor
+additional_permissions[].operations[] | none | no | enum<sup>3</sup> | Operation provided on credential to specified actor
 
 <sup>1</sup>Acceptable key lengths are 2048, 3072, 4096 
+<sup>2</sup>Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/initiatives/authenticati
+on-identities.md) <br>
+<sup>3</sup> Acceptable operations are 'read', 'write', 'delete', 'read_acl' and 'write_acl'
 
 ## Type: SSH
 
@@ -352,5 +383,13 @@ overwrite | false | no | boolean | Overwrite if value exists
 parameters | none | no | object | Generation parameters
 parameters.key_length | 2048 | no | enum<sup>1</sup> | Key length of generated credential value
 parameters.ssh_comment | none | no | string | SSH comment of generated credential value
+additional_permissions | none | no | array | List of additional permissions to set on credential
+additional_permissions[].actor | none | no | identity<sup>2</sup> | Actor to provided specified operations on credential
+additional_permissions[].operations | none | no | array | List of operations provided on credential to specified actor
+additional_permissions[].operations[] | none | no | enum<sup>3</sup> | Operation provided on credential to specified actor
 
 <sup>1</sup>Acceptable key lengths are 2048, 3072, 4096
+<sup>2</sup>Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/initiatives/authenticati
+on-identities.md) <br>
+<sup>3</sup> Acceptable operations are 'read', 'write', 'delete', 'read_acl' and 'write_acl'
+
