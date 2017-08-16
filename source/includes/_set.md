@@ -56,8 +56,7 @@ additional_permissions[].actor | none | no | identity<sup>1</sup> | Actor to pro
 additional_permissions[].operations | none | no | array | List of operations provided on credential to specified actor
 additional_permissions[].operations[] | none | no | enum<sup>2</sup> | Operation provided on credential to specified actor
 
-<sup>1</sup>Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/initiatives/authenticati
-on-identities.md) <br>
+<sup>1</sup>Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/initiatives/authentication-identities.md) <br>
 <sup>2</sup> Acceptable operations are 'read', 'write', 'delete', 'read_acl' and 'write_acl'
 
 ## Type: JSON
@@ -135,8 +134,7 @@ additional_permissions[].actor | none | no | identity<sup>1</sup> | Actor to pro
 additional_permissions[].operations | none | no | array | List of operations provided on credential to specified actor
 additional_permissions[].operations[] | none | no | enum<sup>2</sup> | Operation provided on credential to specified actor
 
-<sup>1</sup>Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/initiatives/authenticati
-on-identities.md) <br>
+<sup>1</sup>Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/initiatives/authentication-identities.md) <br>
 <sup>2</sup> Acceptable operations are 'read', 'write', 'delete', 'read_acl' and 'write_acl'
 
 
@@ -196,8 +194,7 @@ additional_permissions[].actor | none | no | identity<sup>1</sup> | Actor to pro
 additional_permissions[].operations | none | no | array | List of operations provided on credential to specified actor
 additional_permissions[].operations[] | none | no | enum<sup>2</sup> | Operation provided on credential to specified actor
 
-<sup>1</sup>Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/initiatives/authenticati
-on-identities.md) <br>
+<sup>1</sup>Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/initiatives/authentication-identities.md) <br>
 <sup>2</sup> Acceptable operations are 'read', 'write', 'delete', 'read_acl' and 'write_acl'
 
 
@@ -269,8 +266,7 @@ additional_permissions[].actor | none | no | identity<sup>1</sup> | Actor to pro
 additional_permissions[].operations | none | no | array | List of operations provided on credential to specified actor
 additional_permissions[].operations[] | none | no | enum<sup>2</sup> | Operation provided on credential to specified actor
 
-<sup>1</sup>Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/initiatives/authenticati
-on-identities.md) <br>
+<sup>1</sup>Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/initiatives/authentication-identities.md) <br>
 <sup>2</sup> Acceptable operations are 'read', 'write', 'delete', 'read_acl' and 'write_acl'
 
 
@@ -353,9 +349,8 @@ additional_permissions[].actor | none | no | identity<sup>2</sup> | Actor to pro
 additional_permissions[].operations | none | no | array | List of operations provided on credential to specified actor
 additional_permissions[].operations[] | none | no | enum<sup>3</sup> | Operation provided on credential to specified actor
 
-<sup>1</sup> At least one value must be set 
-<sup>2</sup>Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/initiatives/authenticati
-on-identities.md) <br>
+<sup>1</sup> At least one value must be set  <br>
+<sup>2</sup>Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/initiatives/authentication-identities.md) <br>
 <sup>3</sup> Acceptable operations are 'read', 'write', 'delete', 'read_acl' and 'write_acl'
 
 ## Type: RSA
@@ -430,9 +425,8 @@ additional_permissions[].actor | none | no | identity<sup>2</sup> | Actor to pro
 additional_permissions[].operations | none | no | array | List of operations provided on credential to specified actor
 additional_permissions[].operations[] | none | no | enum<sup>3</sup> | Operation provided on credential to specified actor
 
-<sup>1</sup> At least one value must be set 
-<sup>2</sup>Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/initiatives/authenticati
-on-identities.md) <br>
+<sup>1</sup> At least one value must be set  <br>
+<sup>2</sup>Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/initiatives/authentication-identities.md) <br>
 <sup>3</sup> Acceptable operations are 'read', 'write', 'delete', 'read_acl' and 'write_acl'
 
 ## Type: SSH
@@ -504,9 +498,8 @@ additional_permissions[].actor | none | no | identity<sup>2</sup> | Actor to pro
 additional_permissions[].operations | none | no | array | List of operations provided on credential to specified actor
 additional_permissions[].operations[] | none | no | enum<sup>3</sup> | Operation provided on credential to specified actor
 
-<sup>1</sup> At least one value must be set 
-<sup>2</sup>Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/initiatives/authenticati
-on-identities.md) <br>
+<sup>1</sup> At least one value must be set  <br> 
+<sup>2</sup>Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/initiatives/authentication-identities.md) <br>
 <sup>3</sup> Acceptable operations are 'read', 'write', 'delete', 'read_acl' and 'write_acl'
 
 
