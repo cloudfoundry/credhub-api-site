@@ -78,7 +78,7 @@ curl "https://example.com/info" \
   },
   "app": {
     "name": "CredHub",
-    "version": "0.7.0"
+    "version": "1.2.0"
   }
 }
 ```
@@ -124,4 +124,6 @@ curl "https://example.com/api/v1/data?name=/example-password" \
 CredHub supports mutual TLS authentication. Certificates issued by any of the trusted CA certificates are accepted by CredHub. 
 
 CredHub validates the [authenticated identity][3], signing authority, validity dates and presence of x509 extension Extended Key Usage 'Client Authentication' during the authentication workflow.
+
+[3]:https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/initiatives/authentication-identities.md
 
