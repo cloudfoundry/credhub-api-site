@@ -60,5 +60,6 @@ permissions[n].actor | none | yes | identity<sup>1</sup> | Actor provided permis
 permissions[n].operations[] | none | yes | array | Operations to add
 permissions[n].operations[n] | none | yes | operation<sup>2</sup> | Operation provided to Actor
 
-<sup>1</sup>Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/initiatives/authentication-identities.md) <br>
-<sup>2</sup>Supported operations: read, write, delete, read_acl, write_acl
+<sup>1</sup> Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/initiatives/authentication-identities.md) <br>
+<sup>2</sup> Supported operations: read, write, delete, read_acl, write_acl
+

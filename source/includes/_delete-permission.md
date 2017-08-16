@@ -32,4 +32,5 @@ Parameter | Default | Required | Type | Description
 credential_name | none | yes | string | Name of credential whose permissions will be deleted
 actor | none | yes | identity<sup>1</sup> | Name of actor whose permissions will be deleted
 
-<sup>1</sup>Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/initiatives/authentication-identities.md)
+<sup>1</sup> Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/initiatives/authentication-identities.md)
+
