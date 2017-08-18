@@ -113,6 +113,8 @@ curl "https://example.com/api/v1/data" \
 
 This request generates a user credential based on the provided parameters. 
 
+NOTE: The username value is accepted at `value.username` in CredHub server 1.2.0 and prior. This has been deprecated in favor of `parameters.username`. 
+
 ### HTTP Request
 
 `POST: https://example.com/api/v1/data`
@@ -124,9 +126,8 @@ Parameter | Default | Required | Type | Description
 name | none | yes | string | Name of credential to set
 type | none | yes | string | Type of credential to set
 overwrite | false | no | boolean | Overwrite if value exists
-value | none | no | object | 
-value.username | none | no | string | User provided value for username
 parameters | none | no | object | Password generation parameters
+parameters.username | none | no | string | User provided value for username
 parameters.length | 30 | no | integer | Length of generated credential value
 parameters.exclude_upper | false | no | boolean | Exclude upper alpha characters from generated credential value 
 parameters.exclude_lower | false | no | boolean | Exclude lower alpha characters from generated credential value 
