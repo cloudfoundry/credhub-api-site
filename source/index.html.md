@@ -1,7 +1,7 @@
 ---
 title: CredHub API
 
-language_tabs: # must be one of https://git.io/vQNgJ
+language_tabs:
   - shell
 
 toc_footers:
@@ -126,4 +126,3 @@ CredHub supports mutual TLS authentication. Certificates issued by any of the tr
 CredHub validates the [authenticated identity][3], signing authority, validity dates and presence of x509 extension Extended Key Usage 'Client Authentication' during the authentication workflow.
 
 [3]:https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/initiatives/authentication-identities.md
-
