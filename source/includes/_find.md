@@ -1,4 +1,4 @@
-# Finding Credentials
+# Find Credentials
 
 ## Find by Partial Name
 
