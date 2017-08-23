@@ -531,6 +531,10 @@ type: value
 name: /example-value
 value: sample
 version_created_at: 2017-01-01T04:07:38Z
+
+Import complete.
+Successfully set: 3
+Failed to set: 0
 ```
 
 > Sample Import File
