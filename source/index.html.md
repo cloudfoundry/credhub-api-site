@@ -23,6 +23,7 @@ includes:
   - interpolate
   - encryption-rotation
   - errors
+  - integrations
 
 
 search: true
