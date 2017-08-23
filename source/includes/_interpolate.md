@@ -59,7 +59,7 @@ curl "https://example.com/api/v1/interpolate" \
 
 This endpoint receives a `VCAP_SERVICES` object containing CredHub references and responds with the object containing the credential values interpolated.
 
-NOTE: At this time, only credential references at `credentials.credhub-ref` will be interpolated. The key `credhub-ref` will be removed and the referenced credential object will be set as the value of `credentails`.
+NOTE: At this time, only credential references at `credentials.credhub-ref` will be interpolated. The key `credhub-ref` will be removed and the referenced credential object will be set as the value of `credentials`.
 
 ### HTTP Request
 
