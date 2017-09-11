@@ -54,7 +54,7 @@ By default, credential set and generate actions with the API will not overwrite 
 All requests to CredHub, with the exception of `/info` and `/health` must include an authentication method. CredHub supports two authentication provider types, [UAA][1] and [mutual TLS][2].
 
 [1]:https://github.com/cloudfoundry/uaa
-[2]:https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/initiatives/mutual-tls.md
+[2]:https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/mutual-tls.md
 
 ## UAA (oAuth2)
 
@@ -126,4 +126,4 @@ CredHub supports mutual TLS authentication. Certificates issued by any of the tr
 
 CredHub validates the [authenticated identity][3], signing authority, validity dates and presence of x509 extension Extended Key Usage 'Client Authentication' during the authentication workflow.
 
-[3]:https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/initiatives/authentication-identities.md
+[3]:https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/authentication-identities.md

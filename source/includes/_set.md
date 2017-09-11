@@ -18,9 +18,9 @@ version_created_at: 2017-01-01T04:07:18Z
 ```shell
 curl "https://example.com/api/v1/data" \
   -X PUT \
-  -d '{ 
-      "name": "/example-value", 
-      "type": "value", 
+  -d '{
+      "name": "/example-value",
+      "type": "value",
       "value": "sample"
      }' \
   -H "authorization: bearer [token]" \
@@ -37,7 +37,7 @@ curl "https://example.com/api/v1/data" \
 }
 ```
 
-This request sets a value credential with a user-provided value. 
+This request sets a value credential with a user-provided value.
 
 ### HTTP Request
 
@@ -49,14 +49,14 @@ Parameter | Default | Required | Type | Description
 --------- | --------- | --------- | --------- | ------------
 name | none | yes | string | Name of credential to set
 type | none | yes | string | Type of credential to set
-overwrite | false | no | boolean | Overwrite if value exists 
-value | none | yes | string | Value of credential to set  
+overwrite | false | no | boolean | Overwrite if value exists
+value | none | yes | string | Value of credential to set
 additional_permissions | none | no | array | List of additional permissions to set on credential
 additional_permissions[].actor | none | no | identity<sup>1</sup> | Actor to provided specified operations on credential
 additional_permissions[].operations | none | no | array | List of operations provided on credential to specified actor
 additional_permissions[].operations[] | none | no | enum<sup>2</sup> | Operation provided on credential to specified actor
 
-<sup>1</sup> Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/initiatives/authentication-identities.md) <br>
+<sup>1</sup> Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/authentication-identities.md) <br>
 <sup>2</sup> Acceptable operations are 'read', 'write', 'delete', 'read_acl' and 'write_acl'
 
 ## Type: JSON
@@ -68,9 +68,9 @@ user$ credhub set --type json --name '/example-json' --value '{ "key": 123, "key
 id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
 type: json
 name: /example-json
-value: 
+value:
   key: 123
-  key_list: 
+  key_list:
   - val1
   - val2
   is_true: true
@@ -134,7 +134,7 @@ additional_permissions[].actor | none | no | identity<sup>1</sup> | Actor to pro
 additional_permissions[].operations | none | no | array | List of operations provided on credential to specified actor
 additional_permissions[].operations[] | none | no | enum<sup>2</sup> | Operation provided on credential to specified actor
 
-<sup>1</sup> Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/initiatives/authentication-identities.md) <br>
+<sup>1</sup> Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/authentication-identities.md) <br>
 <sup>2</sup> Acceptable operations are 'read', 'write', 'delete', 'read_acl' and 'write_acl'
 
 
@@ -156,8 +156,8 @@ version_created_at: 2017-01-01T04:07:18Z
 ```shell
 curl "https://example.com/api/v1/data" \
   -X PUT \
-  -d '{ 
-      "name": "/example-password", 
+  -d '{
+      "name": "/example-password",
       "type": "password",
       "value": "3t6Y2OFP0jQIcLnki1h7p3NtSfDx4l9bamr1ja6R"
      }' \
@@ -194,7 +194,7 @@ additional_permissions[].actor | none | no | identity<sup>1</sup> | Actor to pro
 additional_permissions[].operations | none | no | array | List of operations provided on credential to specified actor
 additional_permissions[].operations[] | none | no | enum<sup>2</sup> | Operation provided on credential to specified actor
 
-<sup>1</sup> Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/initiatives/authentication-identities.md) <br>
+<sup>1</sup> Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/authentication-identities.md) <br>
 <sup>2</sup> Acceptable operations are 'read', 'write', 'delete', 'read_acl' and 'write_acl'
 
 
@@ -207,7 +207,7 @@ user$ credhub set --type user --name '/example-user' --username 'FQnwWoxgSrDuqDL
 id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
 type: user
 name: /example-user
-value: 
+value:
   username: FQnwWoxgSrDuqDLmeLpU
   password: 6mRPZB3bAfb8lRpacnXsHfDhlPqFcjH2h9YDvLpL
   password_hash: $6$h3b3JsG5$MnrPIrF6T3zAWk9uaun64vWY.vaBQ5nTRFZjjVqKuDWccxWXn8n6vstQykXEReamb4GYh2q1HC7vFy11wflXd0
@@ -219,9 +219,9 @@ version_created_at: 2017-01-01T04:07:18Z
 ```shell
 curl "https://example.com/api/v1/data" \
   -X PUT \
-  -d '{ 
+  -d '{
       "name": "/example-user",
-      "type": "user", 
+      "type": "user",
       "value": {
         "username": "FQnwWoxgSrDuqDLmeLpU",
         "password": "6mRPZB3bAfb8lRpacnXsHfDhlPqFcjH2h9YDvLpL"
@@ -258,7 +258,7 @@ Parameter | Default | Required | Type | Description
 name | none | yes | string | Name of credential to set
 type | none | yes | string | Type of credential to set
 overwrite | false | no | boolean | Overwrite if value exists
-value | none | yes | object | 
+value | none | yes | object |
 value.username | null | no | string | Username value of credential to set
 value.password | none | yes | string | Password value of credential to set
 additional_permissions | none | no | array | List of additional permissions to set on credential
@@ -266,7 +266,7 @@ additional_permissions[].actor | none | no | identity<sup>1</sup> | Actor to pro
 additional_permissions[].operations | none | no | array | List of operations provided on credential to specified actor
 additional_permissions[].operations[] | none | no | enum<sup>2</sup> | Operation provided on credential to specified actor
 
-<sup>1</sup> Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/initiatives/authentication-identities.md) <br>
+<sup>1</sup> Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/authentication-identities.md) <br>
 <sup>2</sup> Acceptable operations are 'read', 'write', 'delete', 'read_acl' and 'write_acl'
 
 
@@ -279,7 +279,7 @@ user$ credhub set --type certificate --name '/example-certificate' --root ./root
 id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
 type: certificate
 name: /example-certificate
-value: 
+value:
   root: |
     -----BEGIN CERTIFICATE-----
     ...
@@ -302,7 +302,7 @@ curl "https://example.com/api/v1/data" \
   -X PUT \
   -d '{
       "name": "/example-certificate",
-      "type": "certificate", 
+      "type": "certificate",
       "value": {
         "ca": "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----",
         "certificate": "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----",
@@ -322,7 +322,7 @@ curl "https://example.com/api/v1/data" \
     "ca": "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----",
     "certificate": "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----",
     "private_key": "-----BEGIN RSA PRIVATE KEY-----\n...\n-----END RSA PRIVATE KEY-----"
-  }, 
+  },
   "version_created_at": "2017-01-01T04:07:18Z"
 }
 ```
@@ -340,17 +340,17 @@ Parameter | Default | Required | Type | Description
 name | none | yes | string | Name of credential to set
 type | none | yes | string | Type of credential to set
 overwrite | false | no | boolean | Overwrite if value exists
-value | none | yes | object | 
-value.ca | null | no<sup>1</sup> | string | Certificate authority value of credential to set 
-value.certificate | null | no<sup>1</sup> | string | Certificate value of credential to set 
-value.private_key | null | no<sup>1</sup> | string | Private key value of credential to set 
+value | none | yes | object |
+value.ca | null | no<sup>1</sup> | string | Certificate authority value of credential to set
+value.certificate | null | no<sup>1</sup> | string | Certificate value of credential to set
+value.private_key | null | no<sup>1</sup> | string | Private key value of credential to set
 additional_permissions | none | no | array | List of additional permissions to set on credential
 additional_permissions[].actor | none | no | identity<sup>2</sup> | Actor to provided specified operations on credential
 additional_permissions[].operations | none | no | array | List of operations provided on credential to specified actor
 additional_permissions[].operations[] | none | no | enum<sup>3</sup> | Operation provided on credential to specified actor
 
 <sup>1</sup> At least one value must be set  <br>
-<sup>2</sup> Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/initiatives/authentication-identities.md) <br>
+<sup>2</sup> Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/authentication-identities.md) <br>
 <sup>3</sup> Acceptable operations are 'read', 'write', 'delete', 'read_acl' and 'write_acl'
 
 ## Type: RSA
@@ -362,7 +362,7 @@ user$ credhub set --type rsa --name '/example-rsa' --public ./public.pem --priva
 id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
 type: rsa
 name: /example-rsa
-value: 
+value:
   public_key: |
     -----BEGIN PUBLIC KEY-----
     ...
@@ -381,7 +381,7 @@ curl "https://example.com/api/v1/data" \
   -X PUT \
   -d '{
       "name": "/example-rsa",
-      "type": "rsa", 
+      "type": "rsa",
       "value": {
         "public_key": "-----BEGIN PUBLIC KEY-----\n...\n-----END PUBLIC KEY-----",
         "private_key": "-----BEGIN RSA PRIVATE KEY-----\n...\n-----END RSA PRIVATE KEY-----"
@@ -399,7 +399,7 @@ curl "https://example.com/api/v1/data" \
   "value": {
     "public_key": "-----BEGIN PUBLIC KEY-----\n...\n-----END PUBLIC KEY-----",
     "private_key": "-----BEGIN RSA PRIVATE KEY-----\n...\n-----END RSA PRIVATE KEY-----"
-  }, 
+  },
   "version_created_at": "2017-01-01T04:07:18Z"
 }
 ```
@@ -417,16 +417,16 @@ Parameter | Default | Required | Type | Description
 name | none | yes | string | Name of credential to set
 type | none | yes | string | Type of credential to set
 overwrite | false | no | boolean | Overwrite if value exists
-value | none | yes | object | 
-value.public_key | null | no<sup>1</sup> | string | Public key value of credential to set 
-value.private_key | null | no<sup>1</sup> | string | Private key value of credential to set 
+value | none | yes | object |
+value.public_key | null | no<sup>1</sup> | string | Public key value of credential to set
+value.private_key | null | no<sup>1</sup> | string | Private key value of credential to set
 additional_permissions | none | no | array | List of additional permissions to set on credential
 additional_permissions[].actor | none | no | identity<sup>2</sup> | Actor to provided specified operations on credential
 additional_permissions[].operations | none | no | array | List of operations provided on credential to specified actor
 additional_permissions[].operations[] | none | no | enum<sup>3</sup> | Operation provided on credential to specified actor
 
 <sup>1</sup> At least one value must be set  <br>
-<sup>2</sup> Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/initiatives/authentication-identities.md) <br>
+<sup>2</sup> Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/authentication-identities.md) <br>
 <sup>3</sup> Acceptable operations are 'read', 'write', 'delete', 'read_acl' and 'write_acl'
 
 ## Type: SSH
@@ -438,7 +438,7 @@ user$ credhub set --type ssh --name '/example-ssh' --public ./public.pem --priva
 id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
 type: ssh
 name: /example-ssh
-value: 
+value:
   public_key: ssh-rsa AAAAB3NzaC1y...W9RWFM1
   private_key: |
     -----BEGIN RSA PRIVATE KEY-----
@@ -454,9 +454,9 @@ curl "https://example.com/api/v1/data" \
   -X PUT \
   -d '{
       "name": "/example-ssh",
-      "type": "ssh", 
+      "type": "ssh",
       "value": {
-        "public_key": "ssh-rsa AAAAB3NzaC1y...W9RWFM1", 
+        "public_key": "ssh-rsa AAAAB3NzaC1y...W9RWFM1",
         "private_key": "-----BEGIN RSA PRIVATE KEY-----\n...\n-----END RSA PRIVATE KEY-----"
       }
      }' \
@@ -470,9 +470,9 @@ curl "https://example.com/api/v1/data" \
   "name": "/example-ssh",
   "type": "ssh",
   "value": {
-    "public_key": "ssh-rsa AAAAB3NzaC1y...W9RWFM1", 
+    "public_key": "ssh-rsa AAAAB3NzaC1y...W9RWFM1",
     "private_key": "-----BEGIN RSA PRIVATE KEY-----\n...\n-----END RSA PRIVATE KEY-----"
-  }, 
+  },
   "version_created_at": "2017-01-01T04:07:18Z"
 }
 ```
@@ -490,16 +490,16 @@ Parameter | Default | Required | Type | Description
 name | none | yes | string | Name of credential to set
 type | none | yes | string | Type of credential to set
 overwrite | false | no | boolean | Overwrite if value exists
-value | none | yes | object | 
-value.public_key | null | no<sup>1</sup> | string | Public key value of credential to set 
-value.private_key | null | no<sup>1</sup> | string | Private key value of credential to set 
+value | none | yes | object |
+value.public_key | null | no<sup>1</sup> | string | Public key value of credential to set
+value.private_key | null | no<sup>1</sup> | string | Private key value of credential to set
 additional_permissions | none | no | array | List of additional permissions to set on credential
 additional_permissions[].actor | none | no | identity<sup>2</sup> | Actor to provided specified operations on credential
 additional_permissions[].operations | none | no | array | List of operations provided on credential to specified actor
 additional_permissions[].operations[] | none | no | enum<sup>3</sup> | Operation provided on credential to specified actor
 
-<sup>1</sup> At least one value must be set  <br> 
-<sup>2</sup> Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/initiatives/authentication-identities.md) <br>
+<sup>1</sup> At least one value must be set  <br>
+<sup>2</sup> Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/authentication-identities.md) <br>
 <sup>3</sup> Acceptable operations are 'read', 'write', 'delete', 'read_acl' and 'write_acl'
 
 
@@ -508,11 +508,11 @@ additional_permissions[].operations[] | none | no | enum<sup>3</sup> | Operation
 > CredHub CLI
 
 ```shell
-user$ credhub import --file import.yml 
+user$ credhub import --file import.yml
 id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
 type: ssh
 name: /example-ssh
-value: 
+value:
   public_key: ssh-rsa AAAAB3NzaC1y...W9RWFM1
   private_key: |
     -----BEGIN RSA PRIVATE KEY-----
@@ -523,7 +523,7 @@ version_created_at: 2017-01-01T04:07:18Z
 id: 2ba73fbd-439e-40ef-b005-0e1db8815063
 type: password
 name: /example-password
-value: SqFcE2c0AuRvet2YhrxdFbPtkBmjiq 
+value: SqFcE2c0AuRvet2YhrxdFbPtkBmjiq
 version_created_at: 2017-01-01T04:07:28Z
 
 id: 22a1e87b-ba0b-4bc9-bb26-4e5fc5fb1b2f
@@ -540,17 +540,17 @@ Failed to set: 0
 > Sample Import File
 
 ```yml
-credentials: 
+credentials:
 - name: /example-ssh
   type: ssh
-  value: 
+  value:
     public_key: ssh-rsa AAAAB3NzaC1y...W9RWFM1
     private_key: |
       -----BEGIN RSA PRIVATE KEY-----
       ...
       -----END RSA PRIVATE KEY-----
 - name: /example-password
-  type: password 
+  type: password
   value: SqFcE2c0AuRvet2YhrxdFbPtkBmjiq
 - name: /example-value
   type: value
