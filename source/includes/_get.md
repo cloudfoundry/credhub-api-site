@@ -87,7 +87,7 @@ curl "https://example.com/api/v1/data?name=/example-password" \
 }
 ```
 
-This request returns a credential's value(s) by name. All historical values will be returned unless `"current": true` is specified.
+This request returns a credential's value(s) by name. All historical values will be returned unless `"current": true` or `"versions": #` is specified.
 
 ### HTTP Request
 
@@ -99,6 +99,7 @@ Parameter | Default | Required | Type | Description
 --------- | --------- | --------- | --------- | -----------
 name | none | yes | string | Name of credential to retrieve
 current | false | no | string | Return only latest credential version
+versions | none | no | integer | Return latest N credential versions
 
 ## Type: Value
 
@@ -148,6 +149,7 @@ Parameter | Default | Required | Type | Description
 --------- | --------- | --------- | --------- | -----------
 name | none | yes | string | Name of credential to retrieve
 current | false | no | string | Return only latest credential version
+versions | none | no | integer | Return latest N credential versions
 
 ## Type: JSON
 
@@ -209,6 +211,7 @@ Parameter | Default | Required | Type | Description
 --------- | --------- | --------- | --------- | -----------
 name | none | yes | string | Name of credential to retrieve
 current | false | no | string | Return only latest credential version
+versions | none | no | integer | Return latest N credential versions
 
 ## Type: Password
 
@@ -258,6 +261,7 @@ Parameter | Default | Required | Type | Description
 --------- | --------- | --------- | --------- | -----------
 name | none | yes | string | Name of credential to retrieve
 current | false | no | string | Return only latest credential version
+versions | none | no | integer | Return latest N credential versions
 
 ## Type: User
 
@@ -314,6 +318,7 @@ Parameter | Default | Required | Type | Description
 --------- | --------- | --------- | --------- | -----------
 name | none | yes | string | Name of credential to retrieve
 current | false | no | string | Return only latest credential version
+versions | none | no | integer | Return latest N credential versions
 
 ## Type: Certificate
 
@@ -379,6 +384,7 @@ Parameter | Default | Required | Type | Description
 --------- | --------- | --------- | --------- | -----------
 name | none | yes | string | Name of credential to retrieve
 current | false | no | string | Return only latest credential version
+versions | none | no | integer | Return latest N credential versions
 
 ## Type: RSA
 
@@ -439,6 +445,7 @@ Parameter | Default | Required | Type | Description
 --------- | --------- | --------- | --------- | -----------
 name | none | yes | string | Name of credential to retrieve
 current | false | no | string | Return only latest credential version
+versions | none | no | integer | Return latest N credential versions
 
 ## Type: SSH
 
@@ -497,4 +504,5 @@ Parameter | Default | Required | Type | Description
 --------- | --------- | --------- | --------- | -----------
 name | none | yes | string | Name of credential to retrieve
 current | false | no | string | Return only latest credential version
+versions | none | no | integer | Return latest N credential versions
 
