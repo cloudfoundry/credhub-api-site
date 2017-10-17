@@ -341,17 +341,19 @@ name | none | yes | string | Name of credential to set
 type | none | yes | string | Type of credential to set
 overwrite | false | no | boolean | Overwrite if value exists
 value | none | yes | object |
-value.ca | null | no<sup>1</sup> | string | Certificate authority value of credential to set
+value.ca | null | no<sup>1,2</sup> | string | Certificate authority value of credential to set
+value.ca_name | null | no<sup>2</sup> | string | Name of CA credential in credhub that has signed this certificate
 value.certificate | null | no<sup>1</sup> | string | Certificate value of credential to set
 value.private_key | null | no<sup>1</sup> | string | Private key value of credential to set
 additional_permissions | none | no | array | List of additional permissions to set on credential
-additional_permissions[].actor | none | no | identity<sup>2</sup> | Actor to provided specified operations on credential
+additional_permissions[].actor | none | no | identity<sup>3</sup> | Actor to provided specified operations on credential
 additional_permissions[].operations | none | no | array | List of operations provided on credential to specified actor
 additional_permissions[].operations[] | none | no | enum<sup>3</sup> | Operation provided on credential to specified actor
 
-<sup>1</sup> At least one value must be set  <br>
-<sup>2</sup> Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/authentication-identities.md) <br>
-<sup>3</sup> Acceptable operations are 'read', 'write', 'delete', 'read_acl' and 'write_acl'
+<sup>1</sup> At least one value must be set <br>
+<sup>2</sup> 'ca_name' and 'ca' are mutually exclusive values <br>
+<sup>3</sup> Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/authentication-identities.md) <br>
+<sup>4</sup> Acceptable operations are 'read', 'write', 'delete', 'read_acl' and 'write_acl'
 
 ## Type: RSA
 
