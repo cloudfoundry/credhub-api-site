@@ -15,7 +15,7 @@ curl "https://example.com/api/v1/interpolate" \
       "p-config-server": [
       {
        "credentials": {
-         "credhub-ref": "((/config-server/credentials))"
+         "credhub-ref": "/config-server/credentials"
        },
        "label": "p-config-server",
        "name": "config-server",
