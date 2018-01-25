@@ -48,10 +48,10 @@ This request generates a password credential based on the provided parameters.
 ### Request Parameters
 
 Parameter | Default | Required | Type | Description
---------- | --------- | --------- | --------- | ------------
+--------- | -------------- | --------- | --------- | ------------
 name | none | yes | string | Name of credential to set
 type | none | yes | string | Type of credential to set
-overwrite | false | no | boolean | Overwrite if value exists
+mode | no-overwrite | no | enum<sup>1</sup> | Overwrite interaction mode
 parameters | none | no | object | Generation parameters
 parameters.length | 30 | no | integer | Length of generated credential value
 parameters.exclude_upper | false | no | boolean | Exclude upper alpha characters from generated credential value
@@ -59,12 +59,13 @@ parameters.exclude_lower | false | no | boolean | Exclude lower alpha characters
 parameters.exclude_number | false | no | boolean | Exclude number characters from generated credential value
 parameters.include_special | false | no | boolean | Include special characters from generated credential value
 additional_permissions | none | no | array | List of additional permissions to set on credential
-additional_permissions[].actor | none | no | identity<sup>1</sup> | Actor to provided specified operations on credential
+additional_permissions[].actor | none | no | identity<sup>2</sup> | Actor to provided specified operations on credential
 additional_permissions[].operations | none | no | array | List of operations provided on credential to specified actor
-additional_permissions[].operations[] | none | no | enum<sup>2</sup> | Operation provided on credential to specified actor
+additional_permissions[].operations[] | none | no | enum<sup>3</sup> | Operation provided on credential to specified actor
 
-<sup>1</sup> Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/authentication-identities.md) <br>
-<sup>2</sup> Acceptable operations are 'read', 'write', 'delete', 'read_acl' and 'write_acl'
+<sup>1</sup> Acceptable modes are 'no-overwrite', 'overwrite', and 'converge' [explained here.](https://credhub-api.cfapps.io/#overwriting-credential-values) <br>
+<sup>2</sup> Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/authentication-identities.md) <br>
+<sup>3</sup> Acceptable operations are 'read', 'write', 'delete', 'read_acl', and 'write_acl'
 
 ## Type: User
 
@@ -125,7 +126,7 @@ Parameter | Default | Required | Type | Description
 --------- | --------- | --------- | --------- | ------------
 name | none | yes | string | Name of credential to set
 type | none | yes | string | Type of credential to set
-overwrite | false | no | boolean | Overwrite if value exists
+mode | no-overwrite | no | enum<sup>1</sup> | Overwrite interaction mode
 parameters | none | no | object | Password generation parameters
 parameters.username | none | no | string | User provided value for username
 parameters.length | 30 | no | integer | Length of generated credential value
@@ -134,12 +135,13 @@ parameters.exclude_lower | false | no | boolean | Exclude lower alpha characters
 parameters.exclude_number | false | no | boolean | Exclude number characters from generated credential value
 parameters.include_special | false | no | boolean | Include special characters from generated credential value
 additional_permissions | none | no | array | List of additional permissions to set on credential
-additional_permissions[].actor | none | no | identity<sup>1</sup> | Actor to provided specified operations on credential
+additional_permissions[].actor | none | no | identity<sup>2</sup> | Actor to provided specified operations on credential
 additional_permissions[].operations | none | no | array | List of operations provided on credential to specified actor
-additional_permissions[].operations[] | none | no | enum<sup>2</sup> | Operation provided on credential to specified actor
+additional_permissions[].operations[] | none | no | enum<sup>3</sup> | Operation provided on credential to specified actor
 
-<sup>1</sup> Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/authentication-identities.md) <br>
-<sup>2</sup> Acceptable operations are 'read', 'write', 'delete', 'read_acl' and 'write_acl'
+<sup>1</sup> Acceptable modes are 'no-overwrite', 'overwrite', and 'converge' [explained here.](https://credhub-api.cfapps.io/#overwriting-credential-values) <br>
+<sup>2</sup> Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/authentication-identities.md) <br>
+<sup>3</sup> Acceptable operations are 'read', 'write', 'delete', 'read_acl' and 'write_acl'
 
 ## Type: Certificate
 
@@ -209,39 +211,39 @@ Parameter | Default | Required | Type | Description
 --------- | --------- | --------- | --------- | ------------
 name | none | yes | string | Name of credential to generate
 type | none | yes | string | Type of credential to generate
-overwrite | false | no | boolean | Overwrite if value exists
+mode | no-overwrite | no | enum<sup>1</sup> | Overwrite interaction mode
 parameters | none | yes | object | Generation parameters
-parameters.common_name | none | no<sup>1</sup> | string | Common name of generated credential value
+parameters.common_name | none | no<sup>2</sup> | string | Common name of generated credential value
 parameters.alternative_names | none | no | array |
 parameters.alternative_names[] | none | no | string | Alternative names of generated credential value
-parameters.organization | none | no<sup>1</sup> | string | Organization of generated credential value
-parameters.organization_unit | none | no<sup>1</sup> | string | Organization Unit of generated credential value
-parameters.locality | none | no<sup>1</sup> | string | Locality/city of generated credential value
-parameters.state | none | no<sup>1</sup> | string | State/province of generated credential value
-parameters.country | none | no<sup>1</sup> | string | Country of generated credential value
+parameters.organization | none | no<sup>2</sup> | string | Organization of generated credential value
+parameters.organization_unit | none | no<sup>2</sup> | string | Organization Unit of generated credential value
+parameters.locality | none | no<sup>2</sup> | string | Locality/city of generated credential value
+parameters.state | none | no<sup>2</sup> | string | State/province of generated credential value
+parameters.country | none | no<sup>2</sup> | string | Country of generated credential value
 parameters.key_usage | none | no | array |
-parameters.key_usage[] | none | no | enum<sup>2</sup> | Key usage extensions of generated credential value
+parameters.key_usage[] | none | no | enum<sup>3</sup> | Key usage extensions of generated credential value
 parameters.extended_key_usage | none | no | array |
-parameters.extended_key_usage[] | none | no | enum<sup>3</sup> | Extended key usage extensions of generated credential value
-parameters.key_length | 2048 | no | enum<sup>4</sup> | Key length of generated credential value
+parameters.extended_key_usage[] | none | no | enum<sup>4</sup> | Extended key usage extensions of generated credential value
+parameters.key_length | 2048 | no | enum<sup>5</sup> | Key length of generated credential value
 parameters.duration | 365 | no | integer | Duration in days of generated credential value
-parameters.ca | none | no<sup>5</sup> | credential<sup>6</sup> | Name of certificate authority to sign of generated credential value
-parameters.is_ca | false | no<sup>5</sup> | boolean | Whether to generate credential value as a certificate authority
-parameters.self_sign | false | no<sup>5</sup> | boolean | Whether to self-sign generated credential value
+parameters.ca | none | no<sup>6</sup> | credential<sup>7</sup> | Name of certificate authority to sign of generated credential value
+parameters.is_ca | false | no<sup>6</sup> | boolean | Whether to generate credential value as a certificate authority
+parameters.self_sign | false | no<sup>6</sup> | boolean | Whether to self-sign generated credential value
 additional_permissions | none | no | array | List of additional permissions to set on credential
-additional_permissions[].actor | none | no | identity<sup>7</sup> | Actor to provided specified operations on credential
+additional_permissions[].actor | none | no | identity<sup>8</sup> | Actor to provided specified operations on credential
 additional_permissions[].operations | none | no | array | List of operations provided on credential to specified actor
-additional_permissions[].operations[] | none | no | enum<sup>8</sup> | Operation provided on credential to specified actor
+additional_permissions[].operations[] | none | no | enum<sup>9</sup> | Operation provided on credential to specified actor
 
-
-<sup>1</sup> One subject field must be specified in the request <br>
-<sup>2</sup> Acceptable key usages are digital_signature, non_repudiation, key_encipherment, data_encipherment, key_agreement, key_cert_sign, crl_sign, encipher_only and decipher_only.<br>
-<sup>3</sup> Acceptable extended key usages are client_auth, server_auth, code_signing, email_protection and timestamping.<br>
-<sup>4</sup> Acceptable key lengths are 2048, 3072, 4096 <br>
-<sup>5</sup> At least one signing parameter must be provided <br>
-<sup>6</sup> Credential must contain appropriate certificate authority extensions  <br>
-<sup>7</sup> Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/authentication-identities.md) <br>
-<sup>8</sup> Acceptable operations are 'read', 'write', 'delete', 'read_acl' and 'write_acl'
+<sup>1</sup> Acceptable modes are 'no-overwrite', 'overwrite', and 'converge' [explained here.](https://credhub-api.cfapps.io/#overwriting-credential-values) <br>
+<sup>2</sup> One subject field must be specified in the request <br>
+<sup>3</sup> Acceptable key usages are digital_signature, non_repudiation, key_encipherment, data_encipherment, key_agreement, key_cert_sign, crl_sign, encipher_only and decipher_only.<br>
+<sup>4</sup> Acceptable extended key usages are client_auth, server_auth, code_signing, email_protection and timestamping.<br>
+<sup>5</sup> Acceptable key lengths are 2048, 3072, 4096 <br>
+<sup>6</sup> At least one signing parameter must be provided <br>
+<sup>7</sup> Credential must contain appropriate certificate authority extensions  <br>
+<sup>8</sup> Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/authentication-identities.md) <br>
+<sup>9</sup> Acceptable operations are 'read', 'write', 'delete', 'read_acl' and 'write_acl'
 
 ## Type: RSA
 
@@ -305,17 +307,18 @@ Parameter | Default | Required | Type | Description
 --------- | --------- | --------- | --------- | ------------
 name | none | yes | string | Name of credential to set
 type | none | yes | string | Type of credential to set
-overwrite | false | no | boolean | Overwrite if value exists
+mode | no-overwrite | no | enum<sup>1</sup> | Overwrite interaction mode
 parameters | none | no | object | Generation parameters
-parameters.key_length | 2048 | no | enum<sup>1</sup> | Key length of generated credential value
+parameters.key_length | 2048 | no | enum<sup>2</sup> | Key length of generated credential value
 additional_permissions | none | no | array | List of additional permissions to set on credential
-additional_permissions[].actor | none | no | identity<sup>2</sup> | Actor to provided specified operations on credential
+additional_permissions[].actor | none | no | identity<sup>3</sup> | Actor to provided specified operations on credential
 additional_permissions[].operations | none | no | array | List of operations provided on credential to specified actor
-additional_permissions[].operations[] | none | no | enum<sup>3</sup> | Operation provided on credential to specified actor
+additional_permissions[].operations[] | none | no | enum<sup>4</sup> | Operation provided on credential to specified actor
 
-<sup>1</sup> Acceptable key lengths are 2048, 3072, 4096  <br>
-<sup>2</sup> Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/authentication-identities.md) <br>
-<sup>3</sup> Acceptable operations are 'read', 'write', 'delete', 'read_acl' and 'write_acl'
+<sup>1</sup> Acceptable modes are 'no-overwrite', 'overwrite', and 'converge' [explained here.](https://credhub-api.cfapps.io/#overwriting-credential-values) <br>
+<sup>2</sup> Acceptable key lengths are 2048, 3072, 4096  <br>
+<sup>3</sup> Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/authentication-identities.md) <br>
+<sup>4</sup> Acceptable operations are 'read', 'write', 'delete', 'read_acl' and 'write_acl'
 
 ## Type: SSH
 
@@ -376,16 +379,17 @@ Parameter | Default | Required | Type | Description
 --------- | --------- | --------- | --------- | ------------
 name | none | yes | string | Name of credential to set
 type | none | yes | string | Type of credential to set
-overwrite | false | no | boolean | Overwrite if value exists
+mode | no-overwrite | no | enum<sup>1</sup> | Overwrite interaction mode
 parameters | none | no | object | Generation parameters
-parameters.key_length | 2048 | no | enum<sup>1</sup> | Key length of generated credential value
+parameters.key_length | 2048 | no | enum<sup>2</sup> | Key length of generated credential value
 parameters.ssh_comment | none | no | string | SSH comment of generated credential value
 additional_permissions | none | no | array | List of additional permissions to set on credential
-additional_permissions[].actor | none | no | identity<sup>2</sup> | Actor to provided specified operations on credential
+additional_permissions[].actor | none | no | identity<sup>3</sup> | Actor to provided specified operations on credential
 additional_permissions[].operations | none | no | array | List of operations provided on credential to specified actor
-additional_permissions[].operations[] | none | no | enum<sup>3</sup> | Operation provided on credential to specified actor
+additional_permissions[].operations[] | none | no | enum<sup>4</sup> | Operation provided on credential to specified actor
 
-<sup>1</sup> Acceptable key lengths are 2048, 3072, 4096  <br>
-<sup>2</sup> Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/authentication-identities.md) <br>
-<sup>3</sup> Acceptable operations are 'read', 'write', 'delete', 'read_acl' and 'write_acl'
+<sup>1</sup> Acceptable modes are 'no-overwrite', 'overwrite', and 'converge' [explained here.](https://credhub-api.cfapps.io/#overwriting-credential-values) <br>
+<sup>2</sup> Acceptable key lengths are 2048, 3072, 4096  <br>
+<sup>3</sup> Authentication-specific identities [explained here.](https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/authentication-identities.md) <br>
+<sup>4</sup> Acceptable operations are 'read', 'write', 'delete', 'read_acl' and 'write_acl'
 

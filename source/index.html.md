@@ -47,7 +47,9 @@ Credential responses include a unique identifier in the key 'id'. This ID is a u
 
 ## Overwriting Credential Values
 
-By default, credential set and generate actions with the API will not overwrite an existing value. If you wish to only create values that do not exist, you can perform generate requests on all of the credentials and it leave existing values in place. If you wish to overwrite existing values, you must include the `"overwrite": true` parameter in your request.
+By default, credential set and generate actions with the API will not overwrite an existing value. If you wish to only create values that do not exist, you can perform generate requests on all of the credentials and it leave existing values in place. This mode is the default, but can be specified as `"mode" : "no-overwrite"`.
+
+If you wish to overwrite existing values, you can set 'mode' as 'overwrite' or 'converge'.  When `"mode" : "converge"` is set, a new value will be generated only if the generation parameters have changed.  When `"mode" : "overwrite"` is set, a new credential is generated in every case.
 
 # Authentication
 
