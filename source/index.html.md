@@ -51,6 +51,7 @@ By default, credential set and generate actions with the API will not overwrite 
 
 If you wish to overwrite existing values, you can set 'mode' as 'overwrite' or 'converge'.  When `"mode" : "converge"` is set, a new value will be generated only if the generation parameters have changed.  When `"mode" : "overwrite"` is set, a new credential is generated in every case.
 
+In versions prior to 1.6, `mode` is not available. Instead `overwrite` is indicated as a boolean value. If you wish to overwrite existing values, you should then include the `"overwrite": true` parameter in your request.
 # Authentication
 
 All requests to CredHub, with the exception of `/info` and `/health` must include an authentication method. CredHub supports two authentication provider types, [UAA][1] and [mutual TLS][2].
