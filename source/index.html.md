@@ -125,8 +125,8 @@ curl "https://example.com/api/v1/data?name=/example-password" \
 }
 ```
 
-CredHub supports mutual TLS authentication. Certificates issued by any of the trusted CA certificates are accepted by CredHub.
-
+CredHub supports mutual TLS authentication. Certificates issued by trusted Certificate Authorities are accepted by CredHub.
+To provide an authenticated identity in the client mtls certificate, CredHub requires the Organization Unit of the certificate to comply with the pattern `app:<v4 UUId>`.
 CredHub validates the [authenticated identity][3], signing authority, validity dates and presence of x509 extension Extended Key Usage 'Client Authentication' during the authentication workflow.
 
 [3]:https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/authentication-identities.md
