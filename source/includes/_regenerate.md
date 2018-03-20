@@ -83,7 +83,9 @@ curl "https://example.com/api/v1/bulk-regenerate" \
 
 This endpoint regenerates all certificate signed by the given CA.
 
-NOTICE: This functionality was added in version 1.4.0.
+NOTICE:  
+    - This functionality was added in version 1.4.0.
+    - As of version 1.7.0, `bulk-regenerate` will additionally traverse the pki chain to leaf certificates beyond one level down.
 
 ### HTTP Request
 
