@@ -20,7 +20,7 @@ curl "https://example.com/api/v1/data" \
   -X POST \
   -d '{
       "name": "/example-password",
-      "type": "password"
+      "type": "password",
       "parameters": {
         "length": 40
       }
