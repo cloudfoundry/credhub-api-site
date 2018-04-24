@@ -506,3 +506,47 @@ name | none | yes | string | Name of credential to retrieve
 current | false | no | string | Return only latest credential version
 versions | none | no | integer | Return latest N credential versions
 
+## Bulk Export
+
+> CredHub CLI
+
+```shell
+user$ credhub export --file export.yml
+```
+
+> Sample Export File
+
+```yml
+credentials:
+- name: /example-ssh
+  type: ssh
+  value:
+    public_key: ssh-rsa AAAAB3NzaC1y...W9RWFM1
+    private_key: |
+      -----BEGIN RSA PRIVATE KEY-----
+      ...
+      -----END RSA PRIVATE KEY-----
+- name: /example-password
+  type: password
+  value: SqFcE2c0AuRvet2YhrxdFbPtkBmjiq
+- name: /example-value
+  type: value
+  value: sample
+```
+
+This CLI command gets multiple credentials and exports them to either standard out, or a file. The output will be in yaml format, with the key `credentials` whose value is a list of credential objects. Each credential will contain a name, type and value. An example is shown to the right. This file is compatible with the bulk import process.
+
+Use `--file` to specify a file to write the export to. Use `--path` to specify a path, that will restrict the credentials exported to those with a prefix matching the given path.
+
+
+
+### HTTP Request
+
+n/a
+
+### Request Parameters
+
+Parameter | Default | Required | Type | Description
+--------- | --------- | --------- | --------- | ------------
+n/a |  |  |  |
+
