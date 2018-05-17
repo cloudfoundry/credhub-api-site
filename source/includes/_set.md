@@ -5,7 +5,7 @@
 > CredHub CLI
 
 ```shell
-user$ credhub set --type value --name '/example-value' --value 'sample'
+user$ credhub set --type value --name '/example-value' --password 'sample'
 id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
 type: value
 name: /example-value
@@ -145,7 +145,7 @@ additional_permissions[].operations[] | none | no | enum<sup>3</sup> | Operation
 > CredHub CLI
 
 ```shell
-user$ credhub set --type password --name '/example-password' --value '3t6Y2OFP0jQIcLnki1h7p3NtSfDx4l9bamr1ja6R'
+user$ credhub set --type password --name '/example-password' --password '3t6Y2OFP0jQIcLnki1h7p3NtSfDx4l9bamr1ja6R'
 id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
 type: password
 name: /example-password
