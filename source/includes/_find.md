@@ -47,7 +47,7 @@ This request retrieves a list of stored credential names which contain the searc
 
 Parameter | Default | Required | Type | Description
 --------- | --------- | --------- | --------- | -----------
-name-like | none | true | string | Search term to match against stored credential names (lower case substring matching)
+name-like | none | true | string | Search term to match against stored credential names (case insensitive substring matching)
 
 ## Find by Path
 
