@@ -37,7 +37,7 @@ curl "https://example.com/api/v1/data?name-like=password" \
 }
 ```
 
-This request retrieves a list of stored credential names which contain the search.
+This request retrieves a list of stored credential names which contain the search term.
 
 ### HTTP Request
 
@@ -47,7 +47,7 @@ This request retrieves a list of stored credential names which contain the searc
 
 Parameter | Default | Required | Type | Description
 --------- | --------- | --------- | --------- | -----------
-name-like | none | true | string | Search term to match against stored credential names
+name-like | none | true | string | Search term to match against stored credential names (case insensitive substring matching)
 
 ## Find by Path
 
