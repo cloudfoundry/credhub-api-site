@@ -2,3 +2,5 @@
 //= require ./app/_lang
 //= require ./app/_search
 //= require ./app/_toc
+//= require ./lib/_dropdown
+//= require ./app/_version_dropdown
