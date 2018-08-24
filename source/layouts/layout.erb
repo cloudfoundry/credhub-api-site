@@ -13,6 +13,12 @@ WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 License for the specific language governing permissions and limitations
 under the License.
 %>
+<%
+  def get_version
+    version = File.exists?('versionfile') ? File.read('versionfile') : 'local'
+    "Version #{version}"
+  end
+%>
 <% language_tabs = current_page.data.language_tabs || [] %>
 <!doctype html>
 <html>
@@ -70,6 +76,19 @@ under the License.
           <% end %>
         </div>
       <% end %>
+      <div id="version-dropdown">
+        <div class="dropdown">
+          <button type="button" id="version-dropdown-button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= get_version %><span class="caret">&#x25BE;</span></button>
+          <ul id="version-dropdown-menu" class="dropdown-menu" role="menu" aria-labelledby="version-dropdown-button">
+            <div class="dropdown-filter">
+              <div class="dropdown-content">
+                <ul class="dropdown-list" id="version-list">
+                </ul>
+              </div>
+            </div>
+          </ul>
+        </div>
+      </div>
       <% if current_page.data.search %>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
