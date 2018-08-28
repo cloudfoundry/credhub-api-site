@@ -60,7 +60,7 @@
         $.get(
             "../../versions.json",
             function(data) {
-                var versions = data.versions
+                var versions = data
                 for(var i = 0; i < versions.length; i++) {
                     var version = versions[i];
                     var li = '<li><a id="version-link-' + version + '"' + ' class="version-link" href="../../version/' + version + '">' + version + '</a></li>';
