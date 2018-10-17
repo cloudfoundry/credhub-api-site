@@ -48,5 +48,4 @@ end
 # If you want Middleman to listen on a different port, you can set that below
 set :port, 4567
 
-config[:kitten] = File.read("versionfile")
-
+set :kitten, File.read("versionfile")
