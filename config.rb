@@ -48,4 +48,4 @@ end
 # If you want Middleman to listen on a different port, you can set that below
 set :port, 4567
 
-set :kitten_name, "Fluffums"
+set config[:kitten] = 'fluffums'
