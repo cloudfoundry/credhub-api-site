@@ -1,0 +1,27 @@
+## Get Permissions
+
+> CredHub CLI
+```shell
+[not supported]
+```
+
+> cURL
+include::snippets/curl-request.adoc[]
+include::snippets/response-body.adoc[]
+
+This request returns the permissions of a path given the permission UUID.
+
+### HTTP Request
+include::snippets/http-request.adoc[]
+
+### Request Parameters
+include::snippets/request-parameters.adoc[]
+
+### Request Body
+include::snippets/request-body.adoc[]
+
+### HTTP Response
+include::snippets/http-response.adoc[]
+
+### Response Fields
+include::snippets/response-fields.adoc[]
