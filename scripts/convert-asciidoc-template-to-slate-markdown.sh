@@ -4,6 +4,7 @@ declare -r ASCIIDOC_BUILD_DIRECTORY=/tmp/credhub-documentation-build/asciidoc
 declare -r DOCBOOK_BUILD_DIRECTORY=/tmp/credhub-documentation-build/docbook
 declare -r MARKDOWN_BUILD_DIRECTORY=/tmp/credhub-documentation-build/markdown
 declare -r SNIPPETS_BUILD_DIRECTORY=/tmp/credhub-documentation-build/asciidoc/snippets
+declare -r API_DOCS_DIRECTORY=../credhub-api-docs
 
 function setup_bash_error_handling() {
     set -euo pipefail
@@ -52,10 +53,15 @@ function convert_intermediary_docbook_format_to_markdown() {
         "${DOCBOOK_BUILD_DIRECTORY}/get-permission-template.xml"
 }
 
+function copy_markdown_to_api_docs_repo() {
+   cp -R ${MARKDOWN_BUILD_DIRECTORY}/. ${API_DOCS_DIRECTORY}/includes
+}
+
 function display_finish_message() {
-    echo "📚 Generated the following slate 'include' documentation snippets in ${MARKDOWN_BUILD_DIRECTORY}:"
+    echo "📚 Generated the following slate 'include' documentation snippets in ${API_DOCS_DIRECTORY}/includes:"
     echo ""
     ls "${MARKDOWN_BUILD_DIRECTORY}"
+    echo "Changes must be pushed up from the credhub-api-docs directory"
 }
 
 function main() {
@@ -67,6 +73,7 @@ function main() {
     copy_asciidoc_templates_to_build_directory
     convert_asciidoc_to_intermediary_docbook_format
     convert_intermediary_docbook_format_to_markdown
+    copy_markdown_to_api_docs_repo
     display_finish_message
 }
 
