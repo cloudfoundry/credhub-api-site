@@ -1,5 +1,7 @@
 ## Get Permissions
 
+### Get by path and actor
+
 > CredHub CLI
 ```shell
 [not supported]
