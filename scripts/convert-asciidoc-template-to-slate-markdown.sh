@@ -60,8 +60,8 @@ function convert_intermediary_docbook_format_to_markdown() {
 
 function fix_headers() {
    for file in ${MARKDOWN_BUILD_DIRECTORY}/*.md; do
-      sed -i "" 's/## HTTP Request/### HTTP Request/g' $file
-      sed -i "" 's/## Request Parameters/### Request Parameters/g' $file
+      sed -i "" 's/^## HTTP Request/### HTTP Request/g' $file
+      sed -i "" 's/^## Request Parameters/### Request Parameters/g' $file
    done
 }
 
