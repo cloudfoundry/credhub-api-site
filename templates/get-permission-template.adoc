@@ -9,7 +9,7 @@
 include::snippets/curl-request.adoc[]
 include::snippets/response-body.adoc[]
 
-This request returns the permissions of a path given the permission UUID.
+This request retrieves a permission by path and actor.
 
 #### HTTP Request
 include::snippets/http-request.adoc[]
