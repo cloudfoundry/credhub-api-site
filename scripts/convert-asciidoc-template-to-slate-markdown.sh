@@ -53,7 +53,7 @@ function convert_intermediary_docbook_format_to_markdown() {
        pandoc \
            -f docbook \
            -t gfm \
-           -o ${MARKDOWN_BUILD_DIRECTORY}/${file_without_extension}.md \
+           -o ${MARKDOWN_BUILD_DIRECTORY}/_${file_without_extension}.md \
            $file
     done
 }
