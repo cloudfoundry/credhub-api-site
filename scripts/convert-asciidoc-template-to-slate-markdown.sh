@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+declare -r GENERATED_SNIPPETS_DIRECTORY=~/workspace/credhub-release/src/credhub/build/generated-snippets
 declare -r ASCIIDOC_BUILD_DIRECTORY=/tmp/credhub-documentation-build/asciidoc
 declare -r DOCBOOK_BUILD_DIRECTORY=/tmp/credhub-documentation-build/docbook
 declare -r MARKDOWN_BUILD_DIRECTORY=/tmp/credhub-documentation-build/markdown
@@ -31,7 +32,7 @@ function go_to_project_root_directory() {
 }
 
 function copy_spring_restdoc_snippets_to_build_directory() {
-    cp ~/workspace/credhub-release/src/credhub/build/generated-snippets/api/v2/permissions/*.adoc "${SNIPPETS_BUILD_DIRECTORY}"
+    find ${GENERATED_SNIPPETS_DIRECTORY} -name \*.adoc -exec cp {} "${SNIPPETS_BUILD_DIRECTORY}" \;
 }
 
 function copy_asciidoc_templates_to_build_directory() {
@@ -40,17 +41,28 @@ function copy_asciidoc_templates_to_build_directory() {
 
 function convert_asciidoc_to_intermediary_docbook_format() {
     asciidoctor \
+        -q \
         -b docbook \
         -D "${DOCBOOK_BUILD_DIRECTORY}" \
-        "${ASCIIDOC_BUILD_DIRECTORY}/get-permission-template.adoc"
+        "${ASCIIDOC_BUILD_DIRECTORY}/*.adoc"
 }
 
 function convert_intermediary_docbook_format_to_markdown() {
-    pandoc \
-        -f docbook \
-        -t gfm \
-        -o "${MARKDOWN_BUILD_DIRECTORY}/_get-permission.md" \
-        "${DOCBOOK_BUILD_DIRECTORY}/get-permission-template.xml"
+    for file in ${DOCBOOK_BUILD_DIRECTORY}/*.xml; do
+       local -r file_without_extension=$(basename $file .xml)
+       pandoc \
+           -f docbook \
+           -t gfm \
+           -o ${MARKDOWN_BUILD_DIRECTORY}/${file_without_extension}.md \
+           $file
+    done
+}
+
+function fix_headers() {
+   for file in ${MARKDOWN_BUILD_DIRECTORY}/*.md; do
+      sed -i "" 's/## HTTP Request/### HTTP Request/g' $file
+      sed -i "" 's/## Request Parameters/### Request Parameters/g' $file
+   done
 }
 
 function copy_markdown_to_api_docs_repo() {
@@ -73,6 +85,7 @@ function main() {
     copy_asciidoc_templates_to_build_directory
     convert_asciidoc_to_intermediary_docbook_format
     convert_intermediary_docbook_format_to_markdown
+    fix_headers
     copy_markdown_to_api_docs_repo
     display_finish_message
 }
