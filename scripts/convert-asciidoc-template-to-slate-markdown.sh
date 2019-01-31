@@ -49,11 +49,11 @@ function convert_asciidoc_to_intermediary_docbook_format() {
 
 function convert_intermediary_docbook_format_to_markdown() {
     for file in ${DOCBOOK_BUILD_DIRECTORY}/*.xml; do
-       local -r file_without_extension=$(basename $file .xml)
+       local -r base_file_name_without_extension=$(echo $(basename $file .xml) | sed -e 's/-template//')
        pandoc \
            -f docbook \
            -t gfm \
-           -o ${MARKDOWN_BUILD_DIRECTORY}/_${file_without_extension}.md \
+           -o ${MARKDOWN_BUILD_DIRECTORY}/_${base_file_name_without_extension}.md \
            $file
     done
 }
