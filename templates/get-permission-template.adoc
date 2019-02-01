@@ -1,6 +1,6 @@
 ## Get Permissions
 
-### Get by path and actor
+### Get by ID
 
 > CredHub CLI
 ```shell
@@ -8,13 +8,32 @@
 ```
 
 > cURL
-include::snippets/curl-request.adoc[]
-include::snippets/response-body.adoc[]
+include::snippets/GET__permissions_by_uuid__returns_a_permission/curl-request.adoc[]
+include::snippets/GET__permissions_by_uuid__returns_a_permission/response-body.adoc[]
 
-This request retrieves a permission by path and actor.
+This request retrieves a permission given the UUID.
 
 #### HTTP Request
-include::snippets/http-request.adoc[]
+include::snippets/GET__permissions_by_uuid__returns_a_permission/http-request.adoc[]
 
 #### Request Parameters
-include::snippets/request-parameters.adoc[]
+include::snippets/GET__permissions_by_uuid__returns_a_permission/request-parameters.adoc[]
+
+### Get by Path and Actor
+
+> CredHub CLI
+```shell
+[not supported]
+```
+
+> cURL
+include::snippets/GET__permissions_by_actor_and_path__returns_a_permission/curl-request.adoc[]
+include::snippets/GET__permissions_by_actor_and_path__returns_a_permission/response-body.adoc[]
+
+This request retrieves a permission given the path and actor.
+
+#### HTTP Request
+include::snippets/GET__permissions_by_actor_and_path__returns_a_permission/http-request.adoc[]
+
+#### Request Parameters
+include::snippets/GET__permissions_by_actor_and_path__returns_a_permission/request-parameters.adoc[]

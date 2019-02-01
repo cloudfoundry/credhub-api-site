@@ -32,7 +32,7 @@ function go_to_project_root_directory() {
 }
 
 function copy_spring_restdoc_snippets_to_build_directory() {
-    find ${GENERATED_SNIPPETS_DIRECTORY} -name \*.adoc -exec cp {} "${SNIPPETS_BUILD_DIRECTORY}" \;
+    cp -r ${GENERATED_SNIPPETS_DIRECTORY}/. ${SNIPPETS_BUILD_DIRECTORY}
 }
 
 function copy_asciidoc_templates_to_build_directory() {
