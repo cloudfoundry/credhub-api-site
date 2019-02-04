@@ -16,6 +16,8 @@ build/
 .cache
 .vagrant
 .sass-cache
+built-site
+source
 
 # YARD artifacts
 .yardoc

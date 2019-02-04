@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+
+function set_bash_error_handling() {
+  set -eux
+}
+
+function go_to_project_root_directory() {
+  local -r script_dir=$( dirname "${BASH_SOURCE[0]}")
+
+  cd "$script_dir/.."
+}
+
+function install_ruby_dependencies() {
+  bundle install
+}
+
+function build_slate_docs() {
+  local -r app_dir=$PWD/built-site
+  local -r api_docs_dir="$PWD/../credhub-api-docs"
+  local -r credhub_versions=$(git -C "$api_docs_dir" branch -r | cut -d'/' -f2 | grep -e '[0-9].[0-9]')
+  local -r credhub_dir="$PWD/../credhub-release/src/credhub"
+
+  for version in $credhub_versions; do
+    build_dir=$app_dir/public/version/"$version"
+    mkdir -p "$build_dir"
+
+    rm -rf source/includes source/index.html.md versionfile
+    git -C "$api_docs_dir" checkout "$version"
+
+    local should_build_autodocs=$(echo "$version >= 2.1" | bc)
+    if [ "$should_build_autodocs" == "1" ]; then
+      git -C "$credhub_dir" checkout "${version}.x"
+      "$credhub_dir"/scripts/generate_documentation_snippets
+      scripts/convert-asciidoc-template-to-slate-markdown
+    fi
+
+    cp -r "$api_docs_dir"/* source
+
+    echo -n "$version" > versionfile
+
+    bundle exec middleman build --clean
+    cp -r build/* "$build_dir"
+  done
+}
+
+function generate_versions_json() {
+  local -r app_dir=$PWD/built-site
+  local -r api_docs_dir=$PWD/../credhub-api-docs
+
+  versions_json=$(git -C "$api_docs_dir" branch -r | cut -d'/' -f2 | grep -e '[0-9].[0-9]' | xargs -I '{}' echo \\\"'{}'\\\" | xargs | sed -e 's/ /,/g')
+  echo -n '[' "$versions_json" ']' > "$app_dir/public/versions.json"
+}
+
+function generate_index_html() {
+  local -r app_dir=$PWD/built-site
+  local -r api_docs_dir=$PWD/../credhub-api-docs
+  local -r latest_version=$(git -C "$api_docs_dir" branch -r | cut -d'/' -f2 | grep -e '[0-9].[0-9]' | tail -n 1)
+
+cat >"$app_dir/public/index.html" <<-EOF
+<html>
+  <head>
+    <script>
+      window.location.href = "/version/$latest_version";
+    </script>
+  </head>
+
+  <body></body>
+</html>
+EOF
+}
+
+function main() {
+  set_bash_error_handling
+  go_to_project_root_directory
+
+  install_ruby_dependencies
+  build_slate_docs
+  generate_versions_json
+  generate_index_html
+}
+
+main

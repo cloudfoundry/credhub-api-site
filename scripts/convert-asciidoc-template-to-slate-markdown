@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-declare -r GENERATED_SNIPPETS_DIRECTORY=~/workspace/credhub-release/src/credhub/build/generated-snippets
 declare -r ASCIIDOC_BUILD_DIRECTORY=/tmp/credhub-documentation-build/asciidoc
 declare -r DOCBOOK_BUILD_DIRECTORY=/tmp/credhub-documentation-build/docbook
 declare -r MARKDOWN_BUILD_DIRECTORY=/tmp/credhub-documentation-build/markdown
@@ -19,10 +18,10 @@ function setup_build_directory() {
 }
 
 function clean_old_converted_files() {
-    rm -f ${ASCIIDOC_BUILD_DIRECTORY}/*.adoc
-    rm -f ${DOCBOOK_BUILD_DIRECTORY}/*.xml
-    rm -f ${MARKDOWN_BUILD_DIRECTORY}/*.md
-    rm -f ${SNIPPETS_BUILD_DIRECTORY}/*.adoc
+    rm -f "${ASCIIDOC_BUILD_DIRECTORY}"/*.adoc
+    rm -f "${DOCBOOK_BUILD_DIRECTORY}"/*.xml
+    rm -f "${MARKDOWN_BUILD_DIRECTORY}"/*.md
+    rm -f "${SNIPPETS_BUILD_DIRECTORY}"/*.adoc
 }
 
 function go_to_project_root_directory() {
@@ -32,7 +31,7 @@ function go_to_project_root_directory() {
 }
 
 function copy_spring_restdoc_snippets_to_build_directory() {
-    cp -r ${GENERATED_SNIPPETS_DIRECTORY}/. ${SNIPPETS_BUILD_DIRECTORY}
+    cp -r ../credhub-release/src/credhub/build/generated-snippets/* "${SNIPPETS_BUILD_DIRECTORY}"
 }
 
 function copy_asciidoc_templates_to_build_directory() {
@@ -48,25 +47,25 @@ function convert_asciidoc_to_intermediary_docbook_format() {
 }
 
 function convert_intermediary_docbook_format_to_markdown() {
-    for file in ${DOCBOOK_BUILD_DIRECTORY}/*.xml; do
-       local -r base_file_name_without_extension=$(echo $(basename $file .xml) | sed -e 's/-template//')
+    for file in "${DOCBOOK_BUILD_DIRECTORY}"/*.xml; do
+       local -r base_file_name_without_extension="$(basename "$file" | sed -e 's/-template//')"
        pandoc \
            -f docbook \
            -t gfm \
-           -o ${MARKDOWN_BUILD_DIRECTORY}/_${base_file_name_without_extension}.md \
-           $file
+           -o "${MARKDOWN_BUILD_DIRECTORY}/_${base_file_name_without_extension}.md" \
+           "$file"
     done
 }
 
 function fix_headers() {
-   for file in ${MARKDOWN_BUILD_DIRECTORY}/*.md; do
-      sed -i "" 's/^## HTTP Request/### HTTP Request/g' $file
-      sed -i "" 's/^## Request Parameters/### Request Parameters/g' $file
+   for file in "${MARKDOWN_BUILD_DIRECTORY}"/*.md; do
+      sed -i 's/^## HTTP Request/### HTTP Request/g' "$file"
+      sed -i 's/^## Request Parameters/### Request Parameters/g' "$file"
    done
 }
 
 function copy_markdown_to_api_docs_repo() {
-   cp -R ${MARKDOWN_BUILD_DIRECTORY}/. ${API_DOCS_DIRECTORY}/includes
+   cp -R "${MARKDOWN_BUILD_DIRECTORY}"/. "${API_DOCS_DIRECTORY}"/includes
 }
 
 function display_finish_message() {
