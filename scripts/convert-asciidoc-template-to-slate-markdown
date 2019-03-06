@@ -34,6 +34,10 @@ function copy_spring_restdoc_snippets_to_build_directory() {
     cp -r ../credhub-release/src/credhub/backends/credhub/build/generated-snippets/* "${SNIPPETS_BUILD_DIRECTORY}"
 }
 
+function copy_cli_doc_snippets_to_build_directory() {
+    cp -r /tmp/credhub_cli_docs/* "${SNIPPETS_BUILD_DIRECTORY}"
+}
+
 function copy_asciidoc_templates_to_build_directory() {
     cp templates/*.adoc "${ASCIIDOC_BUILD_DIRECTORY}"
 }
@@ -61,6 +65,7 @@ function fix_headers() {
    for file in "${MARKDOWN_BUILD_DIRECTORY}"/*.md; do
       sed -i '' 's/^## HTTP Request/### HTTP Request/g' "$file"
       sed -i '' 's/^## Request Parameters/### Request Parameters/g' "$file"
+      sed -i '' 's/^## Get by Path and Actor/### Get by Path and Actor/g' "$file"
    done
 }
 
@@ -81,6 +86,7 @@ function main() {
     clean_old_converted_files
     go_to_project_root_directory
     copy_spring_restdoc_snippets_to_build_directory
+    copy_cli_doc_snippets_to_build_directory
     copy_asciidoc_templates_to_build_directory
     convert_asciidoc_to_intermediary_docbook_format
     convert_intermediary_docbook_format_to_markdown

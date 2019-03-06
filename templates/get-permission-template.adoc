@@ -22,9 +22,8 @@ include::snippets/GET__permissions_by_uuid__returns_a_permission/request-paramet
 ### Get by Path and Actor
 
 > CredHub CLI
-```shell
-[not supported]
-```
+include::snippets/get-permission/input.adoc[]
+include::snippets/get-permission/output.adoc[]
 
 > cURL
 include::snippets/GET__permissions_by_actor_and_path__returns_a_permission/curl-request.adoc[]
