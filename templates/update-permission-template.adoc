@@ -1,0 +1,17 @@
+## Update Permissions
+
+> CredHub CLI
+include::snippets/set-permission/input.adoc[]
+include::snippets/set-permission/output.adoc[]
+
+> cURL
+include::snippets/PUT__permissions__returns_a_permission/curl-request.adoc[]
+include::snippets/PUT__permissions__returns_a_permission/response-body.adoc[]
+
+This request updates the operations for a permission keeping the same path and actor. It replaces the operations that were set before with the new operations that are provided in the request.
+
+#### HTTP Request
+include::snippets/PUT__permissions__returns_a_permission/http-request.adoc[]
+
+#### Request Parameters
+include::snippets/PUT__permissions__returns_a_permission/request-fields.adoc[]
