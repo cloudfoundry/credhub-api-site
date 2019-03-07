@@ -52,7 +52,7 @@ function convert_asciidoc_to_intermediary_docbook_format() {
 
 function convert_intermediary_docbook_format_to_markdown() {
     for file in "${DOCBOOK_BUILD_DIRECTORY}"/*.xml; do
-       local -r base_file_name_without_extension="$(basename "$file" | sed -e 's/-template//')"
+       local -r base_file_name_without_extension="$(basename "$file" | sed -e 's/-template//' | sed -e 's/\.xml//')"
        pandoc \
            -f docbook \
            -t gfm \
