@@ -1,0 +1,27 @@
+#!/bin/bash
+
+set -eux
+
+function start_server(){
+  local -r credhub_dir="$PWD/../credhub-release/src/credhub"
+  pushd "${credhub_dir}"
+    echo "Starting CredHub server locally"
+    ./scripts/start_server.sh &> /dev/null &
+
+    echo "Waiting for server to start up"
+    for _ in $(seq 1 100); do
+     if curl -s -k https://localhost:9000/health | grep UP; then
+        echo "CredHub server is running"
+        exit 0
+     else
+        sleep 5
+     fi;
+    done
+  popd
+}
+
+function main(){
+  start_server
+}
+
+main

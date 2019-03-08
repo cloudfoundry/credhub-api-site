@@ -30,10 +30,6 @@ function go_to_project_root_directory() {
     cd "$script_dir/.."
 }
 
-function copy_spring_restdoc_snippets_to_build_directory() {
-    cp -r ../credhub-release/src/credhub/backends/credhub/build/generated-snippets/* "${SNIPPETS_BUILD_DIRECTORY}"
-}
-
 function copy_cli_doc_snippets_to_build_directory() {
     cp -r /tmp/credhub_cli_docs/* "${SNIPPETS_BUILD_DIRECTORY}"
 }
@@ -52,7 +48,7 @@ function convert_asciidoc_to_intermediary_docbook_format() {
 
 function convert_intermediary_docbook_format_to_markdown() {
     for file in "${DOCBOOK_BUILD_DIRECTORY}"/*.xml; do
-       local -r base_file_name_without_extension="$(basename "$file" | sed -e 's/-template//' | sed -e 's/\.xml//')"
+       local base_file_name_without_extension="$(basename "$file" | sed -e 's/-template//' | sed -e 's/\.xml//')"
        pandoc \
            -f docbook \
            -t gfm \
@@ -84,7 +80,6 @@ function main() {
     setup_build_directory
     clean_old_converted_files
     go_to_project_root_directory
-    copy_spring_restdoc_snippets_to_build_directory
     copy_cli_doc_snippets_to_build_directory
     copy_asciidoc_templates_to_build_directory
     convert_asciidoc_to_intermediary_docbook_format
@@ -94,4 +89,4 @@ function main() {
     display_finish_message
 }
 
-main
+main "$@"

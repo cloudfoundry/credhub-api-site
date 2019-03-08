@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+declare -r SNIPPETS_BUILD_DIRECTORY=/tmp/credhub-documentation-build/asciidoc/snippets
+
 function set_bash_error_handling() {
   set -eux
 }
@@ -14,11 +16,24 @@ function install_ruby_dependencies() {
   bundle install
 }
 
+function copy_spring_restdoc_snippets_to_build_directory() {
+    local -r credhub_dir="$PWD/../credhub-release/src/credhub"
+    local -r version=${1}
+    if [ $("$version > 2.1" | bc) == "1" ]; then 
+      cp -r "$credhub_dir"/backends/credhub/build/generated-snippets/* "${SNIPPETS_BUILD_DIRECTORY}"
+    else
+      cp -r "$credhub_dir"/build/generated-snippets/* "${SNIPPETS_BUILD_DIRECTORY}"
+   fi
+
+}
+
 function build_slate_docs() {
   local -r app_dir=$PWD/built-site
   local -r api_docs_dir="$PWD/../credhub-api-docs"
   local -r credhub_versions=$(git -C "$api_docs_dir" branch -r | cut -d'/' -f2 | grep -e '[0-9].[0-9]')
   local -r credhub_dir="$PWD/../credhub-release/src/credhub"
+  export GOPATH="$HOME/go"
+  local -r credhub_acceptance_test_dir="$GOPATH/src/github.com/cloudfoundry-incubator/credhub-acceptance-tests"
 
   for version in $credhub_versions; do
     build_dir=$app_dir/public/version/"$version"
@@ -31,7 +46,10 @@ function build_slate_docs() {
     if [ "$should_build_autodocs" == "1" ]; then
       git -C "$credhub_dir" checkout "${version}.x"
       "$credhub_dir"/scripts/generate_documentation_snippets
-      scripts/convert-asciidoc-template-to-slate-markdown
+      copy_spring_restdoc_snippets_to_build_directory $version
+      "$PWD"/scripts/start-credhub-server
+      "$credhub_acceptance_test_dir"/scripts/generate_documentation_snippets
+      scripts/convert-asciidoc-template-to-slate-markdown $version
     fi
 
     cp -r "$api_docs_dir"/* source
