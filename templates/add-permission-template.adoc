@@ -14,5 +14,5 @@ This request adds permissions for a path for an actor. You can add permission fo
 include::snippets/POST__permissions__adds_a_leading_slash/http-request.adoc[]
 
 #### Request Parameters
-include::snippets/POST__permissions__adds_a_leading_slash/request-parameters.adoc[]
+include::snippets/POST__permissions__adds_a_leading_slash/request-fields.adoc[]
 

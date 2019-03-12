@@ -1,0 +1,35 @@
+## Delete Permissions
+
+### Delete by ID
+
+> CredHub CLI
+```shell
+[not supported]
+```
+
+> cURL
+include::snippets/DELETE__permissions_by_uuid__returns_a_permission/curl-request.adoc[]
+include::snippets/DELETE__permissions_by_uuid__returns_a_permission/response-body.adoc[]
+
+This request retrieves a permission given the UUID.
+
+#### HTTP Request
+include::snippets/DELETE__permissions_by_uuid__returns_a_permission/http-request.adoc[]
+
+#### Request Parameters
+include::snippets/DELETE__permissions_by_uuid__returns_a_permission/request-parameters.adoc[]
+
+### Delete by Path and Actor
+
+> CredHub CLI
+include::snippets/delete-permission/input.adoc[]
+include::snippets/delete-permission/output.adoc[]
+
+> cURL
+```shell
+[not supported]
+```
+
+This request retrieves a permission given the path and actor.
+
+`NOTE`: This functionality is only supported through the Credhub CLI.

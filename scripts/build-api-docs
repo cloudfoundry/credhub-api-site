@@ -17,12 +17,15 @@ function install_ruby_dependencies() {
 }
 
 function copy_spring_restdoc_snippets_to_build_directory() {
+    echo "*** present dir: $PWD"
     local -r credhub_dir="$PWD/../credhub-release/src/credhub"
     local -r version=${1}
-    if [ $("$version > 2.1" | bc) == "1" ]; then 
-      cp -r "$credhub_dir"/backends/credhub/build/generated-snippets/* "${SNIPPETS_BUILD_DIRECTORY}"
+    local should_build_autodocs=$(echo "$version <= 2.1" | bc)
+    mkdir -p "${SNIPPETS_BUILD_DIRECTORY}"
+    if [ "$should_build_autodocs" == "1" ]; then
+      cp -R "$credhub_dir"/build/generated-snippets/ "${SNIPPETS_BUILD_DIRECTORY}"
     else
-      cp -r "$credhub_dir"/build/generated-snippets/* "${SNIPPETS_BUILD_DIRECTORY}"
+      cp -R "$credhub_dir"/backends/credhub/build/generated-snippets/ "${SNIPPETS_BUILD_DIRECTORY}"
    fi
 
 }
@@ -52,12 +55,12 @@ function build_slate_docs() {
       scripts/convert-asciidoc-template-to-slate-markdown $version
     fi
 
-    cp -r "$api_docs_dir"/* source
+    cp -R "$api_docs_dir"/* source
 
     echo -n "$version" > versionfile
 
     bundle exec middleman build --clean
-    cp -r build/* "$build_dir"
+    cp -R build/* "$build_dir"
   done
 }
 
