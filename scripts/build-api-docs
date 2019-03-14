@@ -16,6 +16,14 @@ function install_ruby_dependencies() {
   bundle install
 }
 
+function copy_cli_doc_snippets_to_build_directory() {
+	local -r cli_docs_dir=/tmp/credhub_cli_docs
+	if [ -d "$cli_docs_dir" ]
+	then
+		cp -R ${cli_docs_dir}/* "${SNIPPETS_BUILD_DIRECTORY}"
+	fi
+}
+
 function copy_spring_restdoc_snippets_to_build_directory() {
     echo "*** present dir: $PWD"
     local -r credhub_dir="$PWD/../credhub-release/src/credhub"
@@ -27,7 +35,6 @@ function copy_spring_restdoc_snippets_to_build_directory() {
     else
       cp -R "$credhub_dir"/backends/credhub/build/generated-snippets/ "${SNIPPETS_BUILD_DIRECTORY}"
    fi
-
 }
 
 function build_slate_docs() {
@@ -41,7 +48,6 @@ function build_slate_docs() {
   for version in $credhub_versions; do
     build_dir=$app_dir/public/version/"$version"
     mkdir -p "$build_dir"
-
     rm -rf source/includes source/index.html.md versionfile
     git -C "$api_docs_dir" checkout "$version"
 
@@ -51,8 +57,13 @@ function build_slate_docs() {
       "$credhub_dir"/scripts/generate_documentation_snippets
       copy_spring_restdoc_snippets_to_build_directory $version
       "$PWD"/scripts/start-credhub-server
-      "$credhub_acceptance_test_dir"/scripts/generate_documentation_snippets
-      scripts/convert-asciidoc-template-to-slate-markdown $version
+			if [ -f "${credhub_acceptance_test_dir}/scripts/generate_documentation_snippets" ]
+			then
+      	"$credhub_acceptance_test_dir"/scripts/generate_documentation_snippets
+				copy_cli_doc_snippets_to_build_directory
+    	fi
+			scripts/convert-asciidoc-template-to-slate-markdown $version
+			pkill java
     fi
 
     cp -R "$api_docs_dir"/* source

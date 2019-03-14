@@ -5,14 +5,14 @@ include::snippets/set-permission/input.adoc[]
 include::snippets/set-permission/output.adoc[]
 
 > cURL
-include::snippets/POST__permissions__adds_a_leading_slash/curl-request.adoc[]
-include::snippets/POST__permissions__adds_a_leading_slash/response-body.adoc[]
+include::snippets/POST__permissions__returns_a_permission/curl-request.adoc[]
+include::snippets/POST__permissions__returns_a_permission/response-body.adoc[]
 
 This request adds permissions for a path for an actor. You can add permission for a specific credential on a path, as well as all items under a path by using the `*` syntax. 
 
 #### HTTP Request
-include::snippets/POST__permissions__adds_a_leading_slash/http-request.adoc[]
+include::snippets/POST__permissions__returns_a_permission/http-request.adoc[]
 
 #### Request Parameters
-include::snippets/POST__permissions__adds_a_leading_slash/request-fields.adoc[]
+include::snippets/POST__permissions__returns_a_permission/request-fields.adoc[]
 
