@@ -11,7 +11,7 @@
 include::snippets/DELETE__permissions_by_uuid__returns_a_permission/curl-request.adoc[]
 include::snippets/DELETE__permissions_by_uuid__returns_a_permission/response-body.adoc[]
 
-This request retrieves a permission given the UUID.
+This request deletes a permission given the UUID.
 
 #### HTTP Request
 include::snippets/DELETE__permissions_by_uuid__returns_a_permission/http-request.adoc[]
@@ -30,6 +30,6 @@ include::snippets/delete-permission/output.adoc[]
 [not supported]
 ```
 
-This request retrieves a permission given the path and actor.
+This request deletes a permission given the path and actor.
 
 `NOTE`: This functionality is only supported through the Credhub CLI.
