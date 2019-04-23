@@ -1,0 +1,228 @@
+#!/bin/bash
+
+set -euo pipefail
+
+repo_root="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && cd .. && pwd )"
+app_dir="$repo_root/app"
+credhub_api_site_dir=${CREDHUB_API_SITE_DIR:-"$HOME/workspace/credhub-api-site"}
+credhub_api_docs_dir=${CREDHUB_API_DOCS_DIR:-"$HOME/workspace/credhub-api-docs"}
+credhub_dir=${CREDHUB_DIR:-"$HOME/workspace/credhub-release/src/credhub"}
+manually_documented_versions=(
+  "1.9"
+  "2.0"
+  "2.1"
+)
+autodoc_versions=(
+  "2.2"
+  "2.3"
+)
+all_versions=("${manually_documented_versions[@]}" "${autodoc_versions[@]}")
+
+check_for_uncommitted_changes() {
+  check_for_uncommitted_changes_in_repo "$credhub_dir"
+  check_for_uncommitted_changes_in_repo "$credhub_api_docs_dir"
+}
+
+check_for_uncommitted_changes_in_repo() {
+  repo="$1"
+
+  if [[ -n "$(git -C "$repo" status --porcelain)" ]]; then
+    echo "Found uncommitted changes in $repo, exiting..."
+    exit 1
+  fi
+}
+
+create_app_dir() {
+  rm -rf "$app_dir"
+  mkdir -p "$app_dir"
+}
+
+generate_docs() {
+  for version in "${manually_documented_versions[@]}"; do
+    generate_manual_docs_for_version "$version"
+  done
+  for version in "${autodoc_versions[@]}"; do
+    generate_autodocs_for_version "$version"
+  done
+}
+
+generate_manual_docs_for_version() {
+  version="$1"
+
+  version_dir="$app_dir/public/version/$version"
+  mkdir -p "$version_dir"
+
+  git -C "$credhub_api_docs_dir" checkout "$version"
+  git -C "$credhub_api_docs_dir" pull
+
+  temp_dir="$(mktemp -d)"
+  cp -R "$credhub_api_site_dir/." "$temp_dir"
+  cp -R "$credhub_api_docs_dir"/* "$temp_dir/source"
+  echo -n "$version" > "$temp_dir/versionfile"
+
+  pushd "$temp_dir" >/dev/null
+    bundle install
+    bundle exec middleman build --clean
+  popd >/dev/null
+
+  cp -R "$temp_dir/build"/* "$version_dir"
+  rm -rf "$temp_dir"
+}
+
+generate_autodocs_for_version() {
+  version="$1"
+
+  version_dir="$app_dir/public/version/$version"
+  mkdir -p "$version_dir"
+
+  git -C "$credhub_dir" checkout "${version}.x"
+  git -C "$credhub_dir" pull
+  "$credhub_dir/scripts/generate_documentation_snippets.sh"
+  cp "$credhub_dir/applications/credhub-api/src/main/resources/static/docs/index.html" "$version_dir"
+}
+
+create_versions_json() {
+  versions_json="$(printf '%s\n' "${all_versions[@]}" | jq -R . | sort -n -r | jq -s .)"
+  echo -n "$versions_json" > "$app_dir/public/versions.json"
+}
+
+create_index() {
+  latest_version="$(echo "${all_versions[@]}" | tr " " "\n" | sort -n | tail -n1)"
+  cat >"$app_dir/public/index.html" <<-EOF
+  <html>
+    <head>
+      <script>
+        window.location.href = "/version/$latest_version";
+      </script>
+    </head>
+
+    <body></body>
+  </html>
+EOF
+}
+
+create_nginx_config_files() {
+  cat >"$app_dir/nginx.conf" <<-EOF
+  worker_processes 1;
+  daemon off;
+
+  error_log stderr;
+  events { worker_connections 1024; }
+
+  http {
+    charset utf-8;
+    log_format cloudfoundry 'NginxLog "\$request" \$status \$body_bytes_sent';
+    access_log /dev/stdout cloudfoundry;
+    default_type application/octet-stream;
+    include mime.types;
+    sendfile on;
+
+    tcp_nopush on;
+    keepalive_timeout 30;
+    port_in_redirect off; # Ensure that redirects don't include the internal container PORT - 8080
+
+    server {
+      listen {{port}};
+      root public;
+      index index.html index.htm Default.htm;
+    }
+  }
+EOF
+
+  cat >"$app_dir/mime.types" <<-EOF
+  types {
+    text/html html htm shtml;
+    text/css css;
+    text/xml xml;
+    image/gif gif;
+    image/jpeg jpeg jpg;
+    application/x-javascript js;
+    application/atom+xml atom;
+    application/rss+xml rss;
+    font/ttf ttf;
+    font/woff woff;
+    font/woff2 woff2;
+    text/mathml mml;
+    text/plain txt;
+    text/vnd.sun.j2me.app-descriptor jad;
+    text/vnd.wap.wml wml;
+    text/x-component htc;
+    text/cache-manifest manifest;
+    image/png png;
+    image/tiff tif tiff;
+    image/vnd.wap.wbmp wbmp;
+    image/x-icon ico;
+    image/x-jng jng;
+    image/x-ms-bmp bmp;
+    image/svg+xml svg svgz;
+    image/webp webp;
+    application/java-archive jar war ear;
+    application/mac-binhex40 hqx;
+    application/msword doc;
+    application/pdf pdf;
+    application/postscript ps eps ai;
+    application/rtf rtf;
+    application/vnd.ms-excel xls;
+    application/vnd.ms-powerpoint ppt;
+    application/vnd.wap.wmlc wmlc;
+    application/vnd.google-earth.kml+xml  kml;
+    application/vnd.google-earth.kmz kmz;
+    application/x-7z-compressed 7z;
+    application/x-cocoa cco;
+    application/x-java-archive-diff jardiff;
+    application/x-java-jnlp-file jnlp;
+    application/x-makeself run;
+    application/x-perl pl pm;
+    application/x-pilot prc pdb;
+    application/x-rar-compressed rar;
+    application/x-redhat-package-manager  rpm;
+    application/x-sea sea;
+    application/x-shockwave-flash swf;
+    application/x-stuffit sit;
+    application/x-tcl tcl tk;
+    application/x-x509-ca-cert der pem crt;
+    application/x-xpinstall xpi;
+    application/xhtml+xml xhtml;
+    application/zip zip;
+    application/octet-stream bin exe dll;
+    application/octet-stream deb;
+    application/octet-stream dmg;
+    application/octet-stream eot;
+    application/octet-stream iso img;
+    application/octet-stream msi msp msm;
+    application/json json;
+    audio/midi mid midi kar;
+    audio/mpeg mp3;
+    audio/ogg ogg;
+    audio/x-m4a m4a;
+    audio/x-realaudio ra;
+    video/3gpp 3gpp 3gp;
+    video/mp4 mp4;
+    video/mpeg mpeg mpg;
+    video/quicktime mov;
+    video/webm webm;
+    video/x-flv flv;
+    video/x-m4v m4v;
+    video/x-mng mng;
+    video/x-ms-asf asx asf;
+    video/x-ms-wmv wmv;
+    video/x-msvideo avi;
+  }
+EOF
+}
+
+copy_manifest_to_app_dir() {
+  cp "$repo_root/manifest.yml" "$app_dir"
+}
+
+main() {
+  check_for_uncommitted_changes
+  create_app_dir
+  generate_docs
+  create_versions_json
+  create_index
+  create_nginx_config_files
+  copy_manifest_to_app_dir
+}
+
+main
