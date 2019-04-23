@@ -53,7 +53,6 @@ generate_manual_docs_for_version() {
   mkdir -p "$version_dir"
 
   git -C "$credhub_api_docs_dir" checkout "$version"
-  git -C "$credhub_api_docs_dir" pull
 
   temp_dir="$(mktemp -d)"
   cp -R "$credhub_api_site_dir/." "$temp_dir"
@@ -76,7 +75,6 @@ generate_autodocs_for_version() {
   mkdir -p "$version_dir"
 
   git -C "$credhub_dir" checkout "${version}.x"
-  git -C "$credhub_dir" pull
   "$credhub_dir/scripts/generate_documentation_snippets.sh"
   cp "$credhub_dir/applications/credhub-api/src/main/resources/static/docs/index.html" "$version_dir"
 }
