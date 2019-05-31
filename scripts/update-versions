@@ -1,0 +1,14 @@
+#!/bin/bash
+
+repo_root="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && cd .. && pwd )"
+
+version=$1
+
+if [[ "$version" == "" ]]; then
+  echo "Usage: $(basename "$0") <version-number>"
+  exit 1
+fi
+
+jq_command=".[\"auto-docs\"] |= (. + [\"${version}\"] | unique)"
+
+cat <<< "$(jq -r "$jq_command" "$repo_root/versions.json")" > "$repo_root/versions.json"
