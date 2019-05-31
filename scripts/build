@@ -7,16 +7,9 @@ app_dir="$repo_root/app"
 credhub_api_site_dir=${CREDHUB_API_SITE_DIR:-"$HOME/workspace/credhub-api-site"}
 credhub_api_docs_dir=${CREDHUB_API_DOCS_DIR:-"$HOME/workspace/credhub-api-docs"}
 credhub_dir=${CREDHUB_DIR:-"$HOME/workspace/credhub-release/src/credhub"}
-manually_documented_versions=(
-  "1.9"
-  "2.0"
-  "2.1"
-)
-autodoc_versions=(
-  "2.2"
-  "2.3"
-)
-all_versions=("${manually_documented_versions[@]}" "${autodoc_versions[@]}")
+
+manually_documented_versions="$(jq -r '.["manual-docs"][]' versions.json)"
+autodoc_versions="$(jq -r '.["auto-docs"][]' versions.json)"
 
 check_for_uncommitted_changes() {
   check_for_uncommitted_changes_in_repo "$credhub_dir"
@@ -38,10 +31,10 @@ create_app_dir() {
 }
 
 generate_docs() {
-  for version in "${manually_documented_versions[@]}"; do
+  for version in ${manually_documented_versions}; do
     generate_manual_docs_for_version "$version"
   done
-  for version in "${autodoc_versions[@]}"; do
+  for version in ${autodoc_versions}; do
     generate_autodocs_for_version "$version"
   done
 }
@@ -80,12 +73,16 @@ generate_autodocs_for_version() {
 }
 
 create_versions_json() {
-  versions_json="$(printf '%s\n' "${all_versions[@]}" | jq -R . | sort -n -r | jq -s .)"
+  declare -r all_versions="${manually_documented_versions}\n${autodoc_versions}"
+  versions_json="$(echo -e "$all_versions" \
+    | jq -R . \
+    | sort --version-sort -r \
+    | jq -s .)"
   echo -n "$versions_json" > "$app_dir/public/versions.json"
 }
 
 create_index() {
-  latest_version="$(echo "${all_versions[@]}" | tr " " "\n" | sort -n | tail -n1)"
+  latest_version="$(echo "${autodoc_versions}" | sort --version-sort | tail -n1)"
   cat >"$app_dir/public/index.html" <<-EOF
   <html>
     <head>
