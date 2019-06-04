@@ -9,8 +9,8 @@ credhub_api_docs_dir=${CREDHUB_API_DOCS_DIR:-"$HOME/workspace/credhub-api-docs"}
 credhub_dir=${CREDHUB_DIR:-"$HOME/workspace/credhub-release/src/credhub"}
 lts_credhub_dir=${LTS_CREDHUB_DIR:-"$HOME/workspace/lts-credhub-release/src/credhub"}
 
-manually_documented_versions="$(jq -r '.["manual-docs"][]' versions.json)"
-autodoc_versions="$(jq -r '.["auto-docs"][]' versions.json)"
+manually_documented_versions="$(jq -r '.["manual-docs"][]' "${repo_root}/versions.json")"
+autodoc_versions="$(jq -r '.["auto-docs"][]' "${repo_root}/versions.json")"
 
 check_for_uncommitted_changes() {
   check_for_uncommitted_changes_in_repo "$credhub_dir"
