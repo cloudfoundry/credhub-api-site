@@ -122,6 +122,10 @@ create_nginx_config_files() {
       listen {{port}};
       root public;
       index index.html index.htm Default.htm;
+
+      if (\$http_x_forwarded_proto != 'https') {
+          return 301 https://\$host\$request_uri;
+      }
     }
   }
 EOF
