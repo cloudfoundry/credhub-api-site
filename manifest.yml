@@ -4,5 +4,8 @@ applications:
   memory: 512M
   instances: 2
   host: credhub-api
-  buildpack: https://github.com/cloudfoundry/nginx-buildpack.git 
+  buildpack: https://github.com/cloudfoundry/nginx-buildpack.git
+
+env:
+  FORCE_HTTPS: true
 
