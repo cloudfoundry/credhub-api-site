@@ -9,6 +9,11 @@ if [[ "$version" == "" ]]; then
   exit 1
 fi
 
+if grep -q "$version" "$repo_root/versions.json"; then
+  echo "Version $version already exists"
+  exit
+fi
+
 jq_command=".[\"auto-docs\"] |= (. + [\"${version}\"] | unique)"
 
 cat <<< "$(jq -r "$jq_command" "$repo_root/versions.json")" > "$repo_root/versions.json"
