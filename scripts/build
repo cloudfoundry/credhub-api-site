@@ -39,6 +39,7 @@ generate_docs() {
   for version in ${autodoc_versions}; do
     generate_autodocs_for_version "$version"
   done
+  generate_autodocs_for_edge
 }
 
 generate_manual_docs_for_version() {
@@ -63,6 +64,15 @@ generate_manual_docs_for_version() {
   rm -rf "$temp_dir"
 }
 
+generate_autodocs_for_edge() {
+  version_dir="$app_dir/public/version/master"
+  mkdir -p "$version_dir"
+
+  git -C "$credhub_dir" checkout master
+  "$credhub_dir/scripts/generate_documentation_snippets.sh"
+  cp "$credhub_dir/applications/credhub-api/src/main/resources/static/docs/index.html" "$version_dir"
+}
+
 generate_autodocs_for_version() {
   version="$1"
 
@@ -75,7 +85,7 @@ generate_autodocs_for_version() {
 }
 
 create_versions_json() {
-  declare -r all_versions="${manually_documented_versions}\n${autodoc_versions}"
+  declare -r all_versions="master\n${manually_documented_versions}\n${autodoc_versions}"
   versions_json="$(echo -e "$all_versions" \
     | jq -R . \
     | sort --version-sort -r \
