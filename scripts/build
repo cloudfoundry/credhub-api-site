@@ -11,7 +11,7 @@ lts_credhub_dir=${LTS_CREDHUB_DIR:-"$HOME/workspace/lts-credhub-release/src/cred
 
 manually_documented_versions="$(jq -r '.["manual-docs"][]' "${repo_root}/versions.json")"
 autodoc_versions="$(jq -r '.["auto-docs"][]' "${repo_root}/versions.json")"
-current_master_version="$(${autodoc_versions} | sort -r | head -1)"
+current_master_version="$(jq -r '.["auto-docs"][]' "${repo_root}/versions.json" | sort -r | head -1)"
 
 check_for_uncommitted_changes() {
   check_for_uncommitted_changes_in_repo "$credhub_dir"
