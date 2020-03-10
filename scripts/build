@@ -14,14 +14,12 @@ autodoc_versions="$(jq -r '.["auto-docs"][]' "${repo_root}/versions.json")"
 current_master_version="$(jq -r '.["auto-docs"][]' "${repo_root}/versions.json" | sort -r | head -1)"
 
 check_for_uncommitted_changes() {
-  echo "---------------------check_for_uncommitted_changes"
   check_for_uncommitted_changes_in_repo "$credhub_dir"
   check_for_uncommitted_changes_in_repo "$lts_credhub_dir"
   check_for_uncommitted_changes_in_repo "$credhub_api_docs_dir"
 }
 
 check_for_uncommitted_changes_in_repo() {
-  echo "---------------------check_for_uncommitted_changes_in_repo"
   repo="$1"
 
   if [[ -n "$(git -C "$repo" status --porcelain)" ]]; then
@@ -31,13 +29,11 @@ check_for_uncommitted_changes_in_repo() {
 }
 
 create_app_dir() {
-  echo "---------------------create_app_dir"
   rm -rf "$app_dir"
   mkdir -p "$app_dir"
 }
 
 generate_docs() {
-  echo "---------------------generate_docs"
   for version in ${manually_documented_versions}; do
     generate_manual_docs_for_version "$version"
   done
@@ -46,12 +42,11 @@ generate_docs() {
       generate_autodocs_for_version "$version"
     fi
   done
-#  generate_autodocs_for_master
+  generate_autodocs_for_master
   generate_autodocs_for_edge
 }
 
 generate_manual_docs_for_version() {
-  echo "---------------------generate_manual_docs_for_version"
   version="$1"
 
   version_dir="$app_dir/public/version/$version"
@@ -75,7 +70,6 @@ generate_manual_docs_for_version() {
 }
 
 generate_autodocs_for_edge() {
-  echo "---------------------generate_autodocs_for_edge"
   version_dir="$app_dir/public/version/develop"
   mkdir -p "$version_dir"
 
@@ -84,18 +78,16 @@ generate_autodocs_for_edge() {
   cp "$credhub_dir/applications/credhub-api/src/main/resources/static/docs/index.html" "$version_dir"
 }
 
-#generate_autodocs_for_master() {
-#  echo "---------------------generate_autodocs_for_master"
-#  version_dir="$app_dir/public/version/${current_master_version}"
-#  mkdir -p "$version_dir"
-#
-#  git -C "$credhub_dir" checkout master
-#  "$credhub_dir/scripts/generate_documentation_snippets.sh"
-#  cp "$credhub_dir/applications/credhub-api/src/main/resources/static/docs/index.html" "$version_dir"
-#}
+generate_autodocs_for_master() {
+  version_dir="$app_dir/public/version/${current_master_version}"
+  mkdir -p "$version_dir"
+
+  git -C "$credhub_dir" checkout master
+  "$credhub_dir/scripts/generate_documentation_snippets.sh"
+  cp "$credhub_dir/applications/credhub-api/src/main/resources/static/docs/index.html" "$version_dir"
+}
 
 generate_autodocs_for_version() {
-  echo "---------------------generate_autodocs_for_version"
   version="$1"
 
   version_dir="$app_dir/public/version/$version"
@@ -107,7 +99,6 @@ generate_autodocs_for_version() {
 }
 
 create_versions_json() {
-  echo "---------------------create_versions_json"
   declare -r all_versions="develop\n${manually_documented_versions}\n${autodoc_versions}"
   versions_json="$(echo -e "$all_versions" \
     | jq -R . \
@@ -117,7 +108,6 @@ create_versions_json() {
 }
 
 create_index() {
-  echo "---------------------create_index"
   latest_version="$(echo "${autodoc_versions}" | sort --version-sort | tail -n1)"
   cat >"$app_dir/public/index.html" <<-EOF
   <html>
@@ -133,7 +123,6 @@ EOF
 }
 
 create_nginx_config_files() {
-  echo "---------------------create_nginx_config_files"
   cat >"$app_dir/nginx.conf" <<-EOF
   worker_processes 1;
   daemon off;
@@ -248,7 +237,6 @@ EOF
 }
 
 copy_manifest_to_app_dir() {
-  echo "---------------------copy_manifest_to_app_dir"
   cp "$repo_root/manifest.yml" "$app_dir"
 }
 
