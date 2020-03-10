@@ -1,0 +1,5 @@
+<h1 id="credhub-api-docs">credhub-api-docs</h1>
+
+<p>To add new sections on the api site, create a new &ldquo;<em>name-of-file.md&rdquo; file in the <code class="prettyprint">includes</code> directory. Then, add the name of the file to the <code class="prettyprint">includes:</code> section <code class="prettyprint">index.html.md</code> file (without the `</em><code class="prettyprint">and</code>.md`).</p>
+
+<p>Changes pushed to this repo will authomatically kick off the pipeline and be uploaded to the website.</p>
