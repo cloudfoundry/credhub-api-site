@@ -1,0 +1,3825 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>CredHub API</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .cd {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all.js"></script>
+    <script>
+    //https://github.com/lord/slate/issues/209
+    //This is Google's default GA code
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-100955923-1', 'auto');
+    ga('send', 'pageview');
+    //This does hash-click tracking (inspired by http://stackoverflow.com/a/4813223)
+    $(document).ready(function() {
+      $('.tocify-item a').on('click', function(){
+        ga('send', 'pageview', {'page': location.pathname + location.search  + location.hash});
+      });
+    });
+    </script>
+  </head>
+
+  <body class="index" data-languages="[&quot;shell&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <img src="images/logo.png" alt="Logo" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="shell">shell</a>
+        </div>
+      <div id="version-dropdown">
+        <div class="dropdown">
+          <button type="button" id="version-dropdown-button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Version 1.9<span class="caret">&#x25BE;</span></button>
+          <ul id="version-dropdown-menu" class="dropdown-menu" role="menu" aria-labelledby="version-dropdown-button">
+            <div class="dropdown-filter">
+              <div class="dropdown-content">
+                <ul class="dropdown-list" id="version-list">
+                </ul>
+              </div>
+            </div>
+          </ul>
+        </div>
+      </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc">
+      </div>
+        <ul class="toc-footer">
+            <li><a href='https://github.com/cloudfoundry-incubator/credhub-api-site'>API Docs Source</a></li>
+            <li><a href='https://github.com/cloudfoundry-incubator/credhub'>CredHub Source</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id="introduction">Introduction</h1>
+
+<p>CredHub manages credentials like passwords, users, certificates, certificate authorities, ssh keys, rsa keys and arbitrary values (strings and JSON blobs). The following spec details the API exposed by the CredHub server and the equivalent requests using the <a href="https://github.com/cloudfoundry-incubator/credhub-cli">CredHub CLI.</a></p>
+
+<p>More information on CredHub <a href="https://github.com/cloudfoundry-incubator/credhub">can be found here.</a></p>
+
+<h2 id="credential-naming-and-paths">Credential Naming and Paths</h2>
+
+<p>Credentials can be named with any value up to 255 characters containing alpha, numeric, underscore <code class="prettyprint">_</code>, hyphen <code class="prettyprint">-</code>, forward slash <code class="prettyprint">/</code>, period <code class="prettyprint">.</code>, colon <code class="prettyprint">:</code>, parenthesis <code class="prettyprint">(</code> <code class="prettyprint">)</code>, and bracket <code class="prettyprint">[</code> <code class="prettyprint">]</code> characters. The character limit includes the leading slash, which will be prepended automatically if absent.</p>
+
+<p>Paths can be used to namespace a set of credential names for a different deployment or environment. To add a path to a credential, simply add the path prior to the credential name, separated by a forward slash (/), e.g. <code class="prettyprint">credhub set -t password -n /prod/deploy123/cc_password -w &#39;myPassword&#39;</code>. If a leading slash is not provided, it will be automatically prepended.</p>
+
+<h2 id="credential-ids">Credential IDs</h2>
+
+<p>Credential responses include a unique identifier in the key &lsquo;id&rsquo;. This ID is a unique identifier for a specific credential version. When a credential value is updated, a new ID will be returned. This identifier can be is useful in applications where a specific credential value should be pinned until a manual action (such as a deployment) is performed. If your application should receive the latest value of the credential, retrieving by name is preferred.</p>
+
+<h2 id="overwriting-credential-values">Overwriting Credential Values</h2>
+
+<p>By default, credential set and generate actions with the API will not overwrite an existing value. If you wish to only create values that do not exist, you can perform generate requests on all of the credentials and it leave existing values in place. This mode is the default, but can be specified as <code class="prettyprint">&quot;mode&quot; : &quot;no-overwrite&quot;</code>.</p>
+
+<p>If you wish to overwrite existing values, you can set &lsquo;mode&rsquo; as &lsquo;overwrite&rsquo; or &lsquo;converge&rsquo;.  When <code class="prettyprint">&quot;mode&quot; : &quot;converge&quot;</code> is set, a new value will be generated only if the generation parameters have changed.  When <code class="prettyprint">&quot;mode&quot; : &quot;overwrite&quot;</code> is set, a new credential is generated in every case.</p>
+
+<p>In versions prior to 1.6, <code class="prettyprint">mode</code> is not available. Instead <code class="prettyprint">overwrite</code> is indicated as a boolean value. If you wish to overwrite existing values, you should then include the <code class="prettyprint">&quot;overwrite&quot;: true</code> parameter in your request.</p>
+
+<h1 id="authentication">Authentication</h1>
+
+<p>All requests to CredHub, with the exception of <code class="prettyprint">/info</code> and <code class="prettyprint">/health</code> must include an authentication method. CredHub supports two authentication provider types, <a href="https://github.com/cloudfoundry/uaa">UAA</a> and <a href="https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/mutual-tls.md">mutual TLS</a>.</p>
+
+<h2 id="uaa-oauth2">UAA (oAuth2)</h2>
+
+<blockquote>
+<p>CredHub CLI</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="gp">user$ </span>credhub login --server example.com
+</code></pre>
+<blockquote>
+<p>cURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/info"</span> <span class="se">\</span>
+  -X GET <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"auth-server"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://uaa.example.com:8443"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"app"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CredHub"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Authentication via UAA is performed directly with the trusted UAA server. When successfully authenticated, the UAA server will return an access token, which must be sent to CredHub in each request.</p>
+
+<p>The address of the UAA server trusted by the targeted CredHub server can be obtained by requesting the <code class="prettyprint">/info</code> endpoint. With that endpoint, you may send a token request <a href="https://docs.cloudfoundry.org/api/uaa/#password-grant">as detailed here.</a></p>
+
+<p>Once you have obtained a token, you must include the token value in the header <code class="prettyprint">authorization: bearer [token]</code> in your request to CredHub.</p>
+
+<h2 id="mutual-tls">Mutual TLS</h2>
+
+<blockquote>
+<p>CredHub CLI</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">[</span>not supported]
+</code></pre>
+<blockquote>
+<p>cURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/api/v1/data?name=/example-password"</span> <span class="se">\</span>
+  -X GET <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+  --cert certificate.pem <span class="se">\</span>
+  --key private_key.pem
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"67fc3def-bbfb-4953-83f8-4ab0682ad675"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/example-password"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"password"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6mRPZB3bAfb8lRpacnXsHfDhlPqFcjH2h9YDvLpL"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"version_created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-05T01:01:01Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>CredHub supports mutual TLS authentication. Certificates issued by trusted Certificate Authorities are accepted by CredHub.
+To provide an authenticated identity in the client mtls certificate, CredHub requires the Organization Unit of the certificate to comply with the pattern <code class="prettyprint">app:&lt;v4 UUId&gt;</code>.
+CredHub validates the <a href="https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/authentication-identities.md">authenticated identity</a>, signing authority, validity dates and presence of x509 extension Extended Key Usage &lsquo;Client Authentication&rsquo; during the authentication workflow.</p>
+
+          <h1 id="credentials">Credentials</h1>
+
+<p>Credentials are the primary object in CredHub. Any passwords, secrets, configurations or other sensitive information that you store is saved to a named credential. You can retrieve, update and delete a credential using its name. </p>
+
+<p>All credentials, regardless of type, share a common namespace, e.g. a credential named <code class="prettyprint">/diego-tls</code> exists once in CredHub. Credential names are not reservable, so two users updating a credential of the same name will result in updates to the same credential. If you prefer a separate namespace for your credentials, you can add a path prior to the credential name.</p>
+
+<p>Credentials are typed based on the format of the stored value, value validation and generation procedure. Once a credential type has been set, it can not be updated to a new type. If you mistakenly set the type, you must delete the credential, then set it with the correct type. </p>
+
+          <h1 id="get-credentials">Get Credentials</h1>
+
+<h2 id="get-by-id">Get by ID</h2>
+
+<blockquote>
+<p>CredHub CLI</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="gp">user$ </span>credhub get --id 2993f622-cb1e-4e00-a267-4b23c273bf3d
+id: 2993f622-cb1e-4e00-a267-4b23c273bf3d
+<span class="nb">type</span>: password
+name: /example-password
+value: 6mRPZB3bAfb8lRpacnXsHfDhlPqFcjH2h9YDvLpL
+version_created_at: 2017-01-05T01:01:01Z
+</code></pre>
+<blockquote>
+<p>cURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/api/v1/data/2993f622-cb1e-4e00-a267-4b23c273bf3d"</span> <span class="se">\</span>
+  -X GET <span class="se">\</span>
+  -H <span class="s2">"authorization: bearer [token]"</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2993f622-cb1e-4e00-a267-4b23c273bf3d"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/example-password"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"password"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6mRPZB3bAfb8lRpacnXsHfDhlPqFcjH2h9YDvLpL"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"version_created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-05T01:01:01Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This request retrieves a credential by ID. Exactly one value will be returned.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET: https://example.com/api/v1/data/[Credential-ID]</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>none</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="get-by-name">Get by Name</h2>
+
+<blockquote>
+<p>CredHub CLI</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="gp">user$ </span>credhub get --name <span class="s1">'/example-password'</span>
+id: 2993f622-cb1e-4e00-a267-4b23c273bf3d
+<span class="nb">type</span>: password
+name: /example-password
+value: 6mRPZB3bAfb8lRpacnXsHfDhlPqFcjH2h9YDvLpL
+version_created_at: 2017-01-05T01:01:01Z
+</code></pre>
+<blockquote>
+<p>cURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/api/v1/data?name=/example-password"</span> <span class="se">\</span>
+  -X GET <span class="se">\</span>
+  -H <span class="s2">"authorization: bearer [token]"</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2993f622-cb1e-4e00-a267-4b23c273bf3d"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/example-password"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"password"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6mRPZB3bAfb8lRpacnXsHfDhlPqFcjH2h9YDvLpL"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"version_created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-05T01:01:01Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"67fc3def-bbfb-4953-83f8-4ab0682ad674"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/example-password"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"password"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3t6Y2OFP0jQIcLnki1h7p3NtSfDx4l9bamr1ja6R"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"version_created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-01T04:07:18Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This request returns a credential&rsquo;s value(s) by name. All historical values will be returned unless <code class="prettyprint">&quot;current&quot;: true</code> or <code class="prettyprint">&quot;versions&quot;: #</code> is specified.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET: https://example.com/api/v1/data</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>none</td>
+<td>yes</td>
+<td>string</td>
+<td>Name of credential to retrieve</td>
+</tr>
+<tr>
+<td>current</td>
+<td>false</td>
+<td>no</td>
+<td>string</td>
+<td>Return only latest credential version</td>
+</tr>
+<tr>
+<td>versions</td>
+<td>none</td>
+<td>no</td>
+<td>integer</td>
+<td>Return latest N credential versions</td>
+</tr>
+</tbody></table>
+
+<h2 id="type-value">Type: Value</h2>
+
+<blockquote>
+<p>CredHub CLI</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="gp">user$ </span>credhub get --name <span class="s1">'/example-value'</span>
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
+<span class="nb">type</span>: value
+name: /example-value
+value: sample
+version_created_at: 2017-01-01T04:07:18Z
+</code></pre>
+<blockquote>
+<p>cURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/api/v1/data?name=/example-value"</span> <span class="se">\</span>
+  -X GET <span class="se">\</span>
+  -H <span class="s2">"authorization: bearer [token]"</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"67fc3def-bbfb-4953-83f8-4ab0682ad675"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/example-value"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"value"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sample"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"version_created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-01T04:07:18Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This request returns a credential by name. The example provided shows the request parameters and response structure of a value type credential.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET: https://example.com/api/v1/data</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>none</td>
+<td>yes</td>
+<td>string</td>
+<td>Name of credential to retrieve</td>
+</tr>
+<tr>
+<td>current</td>
+<td>false</td>
+<td>no</td>
+<td>string</td>
+<td>Return only latest credential version</td>
+</tr>
+<tr>
+<td>versions</td>
+<td>none</td>
+<td>no</td>
+<td>integer</td>
+<td>Return latest N credential versions</td>
+</tr>
+</tbody></table>
+
+<h2 id="type-json">Type: JSON</h2>
+
+<blockquote>
+<p>CredHub CLI</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="gp">user$ </span>credhub get --name <span class="s1">'/example-json'</span>
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
+<span class="nb">type</span>: json
+name: /example-json
+value:
+  key: 123
+  key_list:
+  - val1
+  - val2
+  is_true: <span class="nb">true
+</span>version_created_at: 2017-01-01T04:07:18Z
+</code></pre>
+<blockquote>
+<p>cURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/api/v1/data?name=/example-json"</span> <span class="se">\</span>
+  -X GET <span class="se">\</span>
+  -H <span class="s2">"authorization: bearer [token]"</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"67fc3def-bbfb-4953-83f8-4ab0682ad675"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/example-json"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"json"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"key_list"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"val1"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"val2"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"is_true"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"version_created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-01T04:07:18Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This request returns a credential by name. The example provided shows the request parameters and response structure of a JSON type credential.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET: https://example.com/api/v1/data</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>none</td>
+<td>yes</td>
+<td>string</td>
+<td>Name of credential to retrieve</td>
+</tr>
+<tr>
+<td>current</td>
+<td>false</td>
+<td>no</td>
+<td>string</td>
+<td>Return only latest credential version</td>
+</tr>
+<tr>
+<td>versions</td>
+<td>none</td>
+<td>no</td>
+<td>integer</td>
+<td>Return latest N credential versions</td>
+</tr>
+</tbody></table>
+
+<h2 id="type-password">Type: Password</h2>
+
+<blockquote>
+<p>CredHub CLI</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="gp">user$ </span>credhub get --name <span class="s1">'/example-password'</span>
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
+<span class="nb">type</span>: password
+name: /example-password
+value: 3t6Y2OFP0jQIcLnki1h7p3NtSfDx4l9bamr1ja6R
+version_created_at: 2017-01-01T04:07:18Z
+</code></pre>
+<blockquote>
+<p>cURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/api/v1/data?name=/example-password"</span> <span class="se">\</span>
+  -X GET <span class="se">\</span>
+  -H <span class="s2">"authorization: bearer [token]"</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"67fc3def-bbfb-4953-83f8-4ab0682ad675"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/example-password"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"password"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6mRPZB3bAfb8lRpacnXsHfDhlPqFcjH2h9YDvLpL"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"version_created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-05T01:01:01Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This request returns a credential by name. The example provided shows the request parameters and response structure of a password type credential.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET: https://example.com/api/v1/data</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>none</td>
+<td>yes</td>
+<td>string</td>
+<td>Name of credential to retrieve</td>
+</tr>
+<tr>
+<td>current</td>
+<td>false</td>
+<td>no</td>
+<td>string</td>
+<td>Return only latest credential version</td>
+</tr>
+<tr>
+<td>versions</td>
+<td>none</td>
+<td>no</td>
+<td>integer</td>
+<td>Return latest N credential versions</td>
+</tr>
+</tbody></table>
+
+<h2 id="type-user">Type: User</h2>
+
+<blockquote>
+<p>CredHub CLI</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="gp">user$ </span>credhub get --name <span class="s1">'/example-user'</span>
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
+<span class="nb">type</span>: user
+name: /example-user
+value:
+  username: FQnwWoxgSrDuqDLmeLpU
+  password: 6mRPZB3bAfb8lRpacnXsHfDhlPqFcjH2h9YDvLpL
+  password_hash: <span class="nv">$6$h3b3JsG5$MnrPIrF6T3zAWk9uaun64vWY</span>.vaBQ5nTRFZjjVqKuDWccxWXn8n6vstQykXEReamb4GYh2q1HC7vFy11wflXd0
+version_created_at: 2017-01-01T04:07:18Z
+</code></pre>
+<blockquote>
+<p>cURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/api/v1/data?name=/example-user"</span> <span class="se">\</span>
+  -X GET <span class="se">\</span>
+  -H <span class="s2">"authorization: bearer [token]"</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"67fc3def-bbfb-4953-83f8-4ab0682ad675"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/example-user"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FQnwWoxgSrDuqDLmeLpU"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6mRPZB3bAfb8lRpacnXsHfDhlPqFcjH2h9YDvLpL"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"password_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$6$uu8ybZiNiPRu$6AYClxVqMXA3LAIdDAnEuWLUlWGlm0RRJI2wdHd8R9hKkKtiYupyKBjdRBI1ZhsyHwYetCpySew9ZXXLf.Mih0"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"version_created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-05T01:01:01Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This request returns a credential by name. The example provided shows the request parameters and response structure of a user type credential.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET: https://example.com/api/v1/data</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>none</td>
+<td>yes</td>
+<td>string</td>
+<td>Name of credential to retrieve</td>
+</tr>
+<tr>
+<td>current</td>
+<td>false</td>
+<td>no</td>
+<td>string</td>
+<td>Return only latest credential version</td>
+</tr>
+<tr>
+<td>versions</td>
+<td>none</td>
+<td>no</td>
+<td>integer</td>
+<td>Return latest N credential versions</td>
+</tr>
+</tbody></table>
+
+<h2 id="type-certificate">Type: Certificate</h2>
+
+<blockquote>
+<p>CredHub CLI</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="gp">user$ </span>credhub get --name <span class="s1">'/example-certificate'</span>
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
+<span class="nb">type</span>: certificate
+name: /example-certificate
+value:
+  root: |
+    -----BEGIN CERTIFICATE-----
+    ...
+    -----END CERTIFICATE-----
+  certificate: |
+    -----BEGIN CERTIFICATE-----
+    ...
+    -----END CERTIFICATE-----
+  private_key: |
+    -----BEGIN RSA PRIVATE KEY-----
+    ...
+    -----END RSA PRIVATE KEY-----
+version_created_at: 2017-01-01T04:07:18Z
+</code></pre>
+<blockquote>
+<p>cURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/api/v1/data?name=/example-certificate"</span> <span class="se">\</span>
+  -X GET <span class="se">\</span>
+  -H <span class="s2">"authorization: bearer [token]"</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"67fc3def-bbfb-4953-83f8-4ab0682ad676"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/example-certificate"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"certificate"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"ca"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-----BEGIN CERTIFICATE-----</span><span class="se">\n</span><span class="s2">...</span><span class="se">\n</span><span class="s2">-----END CERTIFICATE-----"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"certificate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-----BEGIN CERTIFICATE-----</span><span class="se">\n</span><span class="s2">...</span><span class="se">\n</span><span class="s2">-----END CERTIFICATE-----"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"private_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-----BEGIN RSA PRIVATE KEY-----</span><span class="se">\n</span><span class="s2">...</span><span class="se">\n</span><span class="s2">-----END RSA PRIVATE KEY-----"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"version_created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-01T04:07:18Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This request returns a credential by name. The example provided shows the request parameters and response structure of a certificate type credential.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET: https://example.com/api/v1/data</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>none</td>
+<td>yes</td>
+<td>string</td>
+<td>Name of credential to retrieve</td>
+</tr>
+<tr>
+<td>current</td>
+<td>false</td>
+<td>no</td>
+<td>string</td>
+<td>Return only latest credential version</td>
+</tr>
+<tr>
+<td>versions</td>
+<td>none</td>
+<td>no</td>
+<td>integer</td>
+<td>Return latest N credential versions</td>
+</tr>
+</tbody></table>
+
+<h2 id="type-rsa">Type: RSA</h2>
+
+<blockquote>
+<p>CredHub CLI</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="gp">user$ </span>credhub get --name <span class="s1">'/example-rsa'</span>
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
+<span class="nb">type</span>: rsa
+name: /example-rsa
+value:
+  public_key: |
+    -----BEGIN PUBLIC KEY-----
+    ...
+    -----END PUBLIC KEY-----
+  private_key: |
+    -----BEGIN RSA PRIVATE KEY-----
+    ...
+    -----END RSA PRIVATE KEY-----
+version_created_at: 2017-01-01T04:07:18Z
+</code></pre>
+<blockquote>
+<p>cURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/api/v1/data?name=/example-rsa"</span> <span class="se">\</span>
+  -X GET <span class="se">\</span>
+  -H <span class="s2">"authorization: bearer [token]"</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"67fc3def-bbfb-4953-83f8-4ab0682ad677"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/example-rsa"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rsa"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"public_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-----BEGIN PUBLIC KEY-----</span><span class="se">\n</span><span class="s2">...</span><span class="se">\n</span><span class="s2">-----END PUBLIC KEY-----"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"private_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-----BEGIN RSA PRIVATE KEY-----</span><span class="se">\n</span><span class="s2">...</span><span class="se">\n</span><span class="s2">-----END RSA PRIVATE KEY-----"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"version_created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-01T04:07:18Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This request returns a credential by name. The example provided shows the request parameters and response structure of an RSA type credential.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET: https://example.com/api/v1/data</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>none</td>
+<td>yes</td>
+<td>string</td>
+<td>Name of credential to retrieve</td>
+</tr>
+<tr>
+<td>current</td>
+<td>false</td>
+<td>no</td>
+<td>string</td>
+<td>Return only latest credential version</td>
+</tr>
+<tr>
+<td>versions</td>
+<td>none</td>
+<td>no</td>
+<td>integer</td>
+<td>Return latest N credential versions</td>
+</tr>
+</tbody></table>
+
+<h2 id="type-ssh">Type: SSH</h2>
+
+<blockquote>
+<p>CredHub CLI</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="gp">user$ </span>credhub get --name <span class="s1">'/example-ssh'</span>
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
+<span class="nb">type</span>: ssh
+name: /example-ssh
+value:
+  public_key: ssh-rsa AAAAB3Nz...
+  private_key: |
+    -----BEGIN RSA PRIVATE KEY-----
+    ...
+    -----END RSA PRIVATE KEY-----
+version_created_at: 2017-01-01T04:07:18Z
+</code></pre>
+<blockquote>
+<p>cURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/api/v1/data?name=/example-ssh"</span> <span class="se">\</span>
+  -X GET <span class="se">\</span>
+  -H <span class="s2">"authorization: bearer [token]"</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"67fc3def-bbfb-4953-83f8-4ab0682ad678"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/example-ssh"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ssh"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"public_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ssh-rsa AAAAB3Nz..."</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"private_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-----BEGIN RSA PRIVATE KEY-----</span><span class="se">\n</span><span class="s2">...</span><span class="se">\n</span><span class="s2">-----END RSA PRIVATE KEY-----"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"public_key_fingerprint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EvI0/GIUgDjcoCzUQM+EtwnVTryNsKRd6TrHAGKJJSI"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"version_created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-01T04:07:18Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This request returns a credential by name. The example provided shows the request parameters and response structure of an SSH type credential.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET: https://example.com/api/v1/data</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>none</td>
+<td>yes</td>
+<td>string</td>
+<td>Name of credential to retrieve</td>
+</tr>
+<tr>
+<td>current</td>
+<td>false</td>
+<td>no</td>
+<td>string</td>
+<td>Return only latest credential version</td>
+</tr>
+<tr>
+<td>versions</td>
+<td>none</td>
+<td>no</td>
+<td>integer</td>
+<td>Return latest N credential versions</td>
+</tr>
+</tbody></table>
+
+<h2 id="bulk-export">Bulk Export</h2>
+
+<blockquote>
+<p>CredHub CLI</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="gp">user$ </span>credhub <span class="nb">export</span> --file export.yml
+</code></pre>
+<blockquote>
+<p>Sample Export File</p>
+</blockquote>
+<pre class="highlight yaml"><code><span class="na">credentials</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">/example-ssh</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">ssh</span>
+  <span class="na">value</span><span class="pi">:</span>
+    <span class="na">public_key</span><span class="pi">:</span> <span class="s">ssh-rsa AAAAB3NzaC1y...W9RWFM1</span>
+    <span class="na">private_key</span><span class="pi">:</span> <span class="pi">|</span>
+      <span class="no">-----BEGIN RSA PRIVATE KEY-----</span>
+      <span class="no">...</span>
+      <span class="no">-----END RSA PRIVATE KEY-----</span>
+<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">/example-password</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">password</span>
+  <span class="na">value</span><span class="pi">:</span> <span class="s">SqFcE2c0AuRvet2YhrxdFbPtkBmjiq</span>
+<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">/example-value</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">value</span>
+  <span class="na">value</span><span class="pi">:</span> <span class="s">sample</span>
+</code></pre>
+<p>This CLI command gets multiple credentials and exports them to either standard out, or a file. The output will be in yaml format, with the key <code class="prettyprint">credentials</code> whose value is a list of credential objects. Each credential will contain a name, type and value. An example is shown to the right. This file is compatible with the bulk import process.</p>
+
+<p>Use <code class="prettyprint">--file</code> to specify a file to write the export to. Use <code class="prettyprint">--path</code> to specify a path, that will restrict the credentials exported to those with a prefix matching the given path.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p>n/a</p>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>n/a</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+
+          <h1 id="set-credentials">Set Credentials</h1>
+
+<h2 id="type-value">Type: Value</h2>
+
+<blockquote>
+<p>CredHub CLI</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="gp">user$ </span>credhub <span class="nb">set</span> --type value --name <span class="s1">'/example-value'</span> --password <span class="s1">'sample'</span>
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
+<span class="nb">type</span>: value
+name: /example-value
+value: sample
+version_created_at: 2017-01-01T04:07:18Z
+</code></pre>
+<blockquote>
+<p>cURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/api/v1/data"</span> <span class="se">\</span>
+  -X PUT <span class="se">\</span>
+  -d <span class="s1">'{
+      "name": "/example-value",
+      "type": "value",
+      "value": "sample"
+     }'</span> <span class="se">\</span>
+  -H <span class="s2">"authorization: bearer [token]"</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"67fc3def-bbfb-4953-83f8-4ab0682ad675"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/example-value"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"value"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sample"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"version_created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-01T04:07:18Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This request sets a value credential with a user-provided value.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">PUT: https://example.com/api/v1/data</code></p>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>none</td>
+<td>yes</td>
+<td>string</td>
+<td>Name of credential to set</td>
+</tr>
+<tr>
+<td>type</td>
+<td>none</td>
+<td>yes</td>
+<td>string</td>
+<td>Type of credential to set</td>
+</tr>
+<tr>
+<td>mode</td>
+<td>no-overwrite</td>
+<td>no</td>
+<td>enum<sup>1</sup></td>
+<td>Overwrite interaction mode</td>
+</tr>
+<tr>
+<td>value</td>
+<td>none</td>
+<td>yes</td>
+<td>string</td>
+<td>Value of credential to set</td>
+</tr>
+<tr>
+<td>additional_permissions</td>
+<td>none</td>
+<td>no</td>
+<td>array</td>
+<td>List of additional permissions to set on credential</td>
+</tr>
+<tr>
+<td>additional_permissions[].actor</td>
+<td>none</td>
+<td>no</td>
+<td>identity<sup>2</sup></td>
+<td>Actor to provided specified operations on credential</td>
+</tr>
+<tr>
+<td>additional_permissions[].operations</td>
+<td>none</td>
+<td>no</td>
+<td>array</td>
+<td>List of operations provided on credential to specified actor</td>
+</tr>
+<tr>
+<td>additional_permissions[].operations[]</td>
+<td>none</td>
+<td>no</td>
+<td>enum<sup>3</sup></td>
+<td>Operation provided on credential to specified actor</td>
+</tr>
+</tbody></table>
+
+<p><sup>1</sup> Acceptable modes are &lsquo;no-overwrite&rsquo; and &lsquo;overwrite&rsquo; <a href="https://credhub-api.cfapps.io/version/1.9/#overwriting-credential-values">explained here.</a> <br>
+<sup>2</sup> Authentication-specific identities <a href="https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/authentication-identities.md">explained here.</a> <br>
+<sup>3</sup> Acceptable operations are &lsquo;read&rsquo;, &lsquo;write&rsquo;, &lsquo;delete&rsquo;, &lsquo;read_acl&rsquo; and &lsquo;write_acl&rsquo;</p>
+
+<h2 id="type-json">Type: JSON</h2>
+
+<blockquote>
+<p>CredHub CLI</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="gp">user$ </span>credhub <span class="nb">set</span> --type json --name <span class="s1">'/example-json'</span> --value <span class="s1">'{ "key": 123, "key_list": ["val1","val2"], "is_true": true }'</span>
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
+<span class="nb">type</span>: json
+name: /example-json
+value:
+  key: 123
+  key_list:
+  - val1
+  - val2
+  is_true: <span class="nb">true
+</span>version_created_at: 2017-01-01T04:07:18Z
+</code></pre>
+<blockquote>
+<p>cURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/api/v1/data"</span> <span class="se">\</span>
+  -X PUT <span class="se">\</span>
+  -d <span class="s1">'{
+      "name": "/example-json",
+      "type": "json",
+      "value": {
+        "key": 123,
+        "key_list": [
+          "val1",
+          "val2"
+        ],
+        "is_true": true
+      }
+     }'</span> <span class="se">\</span>
+  -H <span class="s2">"authorization: bearer [token]"</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"67fc3def-bbfb-4953-83f8-4ab0682ad675"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/example-json"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"json"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"key_list"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"val1"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"val2"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"is_true"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"version_created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-01T04:07:18Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This request sets a json credential with a user-provided value.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">PUT: https://example.com/api/v1/data</code></p>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>none</td>
+<td>yes</td>
+<td>string</td>
+<td>Name of credential to set</td>
+</tr>
+<tr>
+<td>type</td>
+<td>none</td>
+<td>yes</td>
+<td>string</td>
+<td>Type of credential to set</td>
+</tr>
+<tr>
+<td>mode</td>
+<td>no-overwrite</td>
+<td>no</td>
+<td>enum<sup>1</sup></td>
+<td>Overwrite interaction mode</td>
+</tr>
+<tr>
+<td>value</td>
+<td>none</td>
+<td>yes</td>
+<td>object</td>
+<td>Value of credential to set</td>
+</tr>
+<tr>
+<td>additional_permissions</td>
+<td>none</td>
+<td>no</td>
+<td>array</td>
+<td>List of additional permissions to set on credential</td>
+</tr>
+<tr>
+<td>additional_permissions[].actor</td>
+<td>none</td>
+<td>no</td>
+<td>identity<sup>2</sup></td>
+<td>Actor to provided specified operations on credential</td>
+</tr>
+<tr>
+<td>additional_permissions[].operations</td>
+<td>none</td>
+<td>no</td>
+<td>array</td>
+<td>List of operations provided on credential to specified actor</td>
+</tr>
+<tr>
+<td>additional_permissions[].operations[]</td>
+<td>none</td>
+<td>no</td>
+<td>enum<sup>3</sup></td>
+<td>Operation provided on credential to specified actor</td>
+</tr>
+</tbody></table>
+
+<p><sup>1</sup> Acceptable modes are &lsquo;no-overwrite&rsquo; and &lsquo;overwrite&rsquo; <a href="https://credhub-api.cfapps.io/version/1.9/#overwriting-credential-values">explained here.</a> <br>
+<sup>2</sup> Authentication-specific identities <a href="https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/authentication-identities.md">explained here.</a> <br>
+<sup>3</sup> Acceptable operations are &lsquo;read&rsquo;, &lsquo;write&rsquo;, &lsquo;delete&rsquo;, &lsquo;read_acl&rsquo; and &lsquo;write_acl&rsquo;</p>
+
+<h2 id="type-password">Type: Password</h2>
+
+<blockquote>
+<p>CredHub CLI</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="gp">user$ </span>credhub <span class="nb">set</span> --type password --name <span class="s1">'/example-password'</span> --password <span class="s1">'3t6Y2OFP0jQIcLnki1h7p3NtSfDx4l9bamr1ja6R'</span>
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
+<span class="nb">type</span>: password
+name: /example-password
+value: 3t6Y2OFP0jQIcLnki1h7p3NtSfDx4l9bamr1ja6R
+version_created_at: 2017-01-01T04:07:18Z
+</code></pre>
+<blockquote>
+<p>cURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/api/v1/data"</span> <span class="se">\</span>
+  -X PUT <span class="se">\</span>
+  -d <span class="s1">'{
+      "name": "/example-password",
+      "type": "password",
+      "value": "3t6Y2OFP0jQIcLnki1h7p3NtSfDx4l9bamr1ja6R"
+     }'</span> <span class="se">\</span>
+  -H <span class="s2">"authorization: bearer [token]"</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"67fc3def-bbfb-4953-83f8-4ab0682ad675"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/example-password"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"password"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6mRPZB3bAfb8lRpacnXsHfDhlPqFcjH2h9YDvLpL"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"version_created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-05T01:01:01Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This request sets a password credential with a user-provided value.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">PUT: https://example.com/api/v1/data</code></p>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>none</td>
+<td>yes</td>
+<td>string</td>
+<td>Name of credential to set</td>
+</tr>
+<tr>
+<td>type</td>
+<td>none</td>
+<td>yes</td>
+<td>string</td>
+<td>Type of credential to set</td>
+</tr>
+<tr>
+<td>mode</td>
+<td>no-overwrite</td>
+<td>no</td>
+<td>enum<sup>1</sup></td>
+<td>Overwrite interaction mode</td>
+</tr>
+<tr>
+<td>value</td>
+<td>none</td>
+<td>yes</td>
+<td>string</td>
+<td>Value of credential to set</td>
+</tr>
+<tr>
+<td>additional_permissions</td>
+<td>none</td>
+<td>no</td>
+<td>array</td>
+<td>List of additional permissions to set on credential</td>
+</tr>
+<tr>
+<td>additional_permissions[].actor</td>
+<td>none</td>
+<td>no</td>
+<td>identity<sup>2</sup></td>
+<td>Actor to provided specified operations on credential</td>
+</tr>
+<tr>
+<td>additional_permissions[].operations</td>
+<td>none</td>
+<td>no</td>
+<td>array</td>
+<td>List of operations provided on credential to specified actor</td>
+</tr>
+<tr>
+<td>additional_permissions[].operations[]</td>
+<td>none</td>
+<td>no</td>
+<td>enum<sup>3</sup></td>
+<td>Operation provided on credential to specified actor</td>
+</tr>
+</tbody></table>
+
+<p><sup>1</sup> Acceptable modes are &lsquo;no-overwrite&rsquo; and &lsquo;overwrite&rsquo; <a href="https://credhub-api.cfapps.io/version/1.9/#overwriting-credential-values">explained here.</a> <br>
+<sup>2</sup> Authentication-specific identities <a href="https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/authentication-identities.md">explained here.</a> <br>
+<sup>3</sup> Acceptable operations are &lsquo;read&rsquo;, &lsquo;write&rsquo;, &lsquo;delete&rsquo;, &lsquo;read_acl&rsquo; and &lsquo;write_acl&rsquo;</p>
+
+<h2 id="type-user">Type: User</h2>
+
+<blockquote>
+<p>CredHub CLI</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="gp">user$ </span>credhub <span class="nb">set</span> --type user --name <span class="s1">'/example-user'</span> --username <span class="s1">'FQnwWoxgSrDuqDLmeLpU'</span> --password <span class="s1">'6mRPZB3bAfb8lRpacnXsHfDhlPqFcjH2h9YDvLpL'</span>
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
+<span class="nb">type</span>: user
+name: /example-user
+value:
+  username: FQnwWoxgSrDuqDLmeLpU
+  password: 6mRPZB3bAfb8lRpacnXsHfDhlPqFcjH2h9YDvLpL
+  password_hash: <span class="nv">$6$h3b3JsG5$MnrPIrF6T3zAWk9uaun64vWY</span>.vaBQ5nTRFZjjVqKuDWccxWXn8n6vstQykXEReamb4GYh2q1HC7vFy11wflXd0
+version_created_at: 2017-01-01T04:07:18Z
+</code></pre>
+<blockquote>
+<p>cURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/api/v1/data"</span> <span class="se">\</span>
+  -X PUT <span class="se">\</span>
+  -d <span class="s1">'{
+      "name": "/example-user",
+      "type": "user",
+      "value": {
+        "username": "FQnwWoxgSrDuqDLmeLpU",
+        "password": "6mRPZB3bAfb8lRpacnXsHfDhlPqFcjH2h9YDvLpL"
+      }
+     }'</span> <span class="se">\</span>
+  -H <span class="s2">"authorization: bearer [token]"</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"67fc3def-bbfb-4953-83f8-4ab0682ad675"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/example-user"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FQnwWoxgSrDuqDLmeLpU"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6mRPZB3bAfb8lRpacnXsHfDhlPqFcjH2h9YDvLpL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"password_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$6$uu8ybZiNiPRu$6AYClxVqMXA3LAIdDAnEuWLUlWGlm0RRJI2wdHd8R9hKkKtiYupyKBjdRBI1ZhsyHwYetCpySew9ZXXLf.Mih0"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"version_created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-05T01:01:01Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This request sets a user credential with a user-provided value.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">PUT: https://example.com/api/v1/data</code></p>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>none</td>
+<td>yes</td>
+<td>string</td>
+<td>Name of credential to set</td>
+</tr>
+<tr>
+<td>type</td>
+<td>none</td>
+<td>yes</td>
+<td>string</td>
+<td>Type of credential to set</td>
+</tr>
+<tr>
+<td>mode</td>
+<td>no-overwrite</td>
+<td>no</td>
+<td>enum<sup>1</sup></td>
+<td>Overwrite interaction mode</td>
+</tr>
+<tr>
+<td>value</td>
+<td>none</td>
+<td>yes</td>
+<td>object</td>
+<td></td>
+</tr>
+<tr>
+<td>value.username</td>
+<td>null</td>
+<td>no</td>
+<td>string</td>
+<td>Username value of credential to set</td>
+</tr>
+<tr>
+<td>value.password</td>
+<td>none</td>
+<td>yes</td>
+<td>string</td>
+<td>Password value of credential to set</td>
+</tr>
+<tr>
+<td>additional_permissions</td>
+<td>none</td>
+<td>no</td>
+<td>array</td>
+<td>List of additional permissions to set on credential</td>
+</tr>
+<tr>
+<td>additional_permissions[].actor</td>
+<td>none</td>
+<td>no</td>
+<td>identity<sup>2</sup></td>
+<td>Actor to provided specified operations on credential</td>
+</tr>
+<tr>
+<td>additional_permissions[].operations</td>
+<td>none</td>
+<td>no</td>
+<td>array</td>
+<td>List of operations provided on credential to specified actor</td>
+</tr>
+<tr>
+<td>additional_permissions[].operations[]</td>
+<td>none</td>
+<td>no</td>
+<td>enum<sup>3</sup></td>
+<td>Operation provided on credential to specified actor</td>
+</tr>
+</tbody></table>
+
+<p><sup>1</sup> Acceptable modes are &lsquo;no-overwrite&rsquo; and &lsquo;overwrite&rsquo; <a href="https://credhub-api.cfapps.io/version/1.9/#overwriting-credential-values">explained here.</a> <br>
+<sup>2</sup> Authentication-specific identities <a href="https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/authentication-identities.md">explained here.</a> <br>
+<sup>3</sup> Acceptable operations are &lsquo;read&rsquo;, &lsquo;write&rsquo;, &lsquo;delete&rsquo;, &lsquo;read_acl&rsquo; and &lsquo;write_acl&rsquo;</p>
+
+<h2 id="type-certificate">Type: Certificate</h2>
+
+<blockquote>
+<p>CredHub CLI</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="gp">user$ </span>credhub <span class="nb">set</span> --type certificate --name <span class="s1">'/example-certificate'</span> --root ./root.pem --certificate ./cert.pem --private ./private.pem
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
+<span class="nb">type</span>: certificate
+name: /example-certificate
+value:
+  root: |
+    -----BEGIN CERTIFICATE-----
+    ...
+    -----END CERTIFICATE-----
+  certificate: |
+    -----BEGIN CERTIFICATE-----
+    ...
+    -----END CERTIFICATE-----
+  private_key: |
+    -----BEGIN RSA PRIVATE KEY-----
+    ...
+    -----END RSA PRIVATE KEY-----
+version_created_at: 2017-01-01T04:07:18Z
+</code></pre>
+<blockquote>
+<p>cURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/api/v1/data"</span> <span class="se">\</span>
+  -X PUT <span class="se">\</span>
+  -d <span class="s1">'{
+      "name": "/example-certificate",
+      "type": "certificate",
+      "value": {
+        "ca": "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----",
+        "certificate": "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----",
+        "private_key": "-----BEGIN RSA PRIVATE KEY-----\n...\n-----END RSA PRIVATE KEY-----"
+      }
+     }'</span> <span class="se">\</span>
+  -H <span class="s2">"authorization: bearer [token]"</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"67fc3def-bbfb-4953-83f8-4ab0682ad676"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/example-certificate"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"certificate"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ca"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-----BEGIN CERTIFICATE-----</span><span class="se">\n</span><span class="s2">...</span><span class="se">\n</span><span class="s2">-----END CERTIFICATE-----"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"certificate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-----BEGIN CERTIFICATE-----</span><span class="se">\n</span><span class="s2">...</span><span class="se">\n</span><span class="s2">-----END CERTIFICATE-----"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"private_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-----BEGIN RSA PRIVATE KEY-----</span><span class="se">\n</span><span class="s2">...</span><span class="se">\n</span><span class="s2">-----END RSA PRIVATE KEY-----"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"version_created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-01T04:07:18Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This request sets a certificate credential with a user-provided value.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">PUT: https://example.com/api/v1/data</code></p>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>none</td>
+<td>yes</td>
+<td>string</td>
+<td>Name of credential to set</td>
+</tr>
+<tr>
+<td>type</td>
+<td>none</td>
+<td>yes</td>
+<td>string</td>
+<td>Type of credential to set</td>
+</tr>
+<tr>
+<td>mode</td>
+<td>no-overwrite</td>
+<td>no</td>
+<td>enum<sup>1</sup></td>
+<td>Overwrite interaction mode</td>
+</tr>
+<tr>
+<td>value</td>
+<td>none</td>
+<td>yes</td>
+<td>object</td>
+<td></td>
+</tr>
+<tr>
+<td>value.ca</td>
+<td>null</td>
+<td>no<sup>2,3</sup></td>
+<td>string</td>
+<td>Certificate authority value of credential to set</td>
+</tr>
+<tr>
+<td>value.ca_name</td>
+<td>null</td>
+<td>no<sup>3</sup></td>
+<td>string</td>
+<td>Name of CA credential in credhub that has signed this certificate</td>
+</tr>
+<tr>
+<td>value.certificate</td>
+<td>null</td>
+<td>no<sup>2</sup></td>
+<td>string</td>
+<td>Certificate value of credential to set</td>
+</tr>
+<tr>
+<td>value.private_key</td>
+<td>null</td>
+<td>no<sup>2</sup></td>
+<td>string</td>
+<td>Private key value of credential to set</td>
+</tr>
+<tr>
+<td>additional_permissions</td>
+<td>none</td>
+<td>no</td>
+<td>array</td>
+<td>List of additional permissions to set on credential</td>
+</tr>
+<tr>
+<td>additional_permissions[].actor</td>
+<td>none</td>
+<td>no</td>
+<td>identity<sup>4</sup></td>
+<td>Actor to provided specified operations on credential</td>
+</tr>
+<tr>
+<td>additional_permissions[].operations</td>
+<td>none</td>
+<td>no</td>
+<td>array</td>
+<td>List of operations provided on credential to specified actor</td>
+</tr>
+<tr>
+<td>additional_permissions[].operations[]</td>
+<td>none</td>
+<td>no</td>
+<td>enum<sup>5</sup></td>
+<td>Operation provided on credential to specified actor</td>
+</tr>
+</tbody></table>
+
+<p><sup>1</sup> Acceptable modes are &lsquo;no-overwrite&rsquo; and &lsquo;overwrite&rsquo; <a href="https://credhub-api.cfapps.io/version/1.9/#overwriting-credential-values">explained here.</a> <br>
+<sup>2</sup> At least one value must be set <br>
+<sup>3</sup> &lsquo;ca_name&rsquo; and &lsquo;ca&rsquo; are mutually exclusive values <br>
+<sup>4</sup> Authentication-specific identities <a href="https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/authentication-identities.md">explained here.</a> <br>
+<sup>5</sup> Acceptable operations are &lsquo;read&rsquo;, &lsquo;write&rsquo;, &lsquo;delete&rsquo;, &lsquo;read_acl&rsquo; and &lsquo;write_acl&rsquo;</p>
+
+<h2 id="type-rsa">Type: RSA</h2>
+
+<blockquote>
+<p>CredHub CLI</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="gp">user$ </span>credhub <span class="nb">set</span> --type rsa --name <span class="s1">'/example-rsa'</span> --public ./public.pem --private ./private.pem
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
+<span class="nb">type</span>: rsa
+name: /example-rsa
+value:
+  public_key: |
+    -----BEGIN PUBLIC KEY-----
+    ...
+    -----END PUBLIC KEY-----
+  private_key: |
+    -----BEGIN RSA PRIVATE KEY-----
+    ...
+    -----END RSA PRIVATE KEY-----
+version_created_at: 2017-01-01T04:07:18Z
+</code></pre>
+<blockquote>
+<p>cURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/api/v1/data"</span> <span class="se">\</span>
+  -X PUT <span class="se">\</span>
+  -d <span class="s1">'{
+      "name": "/example-rsa",
+      "type": "rsa",
+      "value": {
+        "public_key": "-----BEGIN PUBLIC KEY-----\n...\n-----END PUBLIC KEY-----",
+        "private_key": "-----BEGIN RSA PRIVATE KEY-----\n...\n-----END RSA PRIVATE KEY-----"
+      }
+     }'</span> <span class="se">\</span>
+  -H <span class="s2">"authorization: bearer [token]"</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"67fc3def-bbfb-4953-83f8-4ab0682ad676"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/example-rsa"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rsa"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"public_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-----BEGIN PUBLIC KEY-----</span><span class="se">\n</span><span class="s2">...</span><span class="se">\n</span><span class="s2">-----END PUBLIC KEY-----"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"private_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-----BEGIN RSA PRIVATE KEY-----</span><span class="se">\n</span><span class="s2">...</span><span class="se">\n</span><span class="s2">-----END RSA PRIVATE KEY-----"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"version_created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-01T04:07:18Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This request sets a RSA credential with a user-provided value.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">PUT: https://example.com/api/v1/data</code></p>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>none</td>
+<td>yes</td>
+<td>string</td>
+<td>Name of credential to set</td>
+</tr>
+<tr>
+<td>type</td>
+<td>none</td>
+<td>yes</td>
+<td>string</td>
+<td>Type of credential to set</td>
+</tr>
+<tr>
+<td>mode</td>
+<td>no-overwrite</td>
+<td>no</td>
+<td>enum<sup>1</sup></td>
+<td>Overwrite interaction mode</td>
+</tr>
+<tr>
+<td>value</td>
+<td>none</td>
+<td>yes</td>
+<td>object</td>
+<td></td>
+</tr>
+<tr>
+<td>value.public_key</td>
+<td>null</td>
+<td>no<sup>2</sup></td>
+<td>string</td>
+<td>Public key value of credential to set</td>
+</tr>
+<tr>
+<td>value.private_key</td>
+<td>null</td>
+<td>no<sup>2</sup></td>
+<td>string</td>
+<td>Private key value of credential to set</td>
+</tr>
+<tr>
+<td>additional_permissions</td>
+<td>none</td>
+<td>no</td>
+<td>array</td>
+<td>List of additional permissions to set on credential</td>
+</tr>
+<tr>
+<td>additional_permissions[].actor</td>
+<td>none</td>
+<td>no</td>
+<td>identity<sup>3</sup></td>
+<td>Actor to provided specified operations on credential</td>
+</tr>
+<tr>
+<td>additional_permissions[].operations</td>
+<td>none</td>
+<td>no</td>
+<td>array</td>
+<td>List of operations provided on credential to specified actor</td>
+</tr>
+<tr>
+<td>additional_permissions[].operations[]</td>
+<td>none</td>
+<td>no</td>
+<td>enum<sup>4</sup></td>
+<td>Operation provided on credential to specified actor</td>
+</tr>
+</tbody></table>
+
+<p><sup>1</sup> Acceptable modes are &lsquo;no-overwrite&rsquo; and &lsquo;overwrite&rsquo; <a href="https://credhub-api.cfapps.io/version/1.9/#overwriting-credential-values">explained here.</a> <br>
+<sup>2</sup> At least one value must be set  <br>
+<sup>3</sup> Authentication-specific identities <a href="https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/authentication-identities.md">explained here.</a> <br>
+<sup>4</sup> Acceptable operations are &lsquo;read&rsquo;, &lsquo;write&rsquo;, &lsquo;delete&rsquo;, &lsquo;read_acl&rsquo; and &lsquo;write_acl&rsquo;</p>
+
+<h2 id="type-ssh">Type: SSH</h2>
+
+<blockquote>
+<p>CredHub CLI</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="gp">user$ </span>credhub <span class="nb">set</span> --type ssh --name <span class="s1">'/example-ssh'</span> --public ./public.pem --private ./private.pem
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
+<span class="nb">type</span>: ssh
+name: /example-ssh
+value:
+  public_key: ssh-rsa AAAAB3NzaC1y...W9RWFM1
+  private_key: |
+    -----BEGIN RSA PRIVATE KEY-----
+    ...
+    -----END RSA PRIVATE KEY-----
+version_created_at: 2017-01-01T04:07:18Z
+</code></pre>
+<blockquote>
+<p>cURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/api/v1/data"</span> <span class="se">\</span>
+  -X PUT <span class="se">\</span>
+  -d <span class="s1">'{
+      "name": "/example-ssh",
+      "type": "ssh",
+      "value": {
+        "public_key": "ssh-rsa AAAAB3NzaC1y...W9RWFM1",
+        "private_key": "-----BEGIN RSA PRIVATE KEY-----\n...\n-----END RSA PRIVATE KEY-----"
+      }
+     }'</span> <span class="se">\</span>
+  -H <span class="s2">"authorization: bearer [token]"</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"67fc3def-bbfb-4953-83f8-4ab0682ad676"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/example-ssh"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ssh"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"public_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ssh-rsa AAAAB3NzaC1y...W9RWFM1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"private_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-----BEGIN RSA PRIVATE KEY-----</span><span class="se">\n</span><span class="s2">...</span><span class="se">\n</span><span class="s2">-----END RSA PRIVATE KEY-----"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"version_created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-01T04:07:18Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This request sets a SSH credential with a user-provided value.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">PUT: https://example.com/api/v1/data</code></p>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>none</td>
+<td>yes</td>
+<td>string</td>
+<td>Name of credential to set</td>
+</tr>
+<tr>
+<td>type</td>
+<td>none</td>
+<td>yes</td>
+<td>string</td>
+<td>Type of credential to set</td>
+</tr>
+<tr>
+<td>mode</td>
+<td>no-overwrite</td>
+<td>no</td>
+<td>enum<sup>1</sup></td>
+<td>Overwrite interaction mode</td>
+</tr>
+<tr>
+<td>value</td>
+<td>none</td>
+<td>yes</td>
+<td>object</td>
+<td></td>
+</tr>
+<tr>
+<td>value.public_key</td>
+<td>null</td>
+<td>no<sup>2</sup></td>
+<td>string</td>
+<td>Public key value of credential to set</td>
+</tr>
+<tr>
+<td>value.private_key</td>
+<td>null</td>
+<td>no<sup>2</sup></td>
+<td>string</td>
+<td>Private key value of credential to set</td>
+</tr>
+<tr>
+<td>additional_permissions</td>
+<td>none</td>
+<td>no</td>
+<td>array</td>
+<td>List of additional permissions to set on credential</td>
+</tr>
+<tr>
+<td>additional_permissions[].actor</td>
+<td>none</td>
+<td>no</td>
+<td>identity<sup>3</sup></td>
+<td>Actor to provided specified operations on credential</td>
+</tr>
+<tr>
+<td>additional_permissions[].operations</td>
+<td>none</td>
+<td>no</td>
+<td>array</td>
+<td>List of operations provided on credential to specified actor</td>
+</tr>
+<tr>
+<td>additional_permissions[].operations[]</td>
+<td>none</td>
+<td>no</td>
+<td>enum<sup>4</sup></td>
+<td>Operation provided on credential to specified actor</td>
+</tr>
+</tbody></table>
+
+<p><sup>1</sup> Acceptable modes are &lsquo;no-overwrite&rsquo; and &lsquo;overwrite&rsquo; <a href="https://credhub-api.cfapps.io/version/1.9/#overwriting-credential-values">explained here.</a> <br>
+<sup>2</sup> At least one value must be set  <br>
+<sup>3</sup> Authentication-specific identities <a href="https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/authentication-identities.md">explained here.</a> <br>
+<sup>4</sup> Acceptable operations are &lsquo;read&rsquo;, &lsquo;write&rsquo;, &lsquo;delete&rsquo;, &lsquo;read_acl&rsquo; and &lsquo;write_acl&rsquo;</p>
+
+<h2 id="bulk-import">Bulk Import</h2>
+
+<blockquote>
+<p>CredHub CLI</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="gp">user$ </span>credhub import --file import.yml
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
+<span class="nb">type</span>: ssh
+name: /example-ssh
+value:
+  public_key: ssh-rsa AAAAB3NzaC1y...W9RWFM1
+  private_key: |
+    -----BEGIN RSA PRIVATE KEY-----
+    ...
+    -----END RSA PRIVATE KEY-----
+version_created_at: 2017-01-01T04:07:18Z
+
+id: 2ba73fbd-439e-40ef-b005-0e1db8815063
+<span class="nb">type</span>: password
+name: /example-password
+value: SqFcE2c0AuRvet2YhrxdFbPtkBmjiq
+version_created_at: 2017-01-01T04:07:28Z
+
+id: 22a1e87b-ba0b-4bc9-bb26-4e5fc5fb1b2f
+<span class="nb">type</span>: value
+name: /example-value
+value: sample
+version_created_at: 2017-01-01T04:07:38Z
+
+Import complete.
+Successfully <span class="nb">set</span>: 3
+Failed to <span class="nb">set</span>: 0
+</code></pre>
+<blockquote>
+<p>Sample Import File</p>
+</blockquote>
+<pre class="highlight yaml"><code><span class="na">credentials</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">/example-ssh</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">ssh</span>
+  <span class="na">value</span><span class="pi">:</span>
+    <span class="na">public_key</span><span class="pi">:</span> <span class="s">ssh-rsa AAAAB3NzaC1y...W9RWFM1</span>
+    <span class="na">private_key</span><span class="pi">:</span> <span class="pi">|</span>
+      <span class="no">-----BEGIN RSA PRIVATE KEY-----</span>
+      <span class="no">...</span>
+      <span class="no">-----END RSA PRIVATE KEY-----</span>
+<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">/example-password</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">password</span>
+  <span class="na">value</span><span class="pi">:</span> <span class="s">SqFcE2c0AuRvet2YhrxdFbPtkBmjiq</span>
+<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">/example-value</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">value</span>
+  <span class="na">value</span><span class="pi">:</span> <span class="s">sample</span>
+</code></pre>
+<p>This CLI command sets multiple credentials from an import file. The import file must be in yaml format, with the key <code class="prettyprint">credentials</code> whose value is a list of credential objects. Each credential must contain a name, type and value. An example is shown to the right.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p>n/a</p>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>n/a</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+
+          <h1 id="generate-credentials">Generate Credentials</h1>
+
+<h2 id="type-password">Type: Password</h2>
+
+<blockquote>
+<p>CredHub CLI</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="gp">user$ </span>credhub generate --type password --name <span class="s1">'/example-password'</span>
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
+<span class="nb">type</span>: password
+name: /example-password
+value: 3t6Y2OFP0jQIcLnki1h7p3NtSfDx4l9bamr1ja6R
+version_created_at: 2017-01-01T04:07:18Z
+</code></pre>
+<blockquote>
+<p>cURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/api/v1/data"</span> <span class="se">\</span>
+  -X POST <span class="se">\</span>
+  -d <span class="s1">'{
+      "name": "/example-password",
+      "type": "password",
+      "parameters": {
+        "length": 40
+      }
+     }'</span> <span class="se">\</span>
+  -H <span class="s2">"authorization: bearer [token]"</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"67fc3def-bbfb-4953-83f8-4ab0682ad675"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/example-password"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"password"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6mRPZB3bAfb8lRpacnXsHfDhlPqFcjH2h9YDvLpL"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"version_created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-05T01:01:01Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This request generates a password credential based on the provided parameters.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST: https://example.com/api/v1/data</code></p>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>none</td>
+<td>yes</td>
+<td>string</td>
+<td>Name of credential to set</td>
+</tr>
+<tr>
+<td>type</td>
+<td>none</td>
+<td>yes</td>
+<td>string</td>
+<td>Type of credential to set</td>
+</tr>
+<tr>
+<td>mode</td>
+<td>no-overwrite</td>
+<td>no</td>
+<td>enum<sup>1</sup></td>
+<td>Overwrite interaction mode</td>
+</tr>
+<tr>
+<td>parameters</td>
+<td>none</td>
+<td>no</td>
+<td>object</td>
+<td>Generation parameters</td>
+</tr>
+<tr>
+<td>parameters.length</td>
+<td>30</td>
+<td>no</td>
+<td>integer</td>
+<td>Length of generated credential value</td>
+</tr>
+<tr>
+<td>parameters.exclude_upper</td>
+<td>false</td>
+<td>no</td>
+<td>boolean</td>
+<td>Exclude upper alpha characters from generated credential value</td>
+</tr>
+<tr>
+<td>parameters.exclude_lower</td>
+<td>false</td>
+<td>no</td>
+<td>boolean</td>
+<td>Exclude lower alpha characters from generated credential value</td>
+</tr>
+<tr>
+<td>parameters.exclude_number</td>
+<td>false</td>
+<td>no</td>
+<td>boolean</td>
+<td>Exclude number characters from generated credential value</td>
+</tr>
+<tr>
+<td>parameters.include_special</td>
+<td>false</td>
+<td>no</td>
+<td>boolean</td>
+<td>Include special characters from generated credential value</td>
+</tr>
+<tr>
+<td>additional_permissions</td>
+<td>none</td>
+<td>no</td>
+<td>array</td>
+<td>List of additional permissions to set on credential</td>
+</tr>
+<tr>
+<td>additional_permissions[].actor</td>
+<td>none</td>
+<td>no</td>
+<td>identity<sup>2</sup></td>
+<td>Actor to provided specified operations on credential</td>
+</tr>
+<tr>
+<td>additional_permissions[].operations</td>
+<td>none</td>
+<td>no</td>
+<td>array</td>
+<td>List of operations provided on credential to specified actor</td>
+</tr>
+<tr>
+<td>additional_permissions[].operations[]</td>
+<td>none</td>
+<td>no</td>
+<td>enum<sup>3</sup></td>
+<td>Operation provided on credential to specified actor</td>
+</tr>
+</tbody></table>
+
+<p><sup>1</sup> Acceptable modes are &lsquo;no-overwrite&rsquo;, &lsquo;overwrite&rsquo;, and &lsquo;converge&rsquo; <a href="https://credhub-api.cfapps.io/version/1.9/#overwriting-credential-values">explained here.</a> <br>
+<sup>2</sup> Authentication-specific identities <a href="https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/authentication-identities.md">explained here.</a> <br>
+<sup>3</sup> Acceptable operations are &lsquo;read&rsquo;, &lsquo;write&rsquo;, &lsquo;delete&rsquo;, &lsquo;read_acl&rsquo;, and &lsquo;write_acl&rsquo;</p>
+
+<h2 id="type-user">Type: User</h2>
+
+<blockquote>
+<p>CredHub CLI</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="gp">user$ </span>credhub generate --type user --name <span class="s1">'/example-user'</span>
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
+<span class="nb">type</span>: user
+name: /example-user
+value:
+  username: FQnwWoxgSrDuqDLmeLpU
+  password: 6mRPZB3bAfb8lRpacnXsHfDhlPqFcjH2h9YDvLpL
+  password_hash: <span class="nv">$6$h3b3JsG5$MnrPIrF6T3zAWk9uaun64vWY</span>.vaBQ5nTRFZjjVqKuDWccxWXn8n6vstQykXEReamb4GYh2q1HC7vFy11wflXd0
+version_created_at: 2017-01-01T04:07:18Z
+</code></pre>
+<blockquote>
+<p>cURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/api/v1/data"</span> <span class="se">\</span>
+  -X POST <span class="se">\</span>
+  -d <span class="s1">'{
+      "name": "/example-user",
+      "type": "user"
+      "parameters": {
+        "length": 40
+      }
+     }'</span> <span class="se">\</span>
+  -H <span class="s2">"authorization: bearer [token]"</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"67fc3def-bbfb-4953-83f8-4ab0682ad675"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/example-user"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FQnwWoxgSrDuqDLmeLpU"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6mRPZB3bAfb8lRpacnXsHfDhlPqFcjH2h9YDvLpL"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"version_created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-05T01:01:01Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This request generates a user credential based on the provided parameters.</p>
+
+<p>NOTE: The username value is accepted at <code class="prettyprint">value.username</code> in CredHub server 1.2.0 and prior. This has been deprecated in favor of <code class="prettyprint">parameters.username</code>.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST: https://example.com/api/v1/data</code></p>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>none</td>
+<td>yes</td>
+<td>string</td>
+<td>Name of credential to set</td>
+</tr>
+<tr>
+<td>type</td>
+<td>none</td>
+<td>yes</td>
+<td>string</td>
+<td>Type of credential to set</td>
+</tr>
+<tr>
+<td>mode</td>
+<td>no-overwrite</td>
+<td>no</td>
+<td>enum<sup>1</sup></td>
+<td>Overwrite interaction mode</td>
+</tr>
+<tr>
+<td>parameters</td>
+<td>none</td>
+<td>no</td>
+<td>object</td>
+<td>Password generation parameters</td>
+</tr>
+<tr>
+<td>parameters.username</td>
+<td>none</td>
+<td>no</td>
+<td>string</td>
+<td>User provided value for username</td>
+</tr>
+<tr>
+<td>parameters.length</td>
+<td>30</td>
+<td>no</td>
+<td>integer</td>
+<td>Length of generated credential value</td>
+</tr>
+<tr>
+<td>parameters.exclude_upper</td>
+<td>false</td>
+<td>no</td>
+<td>boolean</td>
+<td>Exclude upper alpha characters from generated credential value</td>
+</tr>
+<tr>
+<td>parameters.exclude_lower</td>
+<td>false</td>
+<td>no</td>
+<td>boolean</td>
+<td>Exclude lower alpha characters from generated credential value</td>
+</tr>
+<tr>
+<td>parameters.exclude_number</td>
+<td>false</td>
+<td>no</td>
+<td>boolean</td>
+<td>Exclude number characters from generated credential value</td>
+</tr>
+<tr>
+<td>parameters.include_special</td>
+<td>false</td>
+<td>no</td>
+<td>boolean</td>
+<td>Include special characters from generated credential value</td>
+</tr>
+<tr>
+<td>additional_permissions</td>
+<td>none</td>
+<td>no</td>
+<td>array</td>
+<td>List of additional permissions to set on credential</td>
+</tr>
+<tr>
+<td>additional_permissions[].actor</td>
+<td>none</td>
+<td>no</td>
+<td>identity<sup>2</sup></td>
+<td>Actor to provided specified operations on credential</td>
+</tr>
+<tr>
+<td>additional_permissions[].operations</td>
+<td>none</td>
+<td>no</td>
+<td>array</td>
+<td>List of operations provided on credential to specified actor</td>
+</tr>
+<tr>
+<td>additional_permissions[].operations[]</td>
+<td>none</td>
+<td>no</td>
+<td>enum<sup>3</sup></td>
+<td>Operation provided on credential to specified actor</td>
+</tr>
+</tbody></table>
+
+<p><sup>1</sup> Acceptable modes are &lsquo;no-overwrite&rsquo;, &lsquo;overwrite&rsquo;, and &lsquo;converge&rsquo; <a href="https://credhub-api.cfapps.io/version/1.9/#overwriting-credential-values">explained here.</a> <br>
+<sup>2</sup> Authentication-specific identities <a href="https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/authentication-identities.md">explained here.</a> <br>
+<sup>3</sup> Acceptable operations are &lsquo;read&rsquo;, &lsquo;write&rsquo;, &lsquo;delete&rsquo;, &lsquo;read_acl&rsquo; and &lsquo;write_acl&rsquo;</p>
+
+<h2 id="type-certificate">Type: Certificate</h2>
+
+<blockquote>
+<p>CredHub CLI</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="gp">user$ </span>credhub generate --type certificate --name <span class="s1">'/example-certificate'</span> --common-name <span class="s1">'example.com'</span> --ca <span class="s1">'/example-ca'</span>
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
+<span class="nb">type</span>: certificate
+name: /example-certificate
+value:
+  root: |
+    -----BEGIN CERTIFICATE-----
+    ...
+    -----END CERTIFICATE-----
+  certificate: |
+    -----BEGIN CERTIFICATE-----
+    ...
+    -----END CERTIFICATE-----
+  private_key: |
+    -----BEGIN RSA PRIVATE KEY-----
+    ...
+    -----END RSA PRIVATE KEY-----
+version_created_at: 2017-01-01T04:07:18Z
+</code></pre>
+<blockquote>
+<p>cURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/api/v1/data"</span> <span class="se">\</span>
+  -X POST <span class="se">\</span>
+  -d <span class="s1">'{
+      "name": "/example-certificate",
+      "type": "certificate"
+      "parameters": {
+        "common_name": "example.com",
+        "ca": "/example-ca"
+      }
+     }'</span> <span class="se">\</span>
+  -H <span class="s2">"authorization: bearer [token]"</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"67fc3def-bbfb-4953-83f8-4ab0682ad676"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/example-certificate"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"certificate"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ca"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-----BEGIN CERTIFICATE-----</span><span class="se">\n</span><span class="s2">...</span><span class="se">\n</span><span class="s2">-----END CERTIFICATE-----"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"certificate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-----BEGIN CERTIFICATE-----</span><span class="se">\n</span><span class="s2">...</span><span class="se">\n</span><span class="s2">-----END CERTIFICATE-----"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"private_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-----BEGIN RSA PRIVATE KEY-----</span><span class="se">\n</span><span class="s2">...</span><span class="se">\n</span><span class="s2">-----END RSA PRIVATE KEY-----"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"version_created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-01T04:07:18Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This request generates a user credential based on the provided parameters.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST: https://example.com/api/v1/data</code></p>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>none</td>
+<td>yes</td>
+<td>string</td>
+<td>Name of credential to generate</td>
+</tr>
+<tr>
+<td>type</td>
+<td>none</td>
+<td>yes</td>
+<td>string</td>
+<td>Type of credential to generate</td>
+</tr>
+<tr>
+<td>mode</td>
+<td>no-overwrite</td>
+<td>no</td>
+<td>enum<sup>1</sup></td>
+<td>Overwrite interaction mode</td>
+</tr>
+<tr>
+<td>parameters</td>
+<td>none</td>
+<td>yes</td>
+<td>object</td>
+<td>Generation parameters</td>
+</tr>
+<tr>
+<td>parameters.common_name</td>
+<td>none</td>
+<td>no<sup>2</sup></td>
+<td>string</td>
+<td>Common name of generated credential value</td>
+</tr>
+<tr>
+<td>parameters.alternative_names</td>
+<td>none</td>
+<td>no</td>
+<td>array</td>
+<td></td>
+</tr>
+<tr>
+<td>parameters.alternative_names[]</td>
+<td>none</td>
+<td>no</td>
+<td>string</td>
+<td>Alternative names of generated credential value</td>
+</tr>
+<tr>
+<td>parameters.organization</td>
+<td>none</td>
+<td>no<sup>2</sup></td>
+<td>string</td>
+<td>Organization of generated credential value</td>
+</tr>
+<tr>
+<td>parameters.organization_unit</td>
+<td>none</td>
+<td>no<sup>2</sup></td>
+<td>string</td>
+<td>Organization Unit of generated credential value</td>
+</tr>
+<tr>
+<td>parameters.locality</td>
+<td>none</td>
+<td>no<sup>2</sup></td>
+<td>string</td>
+<td>Locality/city of generated credential value</td>
+</tr>
+<tr>
+<td>parameters.state</td>
+<td>none</td>
+<td>no<sup>2</sup></td>
+<td>string</td>
+<td>State/province of generated credential value</td>
+</tr>
+<tr>
+<td>parameters.country</td>
+<td>none</td>
+<td>no<sup>2</sup></td>
+<td>string</td>
+<td>Country of generated credential value</td>
+</tr>
+<tr>
+<td>parameters.key_usage</td>
+<td>none</td>
+<td>no</td>
+<td>array</td>
+<td></td>
+</tr>
+<tr>
+<td>parameters.key_usage[]</td>
+<td>none</td>
+<td>no</td>
+<td>enum<sup>3</sup></td>
+<td>Key usage extensions of generated credential value</td>
+</tr>
+<tr>
+<td>parameters.extended_key_usage</td>
+<td>none</td>
+<td>no</td>
+<td>array</td>
+<td></td>
+</tr>
+<tr>
+<td>parameters.extended_key_usage[]</td>
+<td>none</td>
+<td>no</td>
+<td>enum<sup>4</sup></td>
+<td>Extended key usage extensions of generated credential value</td>
+</tr>
+<tr>
+<td>parameters.key_length</td>
+<td>2048</td>
+<td>no</td>
+<td>enum<sup>5</sup></td>
+<td>Key length of generated credential value</td>
+</tr>
+<tr>
+<td>parameters.duration</td>
+<td>365</td>
+<td>no</td>
+<td>integer</td>
+<td>Duration in days of generated credential value</td>
+</tr>
+<tr>
+<td>parameters.ca</td>
+<td>none</td>
+<td>no<sup>6</sup></td>
+<td>credential<sup>7</sup></td>
+<td>Name of certificate authority to sign of generated credential value</td>
+</tr>
+<tr>
+<td>parameters.is_ca</td>
+<td>false</td>
+<td>no<sup>6</sup></td>
+<td>boolean</td>
+<td>Whether to generate credential value as a certificate authority</td>
+</tr>
+<tr>
+<td>parameters.self_sign</td>
+<td>false</td>
+<td>no<sup>6</sup></td>
+<td>boolean</td>
+<td>Whether to self-sign generated credential value</td>
+</tr>
+<tr>
+<td>additional_permissions</td>
+<td>none</td>
+<td>no</td>
+<td>array</td>
+<td>List of additional permissions to set on credential</td>
+</tr>
+<tr>
+<td>additional_permissions[].actor</td>
+<td>none</td>
+<td>no</td>
+<td>identity<sup>8</sup></td>
+<td>Actor to provided specified operations on credential</td>
+</tr>
+<tr>
+<td>additional_permissions[].operations</td>
+<td>none</td>
+<td>no</td>
+<td>array</td>
+<td>List of operations provided on credential to specified actor</td>
+</tr>
+<tr>
+<td>additional_permissions[].operations[]</td>
+<td>none</td>
+<td>no</td>
+<td>enum<sup>9</sup></td>
+<td>Operation provided on credential to specified actor</td>
+</tr>
+</tbody></table>
+
+<p><sup>1</sup> Acceptable modes are &lsquo;no-overwrite&rsquo;, &lsquo;overwrite&rsquo;, and &lsquo;converge&rsquo; <a href="https://credhub-api.cfapps.io/version/1.9/#overwriting-credential-values">explained here.</a> <br>
+<sup>2</sup> One subject field must be specified in the request <br>
+<sup>3</sup> Acceptable key usages are digital_signature, non_repudiation, key_encipherment, data_encipherment, key_agreement, key_cert_sign, crl_sign, encipher_only and decipher_only.<br>
+<sup>4</sup> Acceptable extended key usages are client_auth, server_auth, code_signing, email_protection and timestamping.<br>
+<sup>5</sup> Acceptable key lengths are 2048, 3072, 4096 <br>
+<sup>6</sup> At least one signing parameter must be provided <br>
+<sup>7</sup> Credential must contain appropriate certificate authority extensions  <br>
+<sup>8</sup> Authentication-specific identities <a href="https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/authentication-identities.md">explained here.</a> <br>
+<sup>9</sup> Acceptable operations are &lsquo;read&rsquo;, &lsquo;write&rsquo;, &lsquo;delete&rsquo;, &lsquo;read_acl&rsquo; and &lsquo;write_acl&rsquo;</p>
+
+<h2 id="type-rsa">Type: RSA</h2>
+
+<blockquote>
+<p>CredHub CLI</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="gp">user$ </span>credhub generate --type rsa --name <span class="s1">'/example-rsa'</span>
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
+<span class="nb">type</span>: rsa
+name: /example-rsa
+value:
+  public_key: |
+    -----BEGIN PUBLIC KEY-----
+    ...
+    -----END PUBLIC KEY-----
+  private_key: |
+    -----BEGIN RSA PRIVATE KEY-----
+    ...
+    -----END RSA PRIVATE KEY-----
+version_created_at: 2017-01-01T04:07:18Z
+</code></pre>
+<blockquote>
+<p>cURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/api/v1/data"</span> <span class="se">\</span>
+  -X POST <span class="se">\</span>
+  -d <span class="s1">'{
+      "name": "/example-rsa",
+      "type": "rsa"
+      "parameters": {
+        "key_length": 4096
+      }
+     }'</span> <span class="se">\</span>
+  -H <span class="s2">"authorization: bearer [token]"</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"67fc3def-bbfb-4953-83f8-4ab0682ad677"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/example-rsa"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rsa"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"public_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-----BEGIN PUBLIC KEY-----</span><span class="se">\n</span><span class="s2">...</span><span class="se">\n</span><span class="s2">-----END PUBLIC KEY-----"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"private_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-----BEGIN RSA PRIVATE KEY-----</span><span class="se">\n</span><span class="s2">...</span><span class="se">\n</span><span class="s2">-----END RSA PRIVATE KEY-----"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"version_created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-01T04:07:18Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This request generates an RSA credential based on the provided parameters.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST: https://example.com/api/v1/data</code></p>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>none</td>
+<td>yes</td>
+<td>string</td>
+<td>Name of credential to set</td>
+</tr>
+<tr>
+<td>type</td>
+<td>none</td>
+<td>yes</td>
+<td>string</td>
+<td>Type of credential to set</td>
+</tr>
+<tr>
+<td>mode</td>
+<td>no-overwrite</td>
+<td>no</td>
+<td>enum<sup>1</sup></td>
+<td>Overwrite interaction mode</td>
+</tr>
+<tr>
+<td>parameters</td>
+<td>none</td>
+<td>no</td>
+<td>object</td>
+<td>Generation parameters</td>
+</tr>
+<tr>
+<td>parameters.key_length</td>
+<td>2048</td>
+<td>no</td>
+<td>enum<sup>2</sup></td>
+<td>Key length of generated credential value</td>
+</tr>
+<tr>
+<td>additional_permissions</td>
+<td>none</td>
+<td>no</td>
+<td>array</td>
+<td>List of additional permissions to set on credential</td>
+</tr>
+<tr>
+<td>additional_permissions[].actor</td>
+<td>none</td>
+<td>no</td>
+<td>identity<sup>3</sup></td>
+<td>Actor to provided specified operations on credential</td>
+</tr>
+<tr>
+<td>additional_permissions[].operations</td>
+<td>none</td>
+<td>no</td>
+<td>array</td>
+<td>List of operations provided on credential to specified actor</td>
+</tr>
+<tr>
+<td>additional_permissions[].operations[]</td>
+<td>none</td>
+<td>no</td>
+<td>enum<sup>4</sup></td>
+<td>Operation provided on credential to specified actor</td>
+</tr>
+</tbody></table>
+
+<p><sup>1</sup> Acceptable modes are &lsquo;no-overwrite&rsquo;, &lsquo;overwrite&rsquo;, and &lsquo;converge&rsquo; <a href="https://credhub-api.cfapps.io/version/1.9/#overwriting-credential-values">explained here.</a> <br>
+<sup>2</sup> Acceptable key lengths are 2048, 3072, 4096  <br>
+<sup>3</sup> Authentication-specific identities <a href="https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/authentication-identities.md">explained here.</a> <br>
+<sup>4</sup> Acceptable operations are &lsquo;read&rsquo;, &lsquo;write&rsquo;, &lsquo;delete&rsquo;, &lsquo;read_acl&rsquo; and &lsquo;write_acl&rsquo;</p>
+
+<h2 id="type-ssh">Type: SSH</h2>
+
+<blockquote>
+<p>CredHub CLI</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="gp">user$ </span>credhub generate --type ssh --name <span class="s1">'/example-ssh'</span>
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
+<span class="nb">type</span>: ssh
+name: /example-ssh
+value:
+  public_key: ssh-rsa AAAAB3NzaC1y...W9RWFM1
+  private_key: |
+    -----BEGIN RSA PRIVATE KEY-----
+    ...
+    -----END RSA PRIVATE KEY-----
+version_created_at: 2017-01-01T04:07:18Z
+</code></pre>
+<blockquote>
+<p>cURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/api/v1/data"</span> <span class="se">\</span>
+  -X POST <span class="se">\</span>
+  -d <span class="s1">'{
+      "name": "/example-ssh",
+      "type": "ssh"
+      "parameters": {
+        "key_length": 4096
+      }
+     }'</span> <span class="se">\</span>
+  -H <span class="s2">"authorization: bearer [token]"</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"67fc3def-bbfb-4953-83f8-4ab0682ad677"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/example-ssh"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ssh"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"public_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ssh-rsa AAAAB3NzaC1y...W9RWFM1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"private_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-----BEGIN RSA PRIVATE KEY-----</span><span class="se">\n</span><span class="s2">...</span><span class="se">\n</span><span class="s2">-----END RSA PRIVATE KEY-----"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"version_created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-01T04:07:18Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This request generates an SSH credential based on the provided parameters.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST: https://example.com/api/v1/data</code></p>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>none</td>
+<td>yes</td>
+<td>string</td>
+<td>Name of credential to set</td>
+</tr>
+<tr>
+<td>type</td>
+<td>none</td>
+<td>yes</td>
+<td>string</td>
+<td>Type of credential to set</td>
+</tr>
+<tr>
+<td>mode</td>
+<td>no-overwrite</td>
+<td>no</td>
+<td>enum<sup>1</sup></td>
+<td>Overwrite interaction mode</td>
+</tr>
+<tr>
+<td>parameters</td>
+<td>none</td>
+<td>no</td>
+<td>object</td>
+<td>Generation parameters</td>
+</tr>
+<tr>
+<td>parameters.key_length</td>
+<td>2048</td>
+<td>no</td>
+<td>enum<sup>2</sup></td>
+<td>Key length of generated credential value</td>
+</tr>
+<tr>
+<td>parameters.ssh_comment</td>
+<td>none</td>
+<td>no</td>
+<td>string</td>
+<td>SSH comment of generated credential value</td>
+</tr>
+<tr>
+<td>additional_permissions</td>
+<td>none</td>
+<td>no</td>
+<td>array</td>
+<td>List of additional permissions to set on credential</td>
+</tr>
+<tr>
+<td>additional_permissions[].actor</td>
+<td>none</td>
+<td>no</td>
+<td>identity<sup>3</sup></td>
+<td>Actor to provided specified operations on credential</td>
+</tr>
+<tr>
+<td>additional_permissions[].operations</td>
+<td>none</td>
+<td>no</td>
+<td>array</td>
+<td>List of operations provided on credential to specified actor</td>
+</tr>
+<tr>
+<td>additional_permissions[].operations[]</td>
+<td>none</td>
+<td>no</td>
+<td>enum<sup>4</sup></td>
+<td>Operation provided on credential to specified actor</td>
+</tr>
+</tbody></table>
+
+<p><sup>1</sup> Acceptable modes are &lsquo;no-overwrite&rsquo;, &lsquo;overwrite&rsquo;, and &lsquo;converge&rsquo; <a href="https://credhub-api.cfapps.io/version/1.9/#overwriting-credential-values">explained here.</a> <br>
+<sup>2</sup> Acceptable key lengths are 2048, 3072, 4096  <br>
+<sup>3</sup> Authentication-specific identities <a href="https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/authentication-identities.md">explained here.</a> <br>
+<sup>4</sup> Acceptable operations are &lsquo;read&rsquo;, &lsquo;write&rsquo;, &lsquo;delete&rsquo;, &lsquo;read_acl&rsquo; and &lsquo;write_acl&rsquo;</p>
+
+          <h1 id="regenerate-credentials">Regenerate Credentials</h1>
+
+<p>The regenerate endpoints generate new values for credentials using the same parameters as the stored value. All RSA and SSH credentials may be regenerated. Password and user credentials must have been generated to enable regeneration. Statically set certificates may be regenerated if they are self-signed or if the CA name has been set to a stored CA certificate.</p>
+
+<h2 id="single-credential">Single Credential</h2>
+
+<blockquote>
+<p>CredHub CLI</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="gp">user$ </span>credhub regenerate --name <span class="s1">'/example-password'</span>
+id: 67fc3def-bbfb-4953-83f8-4ab0682ad675
+<span class="nb">type</span>: password
+name: /example-password
+value: 3t6Y2OFP0jQIcLnki1h7p3NtSfDx4l9bamr1ja6R
+version_created_at: 2017-01-01T04:07:18Z
+</code></pre>
+<blockquote>
+<p>cURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/api/v1/regenerate"</span> <span class="se">\</span>
+  -X POST <span class="se">\</span>
+  -d <span class="s1">'{
+      "name": "/example-password"
+     }'</span> <span class="se">\</span>
+  -H <span class="s2">"authorization: bearer [token]"</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"67fc3def-bbfb-4953-83f8-4ab0682ad674"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/example-password"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"password"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3t6Y2OFP0jQIcLnki1h7p3NtSfDx4l9bamr1ja6R"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"version_created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-01T04:07:18Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This request regenerates a single credential by name.</p>
+
+<p>NOTICE: Server version 1.4.0+ supports regenerate at path <code class="prettyprint">api/v1/regenerate</code>, modified from <code class="prettyprint">api/v1/data</code> in prior versions. Regenerate functionality on the <code class="prettyprint">data</code> endpoint is still functional, but deprecated. You are advised to migrate to <code class="prettyprint">regenerate</code> to avoid disruption when the deprecated functionality is removed.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST: https://example.com/api/v1/regenerate</code></p>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>none</td>
+<td>yes</td>
+<td>string</td>
+<td>Name of credential to regenerate</td>
+</tr>
+</tbody></table>
+
+<h2 id="certificate-signed-by-a-ca">Certificate Signed By a CA</h2>
+
+<blockquote>
+<p>CredHub CLI</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">[</span>not supported]
+</code></pre>
+<blockquote>
+<p>cURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/api/v1/bulk-regenerate"</span> <span class="se">\</span>
+  -X POST <span class="se">\</span>
+  -d <span class="s1">'{
+      "signed_by": "/example-ca"
+     }'</span> <span class="se">\</span>
+  -H <span class="s2">"authorization: bearer [token]"</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"regenerated_credentials"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"/example-cert1"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"/example-cert2"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"/example-cert3"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint regenerates all certificate signed by the given CA.</p>
+
+<p>NOTICE:<br>
+    - This functionality was added in version 1.4.0.
+    - As of version 1.7.0, <code class="prettyprint">bulk-regenerate</code> will additionally traverse the pki chain to leaf certificates beyond one level down.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST: https://example.com/api/v1/bulk-regenerate</code></p>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>signed_by</td>
+<td>none</td>
+<td>yes</td>
+<td>string</td>
+<td>Name of CA whose signed certificates will be regenerated</td>
+</tr>
+</tbody></table>
+
+          <h1 id="delete-credentials">Delete Credentials</h1>
+
+<blockquote>
+<p>CredHub CLI</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="gp">user$ </span>credhub delete --name <span class="s1">'/example-password'</span>
+Credential successfully deleted
+</code></pre>
+<blockquote>
+<p>cURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/api/v1/data?name=/example-password"</span> <span class="se">\</span>
+  -X DELETE <span class="se">\</span>
+  -H <span class="s2">"authorization: bearer [token]"</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+</code></pre><pre class="highlight json tab-json"><code><span class="p">[</span><span class="err">Status</span><span class="w"> </span><span class="mi">204</span><span class="w"> </span><span class="err">Empty</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>This request deletes a credential by name. </p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">DELETE: https://example.com/api/v1/data</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>none</td>
+<td>yes</td>
+<td>string</td>
+<td>Name of credential to delete</td>
+</tr>
+</tbody></table>
+
+          <h1 id="find-credentials">Find Credentials</h1>
+
+<h2 id="find-by-partial-name">Find by Partial Name</h2>
+
+<blockquote>
+<p>CredHub CLI</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="gp">user$ </span>credhub find --name-like <span class="s1">'password'</span>
+credentials: 
+- name: /password1
+  version_created_at: 2017-05-09T21:09:26Z
+- name: /test/example/password
+  version_created_at: 2017-05-09T21:09:07Z
+</code></pre>
+<blockquote>
+<p>cURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/api/v1/data?name-like=password"</span> <span class="se">\</span>
+  -X GET <span class="se">\</span>
+  -H <span class="s2">"authorization: bearer [token]"</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"credentials"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"version_created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-09T21:09:26Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/password1"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"version_created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-09T21:09:07Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/test/example/password"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This request retrieves a list of stored credential names which contain the search.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET: https://example.com/api/v1/data</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name-like</td>
+<td>none</td>
+<td>true</td>
+<td>string</td>
+<td>Search term to match against stored credential names</td>
+</tr>
+</tbody></table>
+
+<h2 id="find-by-path">Find by Path</h2>
+
+<blockquote>
+<p>CredHub CLI</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="gp">user$ </span>credhub find --path <span class="s1">'/director-name/deployment-name'</span>
+credentials:
+- name: /director-name/deployment-name/db-password
+  version_created_at: 2017-05-09T21:09:26Z
+- name: /director-name/deployment-name/user-password
+  version_created_at: 2017-05-09T21:09:07Z
+- name: /director-name/deployment-name/api-tls
+  version_created_at: 2017-05-10T11:13:07Z
+</code></pre>
+<blockquote>
+<p>cURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/api/v1/data?path=/director-name/deployment-name"</span> <span class="se">\</span>
+  -X GET <span class="se">\</span>
+  -H <span class="s2">"authorization: bearer [token]"</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"credentials"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"version_created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-09T21:09:26Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/director-name/deployment-name/db-password"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"version_created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-09T21:09:07Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/director-name/deployment-name/user-password"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"version_created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-10T11:13:07Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/director-name/deployment-name/api-tls"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This request retrieves a list of stored credential names which are within the specified path.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET: https://example.com/api/v1/data</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>path</td>
+<td>none</td>
+<td>true</td>
+<td>string</td>
+<td>Path of credentials to return</td>
+</tr>
+</tbody></table>
+
+<h2 id="show-all-paths">Show All Paths</h2>
+
+<blockquote>
+<p>CredHub CLI</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="gp">user$ </span>credhub find --all-paths
+paths: 
+- path: /
+- path: /director-name/
+- path: /director-name/deploy1/
+- path: /director-name/deploy2/
+- path: /director2/
+</code></pre>
+<blockquote>
+<p>cURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/api/v1/data?paths=true"</span> <span class="se">\</span>
+  -X GET <span class="se">\</span>
+  -H <span class="s2">"authorization: bearer [token]"</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"paths"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/director-name/"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/director-name/deploy1/"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/director-name/deploy2/"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/director2/"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This request retrieves a list of all paths which contain credentials.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET: https://example.com/api/v1/data</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>paths</td>
+<td>none</td>
+<td>true</td>
+<td>boolean</td>
+<td>Will return list of all paths if true</td>
+</tr>
+</tbody></table>
+
+          <h1 id="permissions">Permissions</h1>
+
+          <h1 id="get-permissions">Get Permissions</h1>
+
+<blockquote>
+<p>CredHub CLI</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">[</span>not supported]
+</code></pre>
+<blockquote>
+<p>cURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/api/v1/permissions?credential_name=/example-password"</span> <span class="se">\</span>
+  -X GET <span class="se">\</span>
+  -H <span class="s2">"authorization: bearer [token]"</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"credential_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/example-password"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"permissions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"actor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uaa-user:106f52e2-5d01-4675-8d7a-c05ff9a2c081"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"operations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"read"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"write"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"delete"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"read_acl"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"write_acl"</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This request returns the permissions of a credential. </p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET: https://example.com/api/v1/permissions</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>credential_name</td>
+<td>none</td>
+<td>yes</td>
+<td>string</td>
+<td>Name of credential whose permissions will be returned</td>
+</tr>
+</tbody></table>
+
+          <h1 id="add-permissions">Add Permissions</h1>
+
+<blockquote>
+<p>CredHub CLI</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">[</span>not supported]
+</code></pre>
+<blockquote>
+<p>cURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/api/v1/permissions"</span> <span class="se">\</span>
+  -X POST <span class="se">\</span>
+  -d <span class="s1">'{
+      "credential_name": "/example-password",
+      "permissions": [
+      {
+        "actor": "uaa-user:f6b2f8f6-1654-4a5d-aba4-c4d024a43560",
+        "operations": ["read"]
+      }]
+     }'</span> <span class="se">\</span>
+  -H <span class="s2">"authorization: bearer [token]"</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"credential_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/example-password"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"permissions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"actor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uaa-user:106f52e2-5d01-4675-8d7a-c05ff9a2c081"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"operations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"read"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"write"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"delete"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"read_acl"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"write_acl"</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},{</span><span class="w">
+      </span><span class="s2">"actor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uaa-user:f6b2f8f6-1654-4a5d-aba4-c4d024a43560"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"operations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"read"</span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This request adds permissions to a credential.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST: https://example.com/api/v1/permissions</code></p>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>credential_name</td>
+<td>none</td>
+<td>yes</td>
+<td>string</td>
+<td>Name of credential whose permissions will be returned</td>
+</tr>
+<tr>
+<td>permissions[]</td>
+<td>none</td>
+<td>yes</td>
+<td>array</td>
+<td>Permissions to add</td>
+</tr>
+<tr>
+<td>permissions[n].actor</td>
+<td>none</td>
+<td>yes</td>
+<td>identity<sup>1</sup></td>
+<td>Actor provided permission</td>
+</tr>
+<tr>
+<td>permissions[n].operations[]</td>
+<td>none</td>
+<td>yes</td>
+<td>array</td>
+<td>Operations to add</td>
+</tr>
+<tr>
+<td>permissions[n].operations[n]</td>
+<td>none</td>
+<td>yes</td>
+<td>operation<sup>2</sup></td>
+<td>Operation provided to Actor</td>
+</tr>
+</tbody></table>
+
+<p><sup>1</sup> Authentication-specific identities <a href="https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/authentication-identities.md">explained here.</a> <br>
+<sup>2</sup> Supported operations: read, write, delete, read_acl, write_acl</p>
+
+          <h1 id="delete-permissions">Delete Permissions</h1>
+
+<blockquote>
+<p>CredHub CLI</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">[</span>not supported]
+</code></pre>
+<blockquote>
+<p>cURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/api/v1/permissions?credential_name=/example-password&amp;actor=uaa-user:f6b2f8f6-1654-4a5d-aba4-c4d024a43560"</span> <span class="se">\</span>
+  -X DELETE <span class="se">\</span>
+  -H <span class="s2">"authorization: bearer [token]"</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+</code></pre><pre class="highlight json tab-json"><code><span class="p">[</span><span class="err">Status</span><span class="w"> </span><span class="mi">204</span><span class="w"> </span><span class="err">Empty</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>This request deletes a permission for an actor on a credential.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">DELETE: https://example.com/api/v1/permissions</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>credential_name</td>
+<td>none</td>
+<td>yes</td>
+<td>string</td>
+<td>Name of credential whose permissions will be deleted</td>
+</tr>
+<tr>
+<td>actor</td>
+<td>none</td>
+<td>yes</td>
+<td>identity<sup>1</sup></td>
+<td>Name of actor whose permissions will be deleted</td>
+</tr>
+</tbody></table>
+
+<p><sup>1</sup> Authentication-specific identities <a href="https://github.com/cloudfoundry-incubator/credhub/blob/master/docs/authentication-identities.md">explained here.</a></p>
+
+          <h1 id="interpolate-endpoint">Interpolate Endpoint</h1>
+
+<blockquote>
+<p>CredHub CLI</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">[</span>not supported]
+</code></pre>
+<blockquote>
+<p>cURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/api/v1/interpolate"</span> <span class="se">\</span>
+  -X POST <span class="se">\</span>
+  -d <span class="s1">'{ 
+      "p-config-server": [
+      {
+       "credentials": {
+         "credhub-ref": "/config-server/credentials"
+       },
+       "label": "p-config-server",
+       "name": "config-server",
+       "plan": "standard",
+       "provider": null,
+       "syslog_drain_url": null,
+       "tags": [
+        "configuration",
+        "spring-cloud"
+       ],
+       "volume_mounts": []
+      }]
+     }'</span> <span class="se">\</span>
+  -H <span class="s2">"authorization: bearer [token]"</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"p-config-server"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+   </span><span class="s2">"credentials"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+     </span><span class="s2">"access_token_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://p-spring-cloud-services.uaa.example.com/oauth/token"</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"p-config-server-d6ed7b18-5ae8-4642-af0c-11b1a47aad14"</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"client_secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example-secret"</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://config-2ad9cb93-d16d-4840-93ef-15b537c90847.apps.example.com"</span><span class="w">
+   </span><span class="p">},</span><span class="w">
+   </span><span class="s2">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"p-config-server"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"config-server"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"plan"</span><span class="p">:</span><span class="w"> </span><span class="s2">"standard"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"provider"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"syslog_drain_url"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"configuration"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"spring-cloud"</span><span class="w">
+   </span><span class="p">],</span><span class="w">
+   </span><span class="s2">"volume_mounts"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+   </span><span class="p">}]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint receives a <code class="prettyprint">VCAP_SERVICES</code> object containing CredHub references and responds with the object containing the credential values interpolated.</p>
+
+<p>NOTE: At this time, only credential references at <code class="prettyprint">credentials.credhub-ref</code> will be interpolated. The key <code class="prettyprint">credhub-ref</code> will be removed and the referenced credential object will be set as the value of <code class="prettyprint">credentials</code>.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST: https://example.com/api/v1/interpolate</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>none</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+
+          <h1 id="encryption-key-usage">Encryption Key Usage</h1>
+
+<blockquote>
+<p>CredHub CLI</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">[</span>not supported]
+</code></pre>
+<blockquote>
+<p>cURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/api/v1/key-usage"</span> <span class="se">\</span>
+  -X GET <span class="se">\</span>
+  -H <span class="s2">"authorization: bearer [token]"</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"active_key"</span><span class="p">:</span><span class="w"> </span><span class="mi">141240</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"inactive_keys"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"unknown_keys"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint retrieves the number of credentials encrypted by the active key, provided inactive keys and unknown keys. After initiating an encryption key rotation, you may validate the status of the encryption key rotation, and whether it successfully rotated all of the stored data, using this endpoint. </p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET: https://example.com/api/v1/key-usage</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>none</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+
+          <h1 id="get-version">Get Version</h1>
+
+<blockquote>
+<p>CredHub CLI</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="gp">user$ </span>credhub --version
+CLI Version: 2.0.1
+Server Version: 1.9.1
+</code></pre>
+<blockquote>
+<p>cURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/version"</span> <span class="se">\</span>
+  -X GET <span class="se">\</span>
+  -H <span class="s2">"authorization: bearer [token]"</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.9.1"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This request displays the server version.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET: https://example.com/version</code></p>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>none</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+
+          <h1 id="health">Health</h1>
+
+<blockquote>
+<p>CredHub CLI</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">[</span>not supported]
+</code></pre>
+<blockquote>
+<p>cURL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/health"</span> <span class="se">\</span>
+  -X GET
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UP"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This request verifies that communication with the server via the API is possible.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET: https://example.com/health</code></p>
+
+<h3 id="request-parameters">Request Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>none</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+
+          <h1 id="errors">Errors</h1>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>The format of the request does not meet expectation</td>
+</tr>
+<tr>
+<td>401</td>
+<td>The request did not include a valid authentication method</td>
+</tr>
+<tr>
+<td>403</td>
+<td>The authenticated user is not authorized to perform the attempted operation</td>
+</tr>
+<tr>
+<td>404</td>
+<td>The resource does not exist or you are not authorized to access it</td>
+</tr>
+<tr>
+<td>500</td>
+<td>An internal server error occurred. Try again later or contact your administrator.</td>
+</tr>
+</tbody></table>
+
+          <h1 id="integrations">Integrations</h1>
+
+<h2 id="bosh-director">BOSH Director</h2>
+
+<blockquote>
+<p>BOSH Manifest</p>
+</blockquote>
+<pre class="highlight yaml"><code><span class="na">variables</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">/example-user</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">user</span>
+  <span class="na">options</span><span class="pi">:</span>
+    <span class="na">username</span><span class="pi">:</span> <span class="s">admin</span>
+<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">/example-certificate</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">certificate</span>
+  <span class="na">options</span><span class="pi">:</span>
+    <span class="na">ca</span><span class="pi">:</span> <span class="s">/root-ca</span>
+    <span class="na">common_name</span><span class="pi">:</span> <span class="s">example.com</span>
+    <span class="na">alternative_names</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">example.com</span>
+    <span class="pi">-</span> <span class="s">www.example.com</span>
+<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">example-password</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">password</span>
+  <span class="na">options</span><span class="pi">:</span>
+    <span class="na">length</span><span class="pi">:</span> <span class="s">50</span>
+
+<span class="na">instance_groups</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">credhub-db</span>
+  <span class="na">instances</span><span class="pi">:</span> <span class="s">1</span>
+
+  <span class="na">jobs</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">example</span>
+    <span class="na">release</span><span class="pi">:</span> <span class="s">example</span>
+    <span class="na">properties</span><span class="pi">:</span>
+      <span class="na">example</span><span class="pi">:</span>
+        <span class="na">tls</span><span class="pi">:</span> <span class="s">((/example-certificate))</span>
+        <span class="na">data_storage</span><span class="pi">:</span>
+          <span class="na">type</span><span class="pi">:</span> <span class="s">postgres</span>
+          <span class="na">username</span><span class="pi">:</span> <span class="s">((/example-user.username))</span>
+          <span class="na">password</span><span class="pi">:</span> <span class="s">((/example-user.password))</span>
+        <span class="na">admin_password</span><span class="pi">:</span> <span class="s">((example-password))</span>
+</code></pre>
+<p>The integration with the BOSH Director allows you to reference existing or generate new credentials in CredHub. The generation functionality is driven by the <code class="prettyprint">variables</code> section of the deployment manifest. Each variable in the list must contain a name, type and may contain generation parameters. All types and generation <code class="prettyprint">parameters</code> offered by the API are supported using the BOSH manifest.</p>
+
+<p>The object <code class="prettyprint">options</code> passes through directly to the API request object <code class="prettyprint">parameters</code>. Any parameter, e.g. common_name, alternative_names, duration, listed in the generation request parameters above can be provided in yaml format in the <code class="prettyprint">options</code> configuration.</p>
+
+<h2 id="concourse-ci">Concourse CI</h2>
+
+<blockquote>
+<p>Pipeline Configuration</p>
+</blockquote>
+<pre class="highlight yaml"><code><span class="na">resources</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">credhub-ci</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">git</span>
+  <span class="na">source</span><span class="pi">:</span>
+    <span class="na">uri</span><span class="pi">:</span> <span class="s">git@github.com:cloudfoundry-incubator/credhub</span>
+    <span class="na">branch</span><span class="pi">:</span> <span class="s">master</span>
+    <span class="na">private_key</span><span class="pi">:</span> <span class="s">((ci-key.private_key))</span>
+<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">credhub-files</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">s3</span>
+  <span class="na">source</span><span class="pi">:</span>
+    <span class="na">bucket</span><span class="pi">:</span> <span class="s">credhub-example</span>
+    <span class="na">access_key_id</span><span class="pi">:</span> <span class="s">((s3/write/access-key-id))</span>
+    <span class="na">secret_access_key</span><span class="pi">:</span> <span class="s">((s3/write/secret-access-key))</span>
+
+<span class="na">jobs</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">credhub-example</span>
+  <span class="na">plan</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">get</span><span class="pi">:</span> <span class="s">credhub-repo</span>
+  <span class="pi">-</span> <span class="na">task</span><span class="pi">:</span> <span class="s">deploy-something</span>
+    <span class="na">file</span><span class="pi">:</span> <span class="s">credhub-repo/tasks/task.yml</span>
+    <span class="na">params</span><span class="pi">:</span>
+      <span class="na">BOSH_CLIENT</span><span class="pi">:</span> <span class="s">((bosh-client.username))</span>
+      <span class="na">BOSH_CLIENT_SECRET</span><span class="pi">:</span> <span class="s">((bosh-client.password))</span>
+  <span class="pi">-</span> <span class="na">put</span><span class="pi">:</span> <span class="s">credhub-files</span>
+    <span class="na">params</span><span class="pi">:</span>
+      <span class="na">file</span><span class="pi">:</span> <span class="s">file.txt</span>
+</code></pre>
+<p>The Concourse integration allows you to provide references to stored CredHub credentials in your pipeline configurations. The syntax for references is <code class="prettyprint">((credential-name))</code>. For multi-part credentials, like certificates, a single part of the credential can be provided using dot accessors, e.g. <code class="prettyprint">((credential.certificate))</code> and <code class="prettyprint">((credential.private_key))</code>. More information can be <a href="http://concourse.ci/creds.html#credhub">found here.</a></p>
+
+<p>Concourse does not currently support generation of credentials, so you must set or generate the credentials in CredHub prior to referencing them in your pipeline.</p>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="shell">shell</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
