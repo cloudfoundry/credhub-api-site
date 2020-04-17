@@ -1,7 +1,5 @@
 {
   "manual-docs": [
-    "1.9",
-    "2.1",
     "credhub-cli"
   ],
   "auto-docs": [
