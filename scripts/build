@@ -38,12 +38,9 @@ generate_docs() {
     generate_manual_docs_for_version "$version"
   done
   for version in ${autodoc_versions}; do
-    if [ "${version}" != "${current_master_version}" ]; then
-      generate_autodocs_for_version "$version"
-    fi
+    generate_autodocs_for_version "$version"
   done
   generate_autodocs_for_master
-  generate_autodocs_for_edge
 }
 
 generate_manual_docs_for_version() {
@@ -69,17 +66,8 @@ generate_manual_docs_for_version() {
   rm -rf "$temp_dir"
 }
 
-generate_autodocs_for_edge() {
-  version_dir="$app_dir/public/version/develop"
-  mkdir -p "$version_dir"
-
-  git -C "$credhub_dir" checkout develop
-  "$credhub_dir/scripts/generate_documentation_snippets.sh"
-  cp "$credhub_dir/applications/credhub-api/src/main/resources/static/docs/index.html" "$version_dir"
-}
-
 generate_autodocs_for_master() {
-  version_dir="$app_dir/public/version/${current_master_version}"
+  version_dir="$app_dir/public/version/master"
   mkdir -p "$version_dir"
 
   git -C "$credhub_dir" checkout master
@@ -99,7 +87,7 @@ generate_autodocs_for_version() {
 }
 
 create_versions_json() {
-  declare -r all_versions="develop\n${manually_documented_versions}\n${autodoc_versions}"
+  declare -r all_versions="master/n${manually_documented_versions}\n${autodoc_versions}"
   versions_json="$(echo -e "$all_versions" \
     | jq -R . \
     | sort --version-sort -r \
