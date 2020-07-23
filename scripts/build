@@ -11,7 +11,7 @@ lts_credhub_dir=${LTS_CREDHUB_DIR:-"$HOME/workspace/lts-credhub-release/src/cred
 
 manually_documented_versions="$(jq -r '.["manual-docs"][]' "${repo_root}/versions.json")"
 autodoc_versions="$(jq -r '.["auto-docs"][]' "${repo_root}/versions.json")"
-current_master_version="$(jq -r '.["auto-docs"][]' "${repo_root}/versions.json" | sort -r | head -1)"
+current_main_version="$(jq -r '.["auto-docs"][]' "${repo_root}/versions.json" | sort -r | head -1)"
 
 check_for_uncommitted_changes() {
   check_for_uncommitted_changes_in_repo "$credhub_dir"
@@ -40,7 +40,7 @@ generate_docs() {
   for version in ${autodoc_versions}; do
     generate_autodocs_for_version "$version"
   done
-  generate_autodocs_for_master
+  generate_autodocs_for_main
 }
 
 generate_manual_docs_for_version() {
@@ -66,11 +66,11 @@ generate_manual_docs_for_version() {
   rm -rf "$temp_dir"
 }
 
-generate_autodocs_for_master() {
-  version_dir="$app_dir/public/version/master"
+generate_autodocs_for_main() {
+  version_dir="$app_dir/public/version/main"
   mkdir -p "$version_dir"
 
-  git -C "$credhub_dir" checkout master
+  git -C "$credhub_dir" checkout main
   "$credhub_dir/scripts/generate_documentation_snippets.sh"
   cp "$credhub_dir/applications/credhub-api/src/main/resources/static/docs/index.html" "$version_dir"
 }
@@ -87,7 +87,7 @@ generate_autodocs_for_version() {
 }
 
 create_versions_json() {
-  declare -r all_versions="master\n${manually_documented_versions}\n${autodoc_versions}"
+  declare -r all_versions="main\n${manually_documented_versions}\n${autodoc_versions}"
   versions_json="$(echo -e "$all_versions" \
     | jq -R . \
     | sort --version-sort -r \
