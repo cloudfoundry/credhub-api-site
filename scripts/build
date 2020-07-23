@@ -11,7 +11,6 @@ lts_credhub_dir=${LTS_CREDHUB_DIR:-"$HOME/workspace/lts-credhub-release/src/cred
 
 manually_documented_versions="$(jq -r '.["manual-docs"][]' "${repo_root}/versions.json")"
 autodoc_versions="$(jq -r '.["auto-docs"][]' "${repo_root}/versions.json")"
-current_main_version="$(jq -r '.["auto-docs"][]' "${repo_root}/versions.json" | sort -r | head -1)"
 
 check_for_uncommitted_changes() {
   check_for_uncommitted_changes_in_repo "$credhub_dir"
@@ -34,9 +33,11 @@ create_app_dir() {
 }
 
 generate_docs() {
+  # manually_documented_versions include cli & a few older CredHub server versions (located as branches in cloudfoundry-incubator/credhub-api-docs)
   for version in ${manually_documented_versions}; do
     generate_manual_docs_for_version "$version"
   done
+  # these are newer CredHub server version that supports autodocs (in CredHub src controller tests)
   for version in ${autodoc_versions}; do
     generate_autodocs_for_version "$version"
   done
@@ -79,11 +80,21 @@ generate_autodocs_for_version() {
   version="$1"
 
   version_dir="$app_dir/public/version/$version"
-  mkdir -p "$version_dir"
 
-  git -C "$lts_credhub_dir" checkout "${version}.x"
-  "$lts_credhub_dir/scripts/generate_documentation_snippets.sh"
-  cp "$lts_credhub_dir/applications/credhub-api/src/main/resources/static/docs/index.html" "$version_dir"
+  local branch="${version}.x"
+
+  local exists_in_repo=$(git -C "$lts_credhub_dir" branch --list "${branch}")
+
+  if [[ ! -z ${exists_in_repo} ]]; then
+      # the branch exists
+      git -C "$lts_credhub_dir" checkout "${branch}"
+      mkdir -p "$version_dir"
+      "$lts_credhub_dir/scripts/generate_documentation_snippets.sh"
+      cp "$lts_credhub_dir/applications/credhub-api/src/main/resources/static/docs/index.html" "$version_dir"
+  else
+      # the branch does not exist
+      echo "The branch ${branch} does not exist in the LTS repo yet. Continuing..."
+  fi
 }
 
 create_versions_json() {
