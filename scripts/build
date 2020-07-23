@@ -83,13 +83,11 @@ generate_autodocs_for_version() {
 
   local branch="${version}.x"
 
-  git -C "$lts_credhub_dir" fetch --all
-  local exists_in_repo=$(git -C "$lts_credhub_dir" branch --list "${branch}")
+  local exists_in_repo=$(git -C "$lts_credhub_dir" ls-remote --heads origin "${branch}")
 
   if [[ ! -z ${exists_in_repo} ]]; then
       # the branch exists
       git -C "$lts_credhub_dir" checkout "${branch}"
-      git -C "$lts_credhub_dir" pull
       mkdir -p "$version_dir"
       "$lts_credhub_dir/scripts/generate_documentation_snippets.sh"
       cp "$lts_credhub_dir/applications/credhub-api/src/main/resources/static/docs/index.html" "$version_dir"
