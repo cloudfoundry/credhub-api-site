@@ -10,7 +10,22 @@ credhub_dir=${CREDHUB_DIR:-"$HOME/workspace/credhub-release/src/credhub"}
 lts_credhub_dir=${LTS_CREDHUB_DIR:-"$HOME/workspace/lts-credhub-release/src/credhub"}
 
 manually_documented_versions="$(jq -r '.["manual-docs"][]' "${repo_root}/versions.json")"
-autodoc_versions="$(jq -r '.["auto-docs"][]' "${repo_root}/versions.json")"
+all_autodoc_versions="$(jq -r '.["auto-docs"][]' "${repo_root}/versions.json")"
+
+autodoc_versions=()
+
+for version in ${all_autodoc_versions}; do
+
+  branch="${version}.x"
+  exists_in_repo=$(git -C "$lts_credhub_dir" ls-remote --heads origin "${branch}")
+
+  if [[ ! -z ${exists_in_repo} ]]; then      echo "Adding $branch"
+      # the branch exists
+#      version_with_new_line=$'Hello World\n===========\n'
+      autodoc_versions+=("${version}")
+  fi
+
+done
 
 check_for_uncommitted_changes() {
   check_for_uncommitted_changes_in_repo "$credhub_dir"
@@ -80,21 +95,11 @@ generate_autodocs_for_version() {
   version="$1"
 
   version_dir="$app_dir/public/version/$version"
+  mkdir -p "$version_dir"
 
-  local branch="${version}.x"
-
-  local exists_in_repo=$(git -C "$lts_credhub_dir" ls-remote --heads origin "${branch}")
-
-  if [[ ! -z ${exists_in_repo} ]]; then
-      # the branch exists
-      git -C "$lts_credhub_dir" checkout "${branch}"
-      mkdir -p "$version_dir"
-      "$lts_credhub_dir/scripts/generate_documentation_snippets.sh"
-      cp "$lts_credhub_dir/applications/credhub-api/src/main/resources/static/docs/index.html" "$version_dir"
-  else
-      # the branch does not exist
-      echo "The branch ${branch} does not exist in the LTS repo yet. Continuing..."
-  fi
+  git -C "$lts_credhub_dir" checkout "${version}.x"
+  "$lts_credhub_dir/scripts/generate_documentation_snippets.sh"
+  cp "$lts_credhub_dir/applications/credhub-api/src/main/resources/static/docs/index.html" "$version_dir"
 }
 
 create_versions_json() {
