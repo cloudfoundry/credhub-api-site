@@ -103,7 +103,11 @@ generate_autodocs_for_version() {
 }
 
 create_versions_json() {
-  declare -r all_versions="main\n${manually_documented_versions}\n${autodoc_versions[@]}"
+  all_versions="main\n${manually_documented_versions}"
+  for version in ${autodoc_versions[@]}; do
+    all_versions="$all_versions\n$version"
+  done
+
   versions_json="$(echo -e "$all_versions" \
     | jq -R . \
     | sort --version-sort -r \
