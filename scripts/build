@@ -116,7 +116,7 @@ create_versions_json() {
 }
 
 create_index() {
-  latest_version="$(echo "${autodoc_versions[@]}" | sort --version-sort | tail -n1)"
+  latest_version="$(printf "%s\n" "${autodoc_versions[@]}" | sort --version-sort | tail -n1)"
   cat >"$app_dir/public/index.html" <<-EOF
   <html>
     <head>
