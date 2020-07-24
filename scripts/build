@@ -53,7 +53,7 @@ generate_docs() {
     generate_manual_docs_for_version "$version"
   done
   # these are newer CredHub server version that supports autodocs (in CredHub src controller tests)
-  for version in ${autodoc_versions}; do
+  for version in ${autodoc_versions[@]}; do
     generate_autodocs_for_version "$version"
   done
   generate_autodocs_for_main
@@ -103,7 +103,7 @@ generate_autodocs_for_version() {
 }
 
 create_versions_json() {
-  declare -r all_versions="main\n${manually_documented_versions}\n${autodoc_versions}"
+  declare -r all_versions="main\n${manually_documented_versions}\n${autodoc_versions[@]}"
   versions_json="$(echo -e "$all_versions" \
     | jq -R . \
     | sort --version-sort -r \
@@ -112,7 +112,7 @@ create_versions_json() {
 }
 
 create_index() {
-  latest_version="$(echo "${autodoc_versions}" | sort --version-sort | tail -n1)"
+  latest_version="$(echo "${autodoc_versions[@]}" | sort --version-sort | tail -n1)"
   cat >"$app_dir/public/index.html" <<-EOF
   <html>
     <head>
