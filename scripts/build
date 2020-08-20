@@ -21,7 +21,6 @@ for version in ${all_autodoc_versions}; do
 
   if [[ ! -z ${exists_in_repo} ]]; then      echo "Adding $branch"
       # the branch exists
-#      version_with_new_line=$'Hello World\n===========\n'
       autodoc_versions+=("${version}")
   fi
 
