@@ -6,3 +6,4 @@ applications:
   buildpack: https://github.com/cloudfoundry/nginx-buildpack.git
   routes:
   - route: docs.cloudfoundry.org/api/credhub
+  - route: cf-oss-docs.sc2-04-pcf1-apps.oc.vmware.com/api/credhub
