@@ -1,9 +1,7 @@
 ---
 applications: 
-- name: credhub-api-staging
+- name: credhub-api
   memory: 512M
   instances: 2
   buildpack: https://github.com/cloudfoundry/nginx-buildpack.git
-  routes:
-#  - route: docs.cloudfoundry.org/api/credhub # cutover of this domain hasn't happened yet
-  - route: credhub-api-staging.sc2-04-pcf1-apps.oc.vmware.com
+  host: credhub-api
