@@ -148,6 +148,7 @@ create_nginx_config_files() {
     tcp_nopush on;
     keepalive_timeout 30;
     port_in_redirect off; # Ensure that redirects don't include the internal container PORT - 8080
+    absolute_redirect off; # Prevent redirecting user to http when access doc page without trailing slash (e.g.: without this config, https://DOC-PAGE-DIR would redirect to http://DOC-PAGE-DIR/)
 
     server {
       listen {{port}};
