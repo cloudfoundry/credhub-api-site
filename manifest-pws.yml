@@ -1,7 +1,0 @@
----
-applications: 
-- name: credhub-api
-  memory: 512M
-  instances: 2
-  buildpack: https://github.com/cloudfoundry/nginx-buildpack.git
-  host: credhub-api

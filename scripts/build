@@ -246,7 +246,6 @@ EOF
 
 copy_manifest_to_app_dir() {
   cp "$repo_root/manifest.yml" "$app_dir"
-  cp "$repo_root/manifest-pws.yml" "$app_dir"
 }
 
 main() {
