@@ -61,7 +61,7 @@ generate_docs() {
 generate_manual_docs_for_version() {
   version="$1"
 
-  version_dir="$app_dir/public/version/$version"
+  version_dir="$app_dir/public/api/credhub/version/$version"
   mkdir -p "$version_dir"
 
   git -C "$credhub_api_docs_dir" checkout "$version"
@@ -82,7 +82,7 @@ generate_manual_docs_for_version() {
 }
 
 generate_autodocs_for_main() {
-  version_dir="$app_dir/public/version/main"
+  version_dir="$app_dir/public/api/credhub/version/main"
   mkdir -p "$version_dir"
 
   git -C "$credhub_dir" checkout main
@@ -93,7 +93,7 @@ generate_autodocs_for_main() {
 generate_autodocs_for_version() {
   version="$1"
 
-  version_dir="$app_dir/public/version/$version"
+  version_dir="$app_dir/public/api/credhub/version/$version"
   mkdir -p "$version_dir"
 
   git -C "$lts_credhub_dir" checkout "${version}.x"
@@ -111,16 +111,16 @@ create_versions_json() {
     | jq -R . \
     | sort --version-sort -r \
     | jq -s .)"
-  echo -n "$versions_json" > "$app_dir/public/versions.json"
+  echo -n "$versions_json" > "$app_dir/public/api/credhub/versions.json"
 }
 
 create_index() {
   latest_version="$(printf "%s\n" "${autodoc_versions[@]}" | sort --version-sort | tail -n1)"
-  cat >"$app_dir/public/index.html" <<-EOF
+  cat >"$app_dir/public/api/credhub/index.html" <<-EOF
   <html>
     <head>
       <script>
-        window.location.href = "/version/$latest_version/";
+        window.location.href = "/api/credhub/version/$latest_version/";
       </script>
     </head>
 
