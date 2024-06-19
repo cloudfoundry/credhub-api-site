@@ -97,8 +97,7 @@ generate_autodocs_for_version() {
   mkdir -p "$version_dir"
 
   git -C "$lts_credhub_dir" checkout "${version}.x"
-  "$lts_credhub_dir/scripts/generate_documentation_snippets.sh"
-  cp "$lts_credhub_dir/applications/credhub-api/src/main/resources/static/docs/index.html" "$version_dir"
+  cp "$lts_credhub_dir/docs/index.html" "$version_dir"
 }
 
 create_versions_json() {
