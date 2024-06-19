@@ -83,12 +83,11 @@ create_versions_json() {
 }
 
 create_index() {
-  latest_version="$(printf "%s\n" "${autodoc_versions[@]}" | sort --version-sort | tail -n1)"
   cat >"$app_dir/public/api/credhub/index.html" <<-EOF
   <html>
     <head>
       <script>
-        window.location.href = "/api/credhub/version/$latest_version/";
+        window.location.href = "/api/credhub/version/main/";
       </script>
     </head>
 
