@@ -7,11 +7,28 @@ app_dir="$repo_root/app"
 credhub_api_site_dir=${CREDHUB_API_SITE_DIR:-"$HOME/workspace/credhub-api-site"}
 credhub_api_docs_dir=${CREDHUB_API_DOCS_DIR:-"$HOME/workspace/credhub-api-docs"}
 credhub_dir=${CREDHUB_DIR:-"$HOME/workspace/credhub-release/src/credhub"}
+lts_credhub_dir=${LTS_CREDHUB_DIR:-"$HOME/workspace/lts-credhub-release/src/credhub"}
 
 manually_documented_versions="$(jq -r '.["manual-docs"][]' "${repo_root}/versions.json")"
+all_autodoc_versions="$(jq -r '.["auto-docs"][]' "${repo_root}/versions.json")"
+
+autodoc_versions=()
+
+for version in ${all_autodoc_versions}; do
+
+  branch="${version}.x"
+  exists_in_repo=$(git -C "$lts_credhub_dir" ls-remote --heads origin "${branch}")
+
+  if [[ ! -z ${exists_in_repo} ]]; then      echo "Adding $branch"
+      # the branch exists
+      autodoc_versions+=("${version}")
+  fi
+
+done
 
 check_for_uncommitted_changes() {
   check_for_uncommitted_changes_in_repo "$credhub_dir"
+  check_for_uncommitted_changes_in_repo "$lts_credhub_dir"
   check_for_uncommitted_changes_in_repo "$credhub_api_docs_dir"
 }
 
@@ -33,6 +50,10 @@ generate_docs() {
   # manually_documented_versions include cli & a few older CredHub server versions (located as branches in cloudfoundry-incubator/credhub-api-docs)
   for version in ${manually_documented_versions}; do
     generate_manual_docs_for_version "$version"
+  done
+  # these are newer CredHub server version that supports autodocs (in CredHub src controller tests)
+  for version in ${autodoc_versions[@]}; do
+    generate_autodocs_for_version "$version"
   done
   generate_autodocs_for_main
 }
@@ -67,6 +88,17 @@ generate_autodocs_for_main() {
   git -C "$credhub_dir" checkout main
   "$credhub_dir/scripts/generate_documentation_snippets.sh"
   cp "$credhub_dir/applications/credhub-api/src/main/resources/static/docs/index.html" "$version_dir"
+}
+
+generate_autodocs_for_version() {
+  version="$1"
+
+  version_dir="$app_dir/public/api/credhub/version/$version"
+  mkdir -p "$version_dir"
+
+  git -C "$lts_credhub_dir" checkout "${version}.x"
+  "$lts_credhub_dir/scripts/generate_documentation_snippets.sh"
+  cp "$lts_credhub_dir/applications/credhub-api/src/main/resources/static/docs/index.html" "$version_dir"
 }
 
 create_versions_json() {
