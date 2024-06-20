@@ -3,7 +3,7 @@ applications:
 - name: docs-credhub-api-prod
   memory: 512M
   instances: 2
-  buildpack: https://github.com/cloudfoundry/nginx-buildpack.git
+  buildpack: https://github.com/cloudfoundry/nginx-buildpack.git#v1.1.32
   routes:
   - route: docs.cloudfoundry.org/api/credhub
   - route: cf-oss-docs.sc2-04-pcf1-apps.oc.vmware.com/api/credhub
