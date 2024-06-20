@@ -3,6 +3,7 @@
     "credhub-cli"
   ],
   "auto-docs": [
+    "2.12",
     "2.9"
   ]
 }
