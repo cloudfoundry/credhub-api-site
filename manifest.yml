@@ -6,4 +6,5 @@ applications:
   buildpack: https://github.com/cloudfoundry/nginx-buildpack.git#v1.1.32
   stack: cflinuxfs3
   routes:
-  - route: docs.cloudfoundry.org/api/credhub
+  - route: ((prod-doc-route))
+  - route: ((staging-doc-route))
