@@ -14,7 +14,7 @@ License for the specific language governing permissions and limitations
 under the License.
 %>
 <%
-  def get_version
+  def self.get_version
     version = File.exists?('versionfile') ? File.read('versionfile') : 'local'
     "Version #{version}"
   end
