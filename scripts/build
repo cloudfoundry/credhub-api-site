@@ -19,7 +19,8 @@ for version in ${all_autodoc_versions}; do
   branch="${version}.x"
   exists_in_repo=$(git -C "$lts_credhub_dir" ls-remote --heads origin "${branch}")
 
-  if [[ ! -z ${exists_in_repo} ]]; then      echo "Adding $branch"
+  if [[ ! -z ${exists_in_repo} ]]; then
+      echo "Adding $branch"
       # the branch exists
       autodoc_versions+=("${version}")
   fi
@@ -72,7 +73,7 @@ generate_manual_docs_for_version() {
   echo -n "$version" > "$temp_dir/versionfile"
 
   pushd "$temp_dir" >/dev/null
-    gem install bundler:1.17.3 # requires bundler 1.17.3
+    gem install bundler:2.5.23 # requires bundler 2.5.23
     bundle install
     bundle exec middleman build --clean
   popd >/dev/null
