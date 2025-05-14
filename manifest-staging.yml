@@ -1,0 +1,9 @@
+---
+applications: 
+- name: docs-credhub-api-staging
+  memory: 512M
+  instances: 1
+  buildpack: https://github.com/cloudfoundry/nginx-buildpack.git#v1.1.32
+  stack: cflinuxfs3
+  routes:
+  - route: ((staging-doc-route))
