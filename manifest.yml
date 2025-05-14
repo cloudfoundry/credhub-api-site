@@ -7,4 +7,3 @@ applications:
   stack: cflinuxfs3
   routes:
   - route: ((prod-doc-route))
-  - route: ((staging-doc-route))
